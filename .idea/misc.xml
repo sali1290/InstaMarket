@@ -3,13 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/blue_border.xml" value="0.2703125" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/cancel_button_background.xml" value="0.2703125" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/gray_background.xml" value="0.2703125" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/green_background.xml" value="0.2703125" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/ic_edit_background.xml" value="0.2703125" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/ic_profile.xml" value="0.2703125" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/image_background.xml" value="0.2703125" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/ok_button_background.xml" value="0.2703125" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/category_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/edit_prodile_buttons.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/edit_profile_image_item.xml" value="0.264" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_edit_profile.xml" value="0.264" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/person_detail_item.xml" value="0.4" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/person_detail_item.xml" value="0.264" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/person_edit_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/menu/nav_drawer.xml" value="0.25416666666666665" />
       </map>
     </option>
