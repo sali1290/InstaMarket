@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">InstaMarket</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="notif">اطلاعیه ها</string>
+    <string name="common_question">سوالات متداول</string>
+    <string name="rule">قوانین</string>
+    <string name="buy_site">خرید سایت مستقل</string>
+    <string name="represent">اخذ نمایندگی</string>
+    <string name="income">کسب درامد</string>
+    <string name="api">مستندات api</string>
+    <string name="back_up">پشتیبانی</string>
+    <string name="about_us">درباره ما</string>
 </resources>
