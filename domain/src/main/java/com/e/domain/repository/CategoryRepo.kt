@@ -1,4 +1,4 @@
-package com.e.domain.repositories
+package com.e.domain.repository
 
 import com.e.domain.models.CategoryModel
 
