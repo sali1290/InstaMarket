@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.e.instamarket.R
 
-
-class EditProfileFragment : Fragment() {
-
+class MoreFeatureFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +18,6 @@ class EditProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false)
+        return inflater.inflate(R.layout.fragment_more_feature, container, false)
     }
 }

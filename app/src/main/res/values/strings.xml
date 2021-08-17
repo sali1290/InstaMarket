@@ -12,4 +12,11 @@
     <string name="api">مستندات api</string>
     <string name="back_up">پشتیبانی</string>
     <string name="about_us">درباره ما</string>
+    
+    <string name="lucky_wheel">گردونه شانس</string>
+    <string name="raise_stock">افزایش موجودی</string>
+    <string name="order">ثبت سفارش</string>
+    <string name="transaction">لیست تراکنش ها</string>
+    <string name="payment_report">گزارش پرداخت ها</string>
+    <string name="order_report">گزارشات سفارشات</string>
 </resources>

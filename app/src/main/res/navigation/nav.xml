@@ -9,5 +9,22 @@
         android:id="@+id/homeFragment"
         android:name="com.e.instamarket.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_moreFeatureFragment"
+            app:destination="@id/moreFeatureFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moreFeatureFragment"
+        android:name="com.e.instamarket.fragment.MoreFeatureFragment"
+        android:label="fragment_more_feature"
+        tools:layout="@layout/fragment_more_feature" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.e.instamarket.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

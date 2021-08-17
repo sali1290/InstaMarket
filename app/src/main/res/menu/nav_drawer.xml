@@ -5,38 +5,20 @@
 
         <item
             android:id="@+id/notif"
-            android:title="@string/notif" />
+            android:title="امکانات بیشتر"
+            android:icon="@drawable/ic_more"/>
 
         <item
             android:id="@+id/common_question"
-            android:title="@string/common_question" />
+            android:title="خانه"
+            android:icon="@drawable/ic_home"
+            />
 
         <item
             android:id="@+id/rule"
-            android:title="@string/rule" />
+            android:title="پروفایل"
+            android:icon="@drawable/ic_profile"/>
 
-        <item
-            android:id="@+id/buy_site"
-            android:title="@string/buy_site" />
-
-        <item
-            android:id="@+id/represent"
-            android:title="@string/represent" />
-
-        <item
-            android:id="@+id/income"
-            android:title="@string/income" />
-
-        <item
-            android:id="@+id/api"
-            android:title="@string/api" />
-        <item
-            android:id="@+id/back_up"
-            android:title="@string/back_up" />
-
-        <item
-            android:id="@+id/about_us"
-            android:title="@string/about_us" />
 
     </group>
 
