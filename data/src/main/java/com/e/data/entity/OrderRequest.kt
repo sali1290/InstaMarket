@@ -3,31 +3,26 @@ package com.e.data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.e.data.entity.local.Errors
+import com.e.data.entity.local.Order
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 @Entity
-data class Token(
+data class OrderRequest(
 
-    @Json(name = "id")
     @PrimaryKey(autoGenerate = true)
-    var id: Int?,
+    @Json(name = "id")
+    var id : Int?,
 
-    @Json(name = "accessToken")
-    var accessToken : String?,
+    @Json(name = "order")
+    var order: Order?,
 
-    @Json(name = "tokenType")
-    var tokenType:String?,
-
-    @Json(name = "expires")
-    var expires:String?,
-
-    @Json(name = "user")
-    var user: User?,
-
-    @Json(name = "accessResult")
+    @Json(name = "result")
     var result: Boolean?,
+
+    @Json(name = "message")
+    var message: String?,
 
     @Json(name = "errors")
     var errors: Errors?

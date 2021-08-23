@@ -1,13 +1,16 @@
 package com.e.data.entity
 
 import androidx.room.Entity
-import com.e.data.entity.localEntity.LuckUser
+import androidx.room.PrimaryKey
+import com.e.data.entity.local.LuckUser
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Luck(
+@Entity
+data class LuckRequest(
 
+    @PrimaryKey(autoGenerate = true)
     @Json(name = "result")
     var result: Boolean?,
 

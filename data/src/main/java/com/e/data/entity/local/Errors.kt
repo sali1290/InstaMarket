@@ -1,7 +1,7 @@
-package com.e.data.entity.localEntity
+package com.e.data.entity.local
 
 
-data class Error(
+data class Errors(
     var email : String?,
     var password : MutableList<String>?
 )
