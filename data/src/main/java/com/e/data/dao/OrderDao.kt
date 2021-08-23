@@ -3,7 +3,7 @@ package com.e.data.dao
 import androidx.room.*
 
 @Dao
-interface ProductDao {
+interface OrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProduct()
@@ -11,7 +11,7 @@ interface ProductDao {
     @Update
     suspend fun updateProduct()
 
-    @Query("SELECT * FROM Product")
+    @Query("SELECT * FROM `Order`")
     fun getProduct()
 
 }

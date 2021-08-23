@@ -7,22 +7,17 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 @Entity
-data class Product(
-
+data class LuckSlice(
     @PrimaryKey(autoGenerate = true)
-    @Json(name = "id")
     var id: Int?,
 
     @Json(name = "name")
     var name: String?,
 
-    @Json(name = "amount")
-    var amount: Float?,
+    @Json(name = "color")
+    var color: String?,
 
-    @Json(name = "rule")
-    var rule: String?,
+    @Json(name = "value")
+    var value: String?
 
-    @Json(name = "category_id")
-    var category_id: Int?,
-
-    )
+)

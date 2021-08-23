@@ -1,6 +1,6 @@
 package com.e.domain.models
 
-data class ProductModel(
+data class OrderModel(
 
     var id: Int?,
 
