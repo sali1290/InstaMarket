@@ -3,27 +3,50 @@ package com.e.data.api
 import com.e.data.entity.*
 import com.e.data.entity.local.Order
 import com.e.data.entity.local.Ticket
-import com.e.data.entity.Category
-import com.e.data.entity.Service
-import com.e.data.entity.Site
+import com.e.data.entity.local.User
+import com.e.data.entity.remote.*
 import retrofit2.Response
-import retrofit2.http.GET
+import retrofit2.http.Field
 import retrofit2.http.POST
 
 interface ApiService {
 
     //login api
     @POST("/auth/login")
-    suspend fun login():Response<Token>
+    suspend fun login(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Response<Token>
 
     @POST("/auth/register")
-    suspend fun register():Response<Token>
+    suspend fun register(
+        @Field("email") email: String,
+        @Field("phone") phone: String,
+        @Field("first_name") firstName: String,
+        @Field("last_name") lastName: User,
+        @Field("user_name") userName: String,
+        @Field("password") password: String
+    ): Response<Token>
 
     @POST("/auth/user")
-    suspend fun getUser():Response<String>
+    suspend fun getUser(
+        @Field("email") email: String,
+        @Field("phone") phone: String,
+        @Field("first_name") firstName: String,
+        @Field("last_name") lastName: User,
+        @Field("user_name") userName: String,
+        @Field("password") password: String
+    ): Response<String>
 
     @POST("/auth/logout")
-    suspend fun logout():Response<String>
+    suspend fun logout(
+        @Field("email") email: String,
+        @Field("phone") phone: String,
+        @Field("first_name") firstName: String,
+        @Field("last_name") lastName: User,
+        @Field("user_name") userName: String,
+        @Field("password") password: String
+    ): Response<String>
 
 
     //luck api
@@ -34,7 +57,7 @@ interface ApiService {
     suspend fun checkUserLuck(): Response<Boolean>
 
     @POST("/luck/store")
-    suspend fun createLuck(): Response<LuckRequest>
+    suspend fun createLuck(@Field("coin") coin: String): Response<LuckRequest>
 
 
     //info api
@@ -65,40 +88,58 @@ interface ApiService {
 
     //user api
     @POST("/user/update")
-    suspend fun updateUser(): Response<Boolean>
+    suspend fun updateUser(
+        @Field("first_name") firstName: String,
+        @Field("last_name") lastName: String
+    ): Response<Boolean>
 
     @POST("/user/checkVerify")
     suspend fun checkUserIsVerify(): Response<Boolean>
 
     @POST("/user/authenticate")
-    suspend fun verifyUser(): Response<Token>
+    suspend fun verifyUser(@Field("code") code: String): Response<Token>
 
     @POST("/user/sendVerifyCode")
     suspend fun sendVerify(): Response<Token>
 
 
     //order api
-    @GET("/product")
-    suspend fun createOrder(): Response<OrderRequest>
+    @POST("/product")
+    suspend fun createOrder(
+        @Field("category_id") categoryId: String,
+        @Field("service_id") serviceId: String,
+        @Field("quantity") quantity: String,
+        @Field("link") link: String
+    ): Response<OrderRequest>
 
-    @GET("/productList")
-    suspend fun getUserOrders(): Response<MutableList<Order>>
+    @POST("/productList")
+    suspend fun getUserOrders(@Field("id") id: String): Response<MutableList<Order>>
 
 
     //transaction api
     @POST("/transaction/create")
-    suspend fun createTransaction(): Response<String>
+    suspend fun createTransaction(
+        @Field("amount") amount: String,
+        @Field("type") type: String
+    ): Response<String>
 
     @POST("/transaction/get")
-    suspend fun getUserTransaction(): Response<MutableList<Transaction>>
+    suspend fun getUserTransaction(
+        @Field("id") id: String
+    ): Response<MutableList<Transaction>>
 
 
     //ticket api
     @POST("/ticket/create")
-    suspend fun createTicket(): Response<TicketRequest>
+    suspend fun createTicket(
+        @Field("subject") subject: String,
+        @Field("order_id") order_id: String,
+        @Field("type") type: String,
+        @Field("description") description: String
+    ): Response<TicketRequest>
 
     @POST("/ticket/get")
-    suspend fun getTicket(): Response<MutableList<Ticket>>
+    suspend fun getTicket(@Field("id") id: String): Response<MutableList<Ticket>>
 
 
 }

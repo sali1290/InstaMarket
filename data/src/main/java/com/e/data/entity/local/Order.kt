@@ -1,12 +1,8 @@
 package com.e.data.entity.local
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity
 data class Order(
 
-    @PrimaryKey(autoGenerate = true)
     var orderId:Int?,
 
     var apiOrderId: String?,

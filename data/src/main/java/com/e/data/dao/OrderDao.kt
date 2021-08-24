@@ -1,17 +1,18 @@
 package com.e.data.dao
 
 import androidx.room.*
+import com.e.data.entity.OrderRequest
 
 @Dao
 interface OrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertProduct()
+    suspend fun saveOrders(orderRequest: OrderRequest)
 
-    @Update
+    @Query("DELETE FROM OrderRequest")
     suspend fun updateProduct()
 
-    @Query("SELECT * FROM `Order`")
-    fun getProduct()
+    @Query("SELECT * FROM OrderRequest")
+    fun getOrderList(): MutableList<OrderRequest>
 
 }
