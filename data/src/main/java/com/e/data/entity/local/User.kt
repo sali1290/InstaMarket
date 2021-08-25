@@ -11,7 +11,6 @@ data class User(
 
     var loginType: String?,
 
-
     var firstName : String?,
 
     var lastName : String?,

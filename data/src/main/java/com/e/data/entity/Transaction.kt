@@ -15,10 +15,13 @@ data class Transaction(
     var id: Int?,
 
     @Json(name = "ids")
-    var ids: String,
+    var ids: String?,
+
+    @Json(name = "uid")
+    var uid: String?,
 
     @Json(name = "type")
-    var type: String,
+    var type: String?,
 
     @Json(name = "transactionId")
     var transactionId: Float?,
@@ -27,7 +30,7 @@ data class Transaction(
     var amount: Float?,
 
     @Json(name = "status")
-    var status: String,
+    var status: String?,
 
     @Json(name = "created")
     var created: Int?,

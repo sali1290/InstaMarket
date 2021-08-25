@@ -1,41 +1,101 @@
 package com.e.domain.models
 
-import java.util.*
-
 data class UserModel(
 
-    var id : Int?,
+    val id: Int?,
 
-    var name : String?,
+    val ids: Int?,
 
-    var phone : String?,
+    var role: String?,
 
-    var email : String?,
+    var loginType: String?,
 
-    var birth : Date?,
+    var firstName: String?,
 
-    var tel_id : String?,
+    var lastName: String?,
 
-    var insta_id : String?,
+    var email: String?,
 
-    var address : String?,
+    var userName: String?,
 
-    var sex : String?,
+    var phone: String?,
 
-    var martialStatus : String?,
+    var verifyPhone: String?,
 
-    var educate : String?,
+    var timeZone: String?,
 
-    var stock : Float?,
+    var moreInformation: String?,
 
-    var image : String?,
+    var settings: String?,
 
-    var cardNumber : String?,
+    var desc: String?,
 
-    var shabaNumbmer : String?,
+    var balance: String?,
 
-    var bankName : String?,
+    var customRate: String?,
 
-    var ownerName : String?,
+    var apiKey: String?,
 
-)
+    var spent: String?,
+
+    var activationKey: String?,
+
+    var resetKey: String?,
+
+    var historyIp: String?,
+
+    var status: String?,
+
+    var changed: String?,
+
+    var created: String?,
+
+    var ref: String?,
+
+    var profitRate: String?,
+
+    var alfa: String?,
+
+    var minharvest: String?,
+
+    var cardNumber: String?,
+
+    var shNumber: String?,
+
+    var accountName: String?,
+
+    var bankName: String?,
+
+    var verifyBank: String?,
+
+    var verifyMore: String?,
+
+    var birthday: String?,
+
+    var education: String?,
+
+    var marry: String?,
+
+    var sex: String?,
+
+    var avatar: String?,
+
+    var isBlock: String?,
+
+    var roleUser: String?,
+
+    var agentDate: String?,
+
+    var agentId: String?,
+
+    var agentExpair: String?,
+
+    var meliCard: String?,
+
+    var domin: String?,
+
+    var subdomin: String?,
+
+    var flagdomin: String?,
+
+    )
