@@ -11,7 +11,7 @@ import retrofit2.http.POST
 
 interface ApiService {
 
-    //login api
+    //Enter app api
     @POST("/auth/login")
     suspend fun login(
         @Field("email") email: String,
@@ -23,7 +23,7 @@ interface ApiService {
         @Field("email") email: String,
         @Field("phone") phone: String,
         @Field("first_name") firstName: String,
-        @Field("last_name") lastName: User,
+        @Field("last_name") lastName: String,
         @Field("user_name") userName: String,
         @Field("password") password: String
     ): Response<Token>
@@ -33,7 +33,7 @@ interface ApiService {
         @Field("email") email: String,
         @Field("phone") phone: String,
         @Field("first_name") firstName: String,
-        @Field("last_name") lastName: User,
+        @Field("last_name") lastName: String,
         @Field("user_name") userName: String,
         @Field("password") password: String
     ): Response<String>
@@ -43,7 +43,7 @@ interface ApiService {
         @Field("email") email: String,
         @Field("phone") phone: String,
         @Field("first_name") firstName: String,
-        @Field("last_name") lastName: User,
+        @Field("last_name") lastName: String,
         @Field("user_name") userName: String,
         @Field("password") password: String
     ): Response<String>
@@ -104,7 +104,7 @@ interface ApiService {
 
 
     //order api
-    @POST("/product")
+    @POST("/order/create")
     suspend fun createOrder(
         @Field("category_id") categoryId: String,
         @Field("service_id") serviceId: String,
@@ -112,7 +112,7 @@ interface ApiService {
         @Field("link") link: String
     ): Response<OrderRequest>
 
-    @POST("/productList")
+    @POST("/order/get")
     suspend fun getUserOrders(@Field("id") id: String): Response<MutableList<Order>>
 
 

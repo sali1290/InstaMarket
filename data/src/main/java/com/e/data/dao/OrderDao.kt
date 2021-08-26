@@ -10,7 +10,7 @@ interface OrderDao {
     suspend fun saveOrders(orderRequest: OrderRequest)
 
     @Query("DELETE FROM OrderRequest")
-    suspend fun updateProduct()
+    suspend fun deleteOrders()
 
     @Query("SELECT * FROM OrderRequest")
     fun getOrderList(): MutableList<OrderRequest>
