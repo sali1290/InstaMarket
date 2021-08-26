@@ -2,14 +2,15 @@ package com.e.data.repository.orderDataSource.local
 
 import com.e.data.dao.OrderDao
 import com.e.data.entity.OrderRequest
+import com.e.data.entity.local.Order
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class OrderLocalDataSourceImpl(private val orderDao: OrderDao): OrderLocalDataSource {
-    override suspend fun saveOrderFromDB(orderRequest: OrderRequest) {
+    override suspend fun saveOrderFromDB(order: Order) {
         CoroutineScope(Dispatchers.IO).launch {
-            orderDao.saveOrders(orderRequest)
+            orderDao.saveOrders(order)
         }
     }
 
@@ -19,7 +20,7 @@ class OrderLocalDataSourceImpl(private val orderDao: OrderDao): OrderLocalDataSo
         }
     }
 
-    override suspend fun getOrderListFromDB(): MutableList<OrderRequest> {
+    override suspend fun getOrderListFromDB(): MutableList<Order> {
         return orderDao.getOrderList()
         }
 }

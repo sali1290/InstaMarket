@@ -1,7 +1,11 @@
 package com.e.data.entity.local
 
-data class Ticket(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
+data class Ticket(
+    @PrimaryKey(autoGenerate = true)
     val id: Int?,
 
     val changed: Any?,

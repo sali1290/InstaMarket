@@ -1,13 +1,13 @@
 package com.e.data.repository.ticketDataSource.local
 
-import com.e.data.entity.TicketRequest
+import com.e.data.entity.local.Ticket
 
 interface TicketLocalDataSource {
 
-    suspend fun saveTicketFromDB(ticketRequest: TicketRequest)
+    suspend fun saveTicketFromDB(ticket: Ticket)
 
     suspend fun deleteTicketFromDB()
 
-    suspend fun getTicketListFromDB(): MutableList<TicketRequest>
+    suspend fun getTicketListFromDB(): MutableList<Ticket>
 
 }

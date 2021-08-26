@@ -1,13 +1,14 @@
 package com.e.domain.repository
 
-import com.e.domain.models.LuckRequestModel
-import com.e.domain.models.LuckSliceModel
+import com.e.data.entity.LuckRequest
+import com.e.data.entity.remote.LuckSlice
+
 
 interface LuckWheelRepo {
 
-    suspend fun getSlices(): MutableList<LuckSliceModel>
+    suspend fun getSlices(): MutableList<LuckSlice>
 
     suspend fun checkUserLuck(): Boolean
 
-    suspend fun createUserLuck(coin: String): LuckRequestModel
+    suspend fun createUserLuck(coin: String): LuckRequest
 }

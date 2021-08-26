@@ -3,7 +3,6 @@ package com.e.data.api
 import com.e.data.entity.*
 import com.e.data.entity.local.Order
 import com.e.data.entity.local.Ticket
-import com.e.data.entity.local.User
 import com.e.data.entity.remote.*
 import retrofit2.Response
 import retrofit2.http.Field
