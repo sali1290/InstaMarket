@@ -1,0 +1,20 @@
+package com.e.data.mapper
+
+import com.e.data.entity.remote.Site
+import com.e.domain.models.SiteModel
+
+class SiteMapper {
+    fun toMapper(site: Site): SiteModel {
+        return SiteModel(
+            site.day ?: "",
+            site.des ?: "",
+            site.flag ?: "",
+            site.id ?: 0,
+            site.name ?: "",
+            site.num ?: "",
+            site.permition ?: "",
+            site.price ?: "",
+            site.subject ?: "",
+        )
+    }
+}

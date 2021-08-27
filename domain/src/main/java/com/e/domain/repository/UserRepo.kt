@@ -1,11 +1,11 @@
 package com.e.domain.repository
 
-import com.e.data.entity.local.User
+import com.e.domain.models.UserModel
 
 interface UserRepo {
 
-    suspend fun getUser():User?
+    suspend fun getUser():UserModel?
 
-    suspend fun updateUser(): User?
+    suspend fun updateUser(): UserModel?
 
 }

@@ -1,34 +1,45 @@
 package com.e.data.repository
 
 import com.e.data.entity.Token
+import com.e.data.mapper.TokenMapper
 import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
 import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSource
+import com.e.data.utile.NetWorkHelper
+import com.e.domain.models.TokenModel
 import com.e.domain.repository.EnterAppRepo
+import java.io.IOException
 import java.lang.Exception
 
 class EnterAppRepoImpl(
     private val enterAppRemoteDataSource: EnterAppRemoteDataSource,
-    private val enterAppLocalDataSource: EnterAppLocalDataSource
+    private val enterAppLocalDataSource: EnterAppLocalDataSource,
+    private val netWorkHelper: NetWorkHelper,
+    private val tokenMapper: dagger.Lazy<TokenMapper>
 ) : EnterAppRepo {
-    override suspend fun login(email: String, password: String): Token {
-        var token: Token? = null
-        try {
-            if (enterAppRemoteDataSource.loginFromRemote(
-                    email,
-                    password
-                ).isSuccessful
+
+    @Throws(IOException::class)
+    override suspend fun login(email: String, password: String): TokenModel {
+        lateinit var token: TokenModel
+        if (netWorkHelper.isNetworkConnected()) {
+            if (enterAppRemoteDataSource.loginFromRemote(email, password).isSuccessful &&
+                enterAppRemoteDataSource.loginFromRemote(email, password)
+                    .body() != null
             ) {
-                token = enterAppRemoteDataSource.loginFromRemote(email, password).body()
-                if (token != null && token.result == true) {
-                    enterAppLocalDataSource.saveTokenFromDB(token)
+                val response = enterAppRemoteDataSource.loginFromRemote(email, password)
+                token = response.body().let {
+                    tokenMapper.get().toMapper(it!!)
                 }
+                enterAppLocalDataSource.saveTokenFromDB(response.body()!!)
+                return token
+            } else {
+                throw IOException("Server is Not Responding")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } else {
+            throw IOException("No Internet Connection")
         }
-        return token!!
     }
 
+    @Throws(IOException::class)
     override suspend fun register(
         email: String,
         phone: String,
@@ -36,36 +47,38 @@ class EnterAppRepoImpl(
         lastName: String,
         username: String,
         password: String
-    ): Token {
-        var token: Token? = null
-        try {
+    ): TokenModel {
+        lateinit var token: TokenModel
+        if (netWorkHelper.isNetworkConnected()) {
             if (enterAppRemoteDataSource.registerFromRemote(
-                    email,
-                    phone,
-                    firstName,
-                    lastName,
-                    username,
-                    password
-                ).isSuccessful
+                    email, phone, firstName,
+                    lastName, username, password
+                ).isSuccessful &&
+                enterAppRemoteDataSource.registerFromRemote(
+                    email, phone, firstName,
+                    lastName, username, password
+                )
+                    .body() != null
             ) {
-                token = enterAppRemoteDataSource.registerFromRemote(
-                    email,
-                    phone,
-                    firstName,
-                    lastName,
-                    username,
-                    password
-                ).body()
-                if (token != null && token.result == true) {
-                    enterAppLocalDataSource.saveTokenFromDB(token)
+                val response = enterAppRemoteDataSource.registerFromRemote(
+                    email, phone, firstName,
+                    lastName, username, password
+                )
+                token = response.body().let {
+                    tokenMapper.get().toMapper(it!!)
                 }
+                enterAppLocalDataSource.saveTokenFromDB(response.body()!!)
+                return token
+            } else {
+                throw IOException("Server is Not Responding")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } else {
+            throw IOException("No Internet Connection")
         }
-        return token!!
     }
 
+    //not complete
+    @Throws(IOException::class)
     override suspend fun getUserFromLogin(
         email: String,
         phone: String,
@@ -77,6 +90,7 @@ class EnterAppRepoImpl(
         return ""
     }
 
+    @Throws(IOException::class)
     override suspend fun logout(
         email: String,
         phone: String,
@@ -85,35 +99,31 @@ class EnterAppRepoImpl(
         username: String,
         password: String
     ): String {
-
-        var message: String? = ""
-        try {
+        lateinit var message: String
+        if (netWorkHelper.isNetworkConnected()) {
             if (enterAppRemoteDataSource.logout(
-                    email,
-                    phone,
-                    type,
-                    description,
-                    username,
-                    password
-                ).isSuccessful
+                    email, phone, type,
+                    description, username, password
+                ).isSuccessful && enterAppRemoteDataSource.logout(
+                    email, phone, type,
+                    description, username, password
+                ).body() != null
             ) {
-                message =
-                    enterAppRemoteDataSource.logout(
-                        email,
-                        phone,
-                        type,
-                        description,
-                        username,
-                        password
-                    )
-                        .body()
-                if (message != "Unauthenticated") {
-                    enterAppLocalDataSource.deleteTokenFromDB()
-                }
+                message = enterAppRemoteDataSource.logout(
+                    email, phone, type,
+                    description, username, password
+                ).body()!!
+                enterAppLocalDataSource.deleteTokenFromDB()
+                return message
+            } else {
+                throw IOException("Server is Not Responding")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } else {
+            throw IOException("No Internet Connection")
         }
-        return message!!
+
+
     }
+
+
 }

@@ -1,8 +1,7 @@
 package com.e.data.repository.transactionDataSource.remote
 
-import com.e.data.entity.Transaction
+import com.e.data.entity.remote.Transaction
 import retrofit2.Response
-import retrofit2.http.Field
 
 interface TransactionRemoteDataSource {
 

@@ -1,13 +1,13 @@
 package com.e.domain.repository
 
-import com.e.data.entity.Token
+import com.e.domain.models.*
 
 interface EnterAppRepo {
 
     suspend fun login(
         email: String,
         password: String,
-    ): Token
+    ): TokenModel
 
     suspend fun register(
         email: String,
@@ -16,7 +16,7 @@ interface EnterAppRepo {
         lastName: String,
         username: String,
         password: String
-    ): Token
+    ): TokenModel
 
     suspend fun getUserFromLogin(
         email: String,

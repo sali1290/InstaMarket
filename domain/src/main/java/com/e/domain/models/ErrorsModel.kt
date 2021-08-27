@@ -3,5 +3,5 @@ package com.e.domain.models
 
 data class ErrorsModel(
     var email : String?,
-    var password : MutableList<String>?
+    var password : String?
 )

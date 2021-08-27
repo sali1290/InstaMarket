@@ -1,53 +1,81 @@
 package com.e.data.repository
 
-import com.e.data.entity.LuckRequest
-import com.e.data.entity.remote.LuckSlice
+import com.e.data.mapper.LuckRequestMapper
+import com.e.data.mapper.LuckSliceMapper
 import com.e.data.repository.luckWheelDataSource.local.LuckWheelLocalDataSource
 import com.e.data.repository.luckWheelDataSource.remote.LuckWheelRemoteDataSource
+import com.e.data.utile.NetWorkHelper
 import com.e.domain.models.LuckRequestModel
 import com.e.domain.models.LuckSliceModel
 import com.e.domain.repository.LuckWheelRepo
-import java.lang.Exception
+import java.io.IOException
+import kotlin.properties.Delegates
 
 class LuckWheelRepoImpl(
     private val luckWheelRemoteDataSource: LuckWheelRemoteDataSource,
-    private val luckWheelLocalDataSource: LuckWheelLocalDataSource
+    private val luckWheelLocalDataSource: LuckWheelLocalDataSource,
+    private val netWorkHelper: NetWorkHelper,
+    private val luckSliceMapper: dagger.Lazy<LuckSliceMapper>,
+    private val luckRequestMapper: dagger.Lazy<LuckRequestMapper>
 ) : LuckWheelRepo {
-    override suspend fun getSlices(): MutableList<LuckSlice> {
-        var sliceList: MutableList<LuckSlice>? = null
-        try {
-            if (luckWheelRemoteDataSource.getSlicesFromRemote().isSuccessful) {
-                sliceList = luckWheelRemoteDataSource.getSlicesFromRemote().body()!!
+
+    @Throws(IOException::class)
+    override suspend fun getSlices(): MutableList<LuckSliceModel> {
+        lateinit var sliceList: MutableList<LuckSliceModel>
+        if (netWorkHelper.isNetworkConnected()) {
+            if (luckWheelRemoteDataSource.getSlicesFromRemote().isSuccessful &&
+                luckWheelRemoteDataSource.getSlicesFromRemote().body() != null
+            ) {
+                for (i in 0..luckWheelRemoteDataSource.getSlicesFromRemote().body()!!.size) {
+                    sliceList[i] = luckWheelRemoteDataSource.getSlicesFromRemote().body()!![i].let {
+                        luckSliceMapper.get().toMapper(it)
+                    }
+                }
+                return sliceList
+            } else {
+                throw IOException("Server is Not Responding")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } else {
+            throw IOException("No Internet Connection")
         }
-        return sliceList!!
     }
 
+    @Throws(IOException::class)
     override suspend fun checkUserLuck(): Boolean {
-        var userLuck = true
-        try {
-            if (luckWheelRemoteDataSource.getUserLuckFromRemote().isSuccessful) {
-                userLuck = luckWheelRemoteDataSource.getUserLuckFromRemote().body()!!
+        var luck by Delegates.notNull<Boolean>()
+        if (netWorkHelper.isNetworkConnected()) {
+            if (luckWheelRemoteDataSource.getUserLuckFromRemote().isSuccessful &&
+                luckWheelRemoteDataSource.getUserLuckFromRemote().body() != null
+            ) {
+                luck = luckWheelRemoteDataSource.getUserLuckFromRemote().body()!!
+                return luck
+            } else {
+                throw IOException("Server is Not Responding")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } else {
+            throw IOException("No Internet Connection")
         }
-        return userLuck
     }
 
-    override suspend fun createUserLuck(coin: String): LuckRequest {
-        var luck: LuckRequest? = null
-        try {
-            if (luckWheelRemoteDataSource.createLuckFromRemote(coin).isSuccessful) {
-                luck = luckWheelRemoteDataSource.createLuckFromRemote(coin).body()
-                luckWheelLocalDataSource.saveLuckFromDB(luck!!)
+    @Throws(IOException::class)
+    override suspend fun createUserLuck(coin: String): LuckRequestModel {
+        lateinit var luckRequest: LuckRequestModel
+        if (netWorkHelper.isNetworkConnected()) {
+            if (luckWheelRemoteDataSource.createLuckFromRemote(coin).isSuccessful &&
+                luckWheelRemoteDataSource.createLuckFromRemote(coin).body() != null
+            ) {
+                val response = luckWheelRemoteDataSource.createLuckFromRemote(coin).body()
+                luckRequest = response.let {
+                    luckRequestMapper.get().toMapper(it!!)
+                }
+                luckWheelLocalDataSource.saveLuckFromDB(response!!)
+                return luckRequest
+            } else {
+                throw IOException("Server is Not Responding")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } else {
+            throw IOException("No Internet Connection")
         }
-        return luck!!
-
     }
+
 }

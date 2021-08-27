@@ -1,24 +1,23 @@
 package com.e.domain.repository
 
-import com.e.data.entity.remote.Banner
-import com.e.data.entity.remote.*
+import com.e.domain.models.*
 
 interface AppInfoRepo {
 
-    suspend fun getAgent(): MutableList<Agents>
+    suspend fun getAgent(): MutableList<AgentsModel>
 
-    suspend fun getApi(): MutableList<Api>
+    suspend fun getApi(): MutableList<ApiModel>
 
-    suspend fun getBanner(): MutableList<Banner>
+    suspend fun getBanner(): MutableList<BannerModel>
 
-    suspend fun getCategory(): MutableList<Category>
+    suspend fun getCategory(): MutableList<CategoryModel>
 
-    suspend fun getFaq(): MutableList<Faq>
+    suspend fun getFaq(): MutableList<FaqModel>
 
-    suspend fun getNews(): MutableList<News>
+    suspend fun getNews(): MutableList<NewsModel>
 
-    suspend fun getService(): MutableList<Service>
+    suspend fun getService(): MutableList<ServiceModel>
 
-    suspend fun getSite(): MutableList<Site>
+    suspend fun getSite(): MutableList<SiteModel>
 
 }

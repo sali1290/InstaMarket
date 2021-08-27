@@ -1,7 +1,7 @@
 package com.e.data.repository.transactionDataSource.remote
 
 import com.e.data.api.ApiService
-import com.e.data.entity.Transaction
+import com.e.data.entity.remote.Transaction
 import retrofit2.Response
 
 class TransactionRemoteDataSourceImpl(private val apiService: ApiService): TransactionRemoteDataSource {

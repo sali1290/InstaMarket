@@ -1,7 +1,7 @@
 package com.e.domain.repository
 
-import com.e.data.entity.TicketRequest
-import com.e.data.entity.local.Ticket
+import com.e.domain.models.TicketModel
+import com.e.domain.models.TicketRequestModel
 
 interface TicketRepo {
 
@@ -10,8 +10,8 @@ interface TicketRepo {
         orderId: String,
         type: String,
         description: String
-    ): TicketRequest
+    ): TicketRequestModel
 
-    suspend fun getTickets(id:String): MutableList<Ticket>
+    suspend fun getTickets(id:String): MutableList<TicketModel>
 
 }

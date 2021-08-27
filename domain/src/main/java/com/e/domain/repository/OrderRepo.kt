@@ -1,7 +1,7 @@
 package com.e.domain.repository
 
-import com.e.data.entity.OrderRequest
-import com.e.data.entity.local.Order
+import com.e.domain.models.OrderModel
+import com.e.domain.models.OrderRequestModel
 
 interface OrderRepo {
 
@@ -10,8 +10,8 @@ interface OrderRepo {
         serviceId: String,
         quantity: String,
         link: String
-    ): OrderRequest
+    ): OrderRequestModel
 
-    suspend fun getOrders(id: Int): MutableList<Order>
+    suspend fun getOrders(id: Int): MutableList<OrderModel>
 
 }
