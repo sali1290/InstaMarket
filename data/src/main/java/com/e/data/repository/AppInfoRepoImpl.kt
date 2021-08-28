@@ -7,9 +7,10 @@ import com.e.data.utile.NetWorkHelper
 import com.e.domain.models.*
 import com.e.domain.repository.AppInfoRepo
 import java.io.IOException
+import javax.inject.Inject
 
 
-class AppInfoRepoImpl(
+class AppInfoRepoImpl @Inject constructor(
     private val agentMapper: dagger.Lazy<AgentMapper>,
     private val apiMapper: dagger.Lazy<ApiMapper>,
     private val bannerMapper: dagger.Lazy<BannerMapper>,

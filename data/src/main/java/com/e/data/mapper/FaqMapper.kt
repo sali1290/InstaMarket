@@ -4,8 +4,9 @@ import com.e.data.entity.remote.Category
 import com.e.data.entity.remote.Faq
 import com.e.domain.models.CategoryModel
 import com.e.domain.models.FaqModel
+import javax.inject.Inject
 
-class FaqMapper {
+class FaqMapper @Inject constructor(){
     fun toMapper(faq: Faq): FaqModel {
         return FaqModel(
             faq.id ?: 0,

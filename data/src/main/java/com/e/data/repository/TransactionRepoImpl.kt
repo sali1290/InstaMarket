@@ -6,8 +6,9 @@ import com.e.data.utile.NetWorkHelper
 import com.e.domain.models.TransactionModel
 import com.e.domain.repository.TransactionRepo
 import java.io.IOException
+import javax.inject.Inject
 
-class TransactionRepoImpl(
+class TransactionRepoImpl @Inject constructor(
     private val transactionRemoteDataSource: TransactionRemoteDataSource,
     private val netWorkHelper: NetWorkHelper,
     private val transactionMapper: dagger.Lazy<TransactionMapper>

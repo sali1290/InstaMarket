@@ -6,8 +6,9 @@ import com.e.data.entity.local.Order
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class OrderLocalDataSourceImpl(private val orderDao: OrderDao): OrderLocalDataSource {
+class OrderLocalDataSourceImpl @Inject constructor(private val orderDao: OrderDao): OrderLocalDataSource {
     override suspend fun saveOrderFromDB(order: Order) {
         CoroutineScope(Dispatchers.IO).launch {
             orderDao.saveOrders(order)

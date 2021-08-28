@@ -2,8 +2,9 @@ package com.e.data.mapper
 
 import com.e.data.entity.remote.Api
 import com.e.domain.models.ApiModel
+import javax.inject.Inject
 
-class ApiMapper {
+class ApiMapper @Inject constructor(){
 
     fun toMapper(api: Api): ApiModel {
         return ApiModel(

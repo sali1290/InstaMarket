@@ -33,7 +33,7 @@ data class Service(
 
     val name: String?,
 
-    val oagentprice: Any?,
+    val oagentprice: String?,
 
     val originalPrice: String?,
 

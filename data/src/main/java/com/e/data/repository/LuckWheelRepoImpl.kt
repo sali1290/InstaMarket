@@ -9,9 +9,10 @@ import com.e.domain.models.LuckRequestModel
 import com.e.domain.models.LuckSliceModel
 import com.e.domain.repository.LuckWheelRepo
 import java.io.IOException
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class LuckWheelRepoImpl(
+class LuckWheelRepoImpl @Inject constructor(
     private val luckWheelRemoteDataSource: LuckWheelRemoteDataSource,
     private val luckWheelLocalDataSource: LuckWheelLocalDataSource,
     private val netWorkHelper: NetWorkHelper,

@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.e.instamarket.R
 import com.e.instamarket.databinding.FragmentEnterBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EnterFragment : Fragment() {
 
 lateinit var binding: FragmentEnterBinding

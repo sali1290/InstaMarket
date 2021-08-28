@@ -4,8 +4,9 @@ import com.e.data.entity.local.User
 import com.e.data.entity.remote.Service
 import com.e.domain.models.ServiceModel
 import com.e.domain.models.UserModel
+import javax.inject.Inject
 
-class UserMapper {
+class UserMapper @Inject constructor(){
     fun toMapper(user: User): UserModel {
         return UserModel(
             user.id ?: 0,

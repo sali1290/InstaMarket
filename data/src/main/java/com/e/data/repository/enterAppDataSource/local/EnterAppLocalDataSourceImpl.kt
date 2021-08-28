@@ -5,8 +5,9 @@ import com.e.data.entity.Token
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EnterAppLocalDataSourceImpl(
+class EnterAppLocalDataSourceImpl @Inject constructor(
     private val tokenDao: TokenDao
 ) : EnterAppLocalDataSource {
 

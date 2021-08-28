@@ -2,6 +2,8 @@ package com.e.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.e.data.dao.*
 import com.e.data.entity.*
 import com.e.data.entity.local.Order
@@ -15,7 +17,7 @@ import com.e.data.entity.remote.Transaction
     version = 1,
     exportSchema = false
 )
-
+@TypeConverters(UserTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun orderDao(): OrderDao

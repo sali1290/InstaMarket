@@ -4,8 +4,9 @@ import com.e.data.api.ApiService
 import com.e.data.entity.remote.Banner
 import com.e.data.entity.remote.*
 import retrofit2.Response
+import javax.inject.Inject
 
-class AppInfoRemoteDataSourceImpl(
+class AppInfoRemoteDataSourceImpl @Inject constructor(
     private val apiService: ApiService
 ) : AppInfoRemoteDataSource {
 

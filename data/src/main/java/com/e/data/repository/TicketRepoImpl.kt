@@ -12,8 +12,9 @@ import com.e.domain.models.TicketRequestModel
 import com.e.domain.repository.TicketRepo
 import java.io.IOException
 import java.lang.Exception
+import javax.inject.Inject
 
-class TicketRepoImpl(
+class TicketRepoImpl @Inject constructor(
     private val ticketLocalDataSource: TicketLocalDataSource,
     private val ticketRemoteDataSource: TicketRemoteDataSource,
     private val netWorkHelper: NetWorkHelper,

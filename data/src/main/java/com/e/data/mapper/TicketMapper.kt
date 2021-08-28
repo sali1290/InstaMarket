@@ -2,8 +2,9 @@ package com.e.data.mapper
 
 import com.e.data.entity.local.Ticket
 import com.e.domain.models.TicketModel
+import javax.inject.Inject
 
-class TicketMapper {
+class TicketMapper @Inject constructor(){
     fun toMapper(agents: Ticket): TicketModel {
         return TicketModel(
             agents.id ?: 0,

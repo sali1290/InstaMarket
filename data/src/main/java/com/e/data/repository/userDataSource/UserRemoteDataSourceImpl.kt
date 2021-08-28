@@ -3,8 +3,9 @@ package com.e.data.repository.userDataSource
 import com.e.data.api.ApiService
 import com.e.data.entity.Token
 import retrofit2.Response
+import javax.inject.Inject
 
-class UserRemoteDataSourceImpl(private val apiService: ApiService) : UserRemoteDataSource {
+class UserRemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) : UserRemoteDataSource {
     override suspend fun updateUserFromRemote(
         firstName: String,
         lastName: String

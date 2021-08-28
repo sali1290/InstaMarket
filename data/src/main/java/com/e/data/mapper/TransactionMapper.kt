@@ -2,8 +2,9 @@ package com.e.data.mapper
 
 import com.e.data.entity.remote.Transaction
 import com.e.domain.models.TransactionModel
+import javax.inject.Inject
 
-class TransactionMapper {
+class TransactionMapper @Inject constructor(){
     fun toMapper(agents: Transaction): TransactionModel {
         return TransactionModel(
             agents.id ?: 0,

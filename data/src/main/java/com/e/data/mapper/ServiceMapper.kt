@@ -2,8 +2,9 @@ package com.e.data.mapper
 
 import com.e.data.entity.remote.Service
 import com.e.domain.models.ServiceModel
+import javax.inject.Inject
 
-class ServiceMapper {
+class ServiceMapper @Inject constructor(){
     fun toMapper(agents: Service): ServiceModel {
         return ServiceModel(
             agents.id ?: 0,

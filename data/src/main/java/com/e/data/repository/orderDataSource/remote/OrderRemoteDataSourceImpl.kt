@@ -4,8 +4,9 @@ import com.e.data.api.ApiService
 import com.e.data.entity.OrderRequest
 import com.e.data.entity.local.Order
 import retrofit2.Response
+import javax.inject.Inject
 
-class OrderRemoteDataSourceImpl(private val apiService: ApiService) : OrderRemoteDataSource {
+class OrderRemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) : OrderRemoteDataSource {
     override suspend fun createOrderFromRemote(
         categoryId: String,
         serviceId: String,

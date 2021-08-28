@@ -5,8 +5,9 @@ import com.e.data.entity.LuckRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LuckWheelLocalDataSourceImpl(private val luckRequestDao: LuckRequestDao): LuckWheelLocalDataSource {
+class LuckWheelLocalDataSourceImpl @Inject constructor(private val luckRequestDao: LuckRequestDao): LuckWheelLocalDataSource {
     override suspend fun saveLuckFromDB(luckRequest: LuckRequest) {
         CoroutineScope(Dispatchers.IO).launch {
             luckRequestDao.saveLuck(luckRequest)

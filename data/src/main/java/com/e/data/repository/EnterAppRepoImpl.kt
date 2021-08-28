@@ -9,8 +9,9 @@ import com.e.domain.models.TokenModel
 import com.e.domain.repository.EnterAppRepo
 import java.io.IOException
 import java.lang.Exception
+import javax.inject.Inject
 
-class EnterAppRepoImpl(
+class EnterAppRepoImpl @Inject constructor(
     private val enterAppRemoteDataSource: EnterAppRemoteDataSource,
     private val enterAppLocalDataSource: EnterAppLocalDataSource,
     private val netWorkHelper: NetWorkHelper,
@@ -123,6 +124,18 @@ class EnterAppRepoImpl(
         }
 
 
+    }
+
+    override suspend fun getUserToken(): TokenModel {
+        lateinit var token: TokenModel
+        if (enterAppLocalDataSource.getTokenFromDB().result == true) {
+            token = enterAppLocalDataSource.getTokenFromDB().let {
+                tokenMapper.get().toMapper(it)
+            }
+        } else {
+            token.result = false
+        }
+        return token
     }
 
 

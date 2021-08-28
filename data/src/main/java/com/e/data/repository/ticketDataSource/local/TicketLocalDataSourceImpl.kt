@@ -5,8 +5,9 @@ import com.e.data.entity.local.Ticket
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TicketLocalDataSourceImpl(private val ticketRequestDao: TicketRequestDao) :
+class TicketLocalDataSourceImpl @Inject constructor(private val ticketRequestDao: TicketRequestDao) :
     TicketLocalDataSource {
     override suspend fun saveTicketFromDB(ticket: Ticket) {
         CoroutineScope(Dispatchers.IO).launch {

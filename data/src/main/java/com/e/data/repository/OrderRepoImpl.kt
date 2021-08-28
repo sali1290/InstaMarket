@@ -9,8 +9,9 @@ import com.e.domain.models.OrderModel
 import com.e.domain.models.OrderRequestModel
 import com.e.domain.repository.OrderRepo
 import java.io.IOException
+import javax.inject.Inject
 
-class OrderRepoImpl(
+class OrderRepoImpl @Inject constructor(
     private val orderLocalDataSource: OrderLocalDataSource,
     private val orderRemoteDataSource: OrderRemoteDataSource,
     private val netWorkHelper: NetWorkHelper,

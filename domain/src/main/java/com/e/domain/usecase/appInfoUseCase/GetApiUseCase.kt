@@ -1,8 +1,9 @@
 package com.e.domain.usecase.appInfoUseCase
 
 import com.e.domain.repository.AppInfoRepo
+import javax.inject.Inject
 
-class GetApiUseCase(private val appInfoRepo: AppInfoRepo) {
+class GetApiUseCase @Inject constructor(private val appInfoRepo: AppInfoRepo) {
 
     suspend fun execute() = appInfoRepo.getApi()
 

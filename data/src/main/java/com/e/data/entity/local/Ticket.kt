@@ -8,15 +8,15 @@ data class Ticket(
     @PrimaryKey(autoGenerate = true)
     val id: Int?,
 
-    val changed: Any?,
+    val changed: String?,
 
-    val created: Any?,
+    val created: String?,
 
     val description: String?,
 
-    val ids: Any?,
+    val ids: String?,
 
-    val messages: List<Any>?,
+    val messages: List<String>?,
 
     val status: String?,
 

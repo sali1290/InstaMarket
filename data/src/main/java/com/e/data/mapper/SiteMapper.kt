@@ -2,8 +2,9 @@ package com.e.data.mapper
 
 import com.e.data.entity.remote.Site
 import com.e.domain.models.SiteModel
+import javax.inject.Inject
 
-class SiteMapper {
+class SiteMapper @Inject constructor(){
     fun toMapper(site: Site): SiteModel {
         return SiteModel(
             site.day ?: "",

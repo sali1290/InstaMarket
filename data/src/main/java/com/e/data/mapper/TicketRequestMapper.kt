@@ -4,8 +4,9 @@ import com.e.data.entity.TicketRequest
 import com.e.data.entity.local.Ticket
 import com.e.domain.models.TicketModel
 import com.e.domain.models.TicketRequestModel
+import javax.inject.Inject
 
-class TicketRequestMapper {
+class TicketRequestMapper @Inject constructor(){
     fun toMapper(agents: TicketRequest): TicketRequestModel {
         return TicketRequestModel(
             agents.id ?: 0,

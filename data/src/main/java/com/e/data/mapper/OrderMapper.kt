@@ -4,8 +4,9 @@ import com.e.data.entity.local.Order
 import com.e.data.entity.remote.Service
 import com.e.domain.models.OrderModel
 import com.e.domain.models.ServiceModel
+import javax.inject.Inject
 
-class OrderMapper {
+class OrderMapper @Inject constructor(){
     fun toMapper(agents: Order): OrderModel {
         return OrderModel(
             agents.id ?: 0,

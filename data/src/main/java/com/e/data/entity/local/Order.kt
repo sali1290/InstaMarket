@@ -10,37 +10,37 @@ data class Order(
 
     var apiOrderId: String?,
 
-    var apiProvider_id: Any?,
+    var apiProvider_id: String?,
 
-    var apiResponse: Any?,
+    var apiResponse: String?,
 
-    var apiServiceId: Any?,
+    var apiServiceId: String?,
 
-    var apiSite: Any?,
+    var apiSite: String?,
 
     var cateId: String?,
 
-    var changed: Any?,
+    var changed: String?,
 
     var charge: String?,
 
-    var comments: Any?,
+    var comments: String?,
 
-    var created: Any?,
+    var created: String?,
 
     var dripfeedQuantity: String?,
 
-    var finish: Any?,
+    var finish: String?,
 
-    var formalCharge: Any?,
+    var formalCharge: String?,
 
-    var hashtag: Any?,
+    var hashtag: String?,
 
-    var hashtags: Any?,
+    var hashtags: String?,
 
     var id: Int?,
 
-    var ids: Any?,
+    var ids: String?,
 
     var interval: String?,
 
@@ -48,19 +48,19 @@ data class Order(
 
     var link: String?,
 
-    var media: Any?,
+    var media: String?,
 
-    var note: Any?,
+    var note: String?,
 
-    var profit: Any?,
+    var profit: String?,
 
     var quantity: String?,
 
     var remains: String?,
 
-    var returnAmount: Any?,
+    var returnAmount: String?,
 
-    var returnId: Any?,
+    var returnId: String?,
 
     var runs: String?,
 
@@ -72,29 +72,29 @@ data class Order(
 
     var status: String?,
 
-    var subDelay: Any?,
+    var subDelay: String?,
 
-    var subexpiry: Any?,
+    var subexpiry: String?,
 
-    var subMax: Any?,
+    var subMax: String?,
 
-    var subMin: Any?,
+    var subMin: String?,
 
-    var subPosts: Any?,
+    var subPosts: String?,
 
-    var subResponseOrders: Any?,
+    var subResponseOrders: String?,
 
-    var subResponsePosts: Any?,
+    var subResponsePosts: String?,
 
-    var subStatus: Any?,
+    var subStatus: String?,
 
     var type: String?,
 
     var uid: String?,
 
-    var userName: Any?,
+    var userName: String?,
 
-    var userNames: Any?
+    var userNames: String?
 
 
 )

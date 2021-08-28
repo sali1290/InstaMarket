@@ -4,8 +4,9 @@ import com.e.data.api.ApiService
 import com.e.data.entity.TicketRequest
 import com.e.data.entity.local.Ticket
 import retrofit2.Response
+import javax.inject.Inject
 
-class TicketRemoteDataSourceImpl(private val apiService: ApiService): TicketRemoteDataSource {
+class TicketRemoteDataSourceImpl @Inject constructor(private val apiService: ApiService): TicketRemoteDataSource {
     override suspend fun createTicketFromRemote(
         subject: String,
         order_id: String,

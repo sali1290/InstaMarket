@@ -13,8 +13,11 @@ import com.e.domain.usecase.enterAppUseCase.GetUserFromLogin
 import com.e.domain.usecase.enterAppUseCase.LoginUseCase
 import com.e.instamarket.R
 import com.e.instamarket.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class LoginFragment(
+@AndroidEntryPoint
+class LoginFragment @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val getUserFromLogin: GetUserFromLogin
 ) : Fragment() {

@@ -4,8 +4,9 @@ import com.e.data.entity.Token
 import com.e.data.entity.local.User
 import com.e.domain.models.TokenModel
 import com.e.domain.models.UserModel
+import javax.inject.Inject
 
-class TokenMapper {
+class TokenMapper @Inject constructor(){
 
     fun toMapper(token: Token): TokenModel {
         return TokenModel(
