@@ -17,7 +17,13 @@ import com.e.data.entity.remote.Transaction
     version = 1,
     exportSchema = false
 )
-@TypeConverters(UserTypeConverter::class)
+@TypeConverters(
+    UserTypeConverter::class,
+    ErrorTypeConverter::class,
+    TicketTypeConverter::class,
+    OrderTypeConverter::class,
+    LuckUserTypeConverter::class
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun orderDao(): OrderDao

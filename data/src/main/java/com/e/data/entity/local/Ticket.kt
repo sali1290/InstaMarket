@@ -16,7 +16,7 @@ data class Ticket(
 
     val ids: String?,
 
-    val messages: List<String>?,
+    val messages: Errors?,
 
     val status: String?,
 

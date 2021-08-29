@@ -5,9 +5,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.e.domain.usecase.enterAppUseCase.GetUserTokenUseCase
 import com.e.domain.usecase.enterAppUseCase.LoginUseCase
 import com.e.domain.usecase.enterAppUseCase.RegisterUseCase
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
+@HiltViewModel
 class EnterAppViewModelFactory @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val getUserTokenUseCase: GetUserTokenUseCase,

@@ -12,7 +12,7 @@ data class TicketModel(
 
     val ids: Any?,
 
-    val messages: List<Any>?,
+    val messages: ErrorsModel?,
 
     val status: String?,
 

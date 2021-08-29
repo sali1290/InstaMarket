@@ -1,12 +1,14 @@
 package com.e.data.entity.remote
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-
+@Entity
 @JsonClass(generateAdapter = true)
 data class Transaction(
-
+    @PrimaryKey(autoGenerate = true)
     @Json(name = "id")
     var id: Int?,
 

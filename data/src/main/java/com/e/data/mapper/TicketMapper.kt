@@ -1,5 +1,6 @@
 package com.e.data.mapper
 
+import com.e.data.entity.local.Errors
 import com.e.data.entity.local.Ticket
 import com.e.domain.models.TicketModel
 import javax.inject.Inject
@@ -12,7 +13,7 @@ class TicketMapper @Inject constructor(){
             agents.created ?: "",
             agents.description ?: "",
             agents.ids ?: "",
-            agents.messages ?: listOf(),
+            ErrorsMapper().toMapper(agents.messages!!) ,
             agents.status ?: "",
             agents.subject ?: "",
             agents.uid ?: ""
