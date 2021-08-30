@@ -1,9 +1,12 @@
 package com.e.instamarket.viewmodel.appInfo
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.e.domain.usecase.appInfoUseCase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
+import javax.inject.Singleton
 
 @HiltViewModel
 class AppInfoViewModel @Inject constructor(
@@ -15,7 +18,7 @@ class AppInfoViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
     private val getServiceUseCase: GetServiceUseCase,
     private val getSiteUseCase: GetSiteUseCase
-) {
+): ViewModel() {
 
     fun getAgent() = liveData {
         val agentsList = getAgentUseCase.execute()

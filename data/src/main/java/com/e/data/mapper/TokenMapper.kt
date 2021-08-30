@@ -10,13 +10,16 @@ class TokenMapper @Inject constructor(){
 
     fun toMapper(token: Token): TokenModel {
         return TokenModel(
-            token.id ?: 0,
-            token.accessToken ?: "",
-            token.tokenType ?: "",
-            token.expires ?: "",
+            token.id ,
+            token.accessToken,
+            token.tokenType,
+            token.expires,
             UserMapper().toMapper(token.user!!),
-            token.result ?: false,
-            ErrorsMapper().toMapper(token.errors!!)
+            token.result,
+            token.errors?.let { ErrorsMapper().toMapper(it) }
         )
     }
+
+
+
 }

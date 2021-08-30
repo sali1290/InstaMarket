@@ -1,5 +1,7 @@
 package com.e.data.repository
 
+import com.e.data.api.LoginRequest
+import com.e.data.api.LoginTypeConverter
 import com.e.data.entity.Token
 import com.e.data.mapper.TokenMapper
 import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
@@ -21,12 +23,13 @@ class EnterAppRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun login(email: String, password: String): TokenModel {
         lateinit var token: TokenModel
+//        var loginRequest: LoginRequest = LoginTypeConverter().converter(email , password)
         if (netWorkHelper.isNetworkConnected()) {
-            if (enterAppRemoteDataSource.loginFromRemote(email, password).isSuccessful &&
-                enterAppRemoteDataSource.loginFromRemote(email, password)
+            if (enterAppRemoteDataSource.loginFromRemote(email , password).isSuccessful &&
+                enterAppRemoteDataSource.loginFromRemote(email , password)
                     .body() != null
             ) {
-                val response = enterAppRemoteDataSource.loginFromRemote(email, password)
+                val response = enterAppRemoteDataSource.loginFromRemote(email , password)
                 token = response.body().let {
                     tokenMapper.get().toMapper(it!!)
                 }

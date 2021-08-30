@@ -7,10 +7,10 @@ import org.json.JSONObject
 
 class ErrorTypeConverter {
     @TypeConverter
-    fun fromError(error: Errors): String {
+    fun fromError(error: Errors?): String {
         return JSONObject().apply {
-            put("email", error.email)
-            put("password", error.password)
+            put("email", error?.email)
+            put("password", error?.password)
         }.toString()
     }
 

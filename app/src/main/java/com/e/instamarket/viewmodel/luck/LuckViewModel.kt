@@ -1,18 +1,21 @@
 package com.e.instamarket.viewmodel.luck
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.e.domain.usecase.luckUseCase.HaveChanceUseCase
 import com.e.domain.usecase.luckUseCase.LuckWheelUseCase
 import com.e.domain.usecase.luckUseCase.UserLuckUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
+import javax.inject.Singleton
 
 @HiltViewModel
 class LuckViewModel @Inject constructor(
     private val haveChanceUseCase: HaveChanceUseCase,
     private val luckWheelUseCase: LuckWheelUseCase,
     private val userLuckUseCase: UserLuckUseCase
-){
+): ViewModel() {
     fun haveLuck() = liveData {
         val haveLuck = haveChanceUseCase.execute()
         emit(haveLuck)

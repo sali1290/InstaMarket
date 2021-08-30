@@ -25,7 +25,6 @@ class ApiModule {
         val okHttpBuilder = OkHttpClient.Builder()
         okHttpBuilder.connectTimeout(30, TimeUnit.SECONDS)
         okHttpBuilder.readTimeout(30, TimeUnit.SECONDS)
-
         return okHttpBuilder.build()
     }
 
@@ -41,8 +40,8 @@ class ApiModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://instamarketapi.instamarket.social/public/api")
-            .addConverterFactory(MoshiConverterFactory.create())
+            .baseUrl("https://instamarketapi.instamarket.social/public/api/")
+            .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
             .client(okHttpClient)
             .build()
     }

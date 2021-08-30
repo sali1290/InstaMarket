@@ -6,6 +6,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class EnterAppRemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) : EnterAppRemoteDataSource {
+
     override suspend fun loginFromRemote(email: String, password: String): Response<Token> {
         return apiService.login(email, password)
     }
