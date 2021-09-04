@@ -21,16 +21,16 @@ class EnterAppRepoImpl @Inject constructor(
     override suspend fun login(email: String, password: String): TokenModel {
         lateinit var token: TokenModel
         if (netWorkHelper.isNetworkConnected()) {
-            if (enterAppRemoteDataSource.loginFromRemote(email , password).isSuccessful &&
-                enterAppRemoteDataSource.loginFromRemote(email , password)
+            if (enterAppRemoteDataSource.loginFromRemote(email, password).isSuccessful &&
+                enterAppRemoteDataSource.loginFromRemote(email, password)
                     .body() != null
             ) {
-                val response = enterAppRemoteDataSource.loginFromRemote(email , password)
+                val response = enterAppRemoteDataSource.loginFromRemote(email, password)
                 token = response.body().let {
                     tokenMapper.get().toMapper(it!!)
                 }
                 enterAppLocalDataSource.saveTokenFromDB(response.body()!!)
-                Log.i("My tag" , "value in repoImpl is: " + token.id.toString())
+                Log.i("My tag", "value in repoImpl is: " + token.id.toString())
                 return token
             } else {
                 throw IOException("Server is Not Responding")
@@ -54,17 +54,17 @@ class EnterAppRepoImpl @Inject constructor(
         if (netWorkHelper.isNetworkConnected()) {
             if (enterAppRemoteDataSource.registerFromRemote(
                     email, phone, firstName,
-                    lastName, username, password , confirmPassword
+                    lastName, username, password, confirmPassword
                 ).isSuccessful &&
                 enterAppRemoteDataSource.registerFromRemote(
                     email, phone, firstName,
-                    lastName, username, password , confirmPassword
+                    lastName, username, password, confirmPassword
                 )
                     .body() != null
             ) {
                 val response = enterAppRemoteDataSource.registerFromRemote(
                     email, phone, firstName,
-                    lastName, username, password , confirmPassword
+                    lastName, username, password, confirmPassword
                 )
                 token = response.body().let {
                     tokenMapper.get().toMapper(it!!)
@@ -123,8 +123,6 @@ class EnterAppRepoImpl @Inject constructor(
         } else {
             throw IOException("No Internet Connection")
         }
-
-
     }
 
     override suspend fun getUserToken(): TokenModel {

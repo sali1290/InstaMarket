@@ -60,32 +60,39 @@ class TicketRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun getTickets(id: String): MutableList<TicketModel> {
         lateinit var ticketList: MutableList<TicketModel>
-        if (ticketLocalDataSource.getTicketListFromDB().size > 0) {
-            for (i in 0..ticketLocalDataSource.getTicketListFromDB().size) {
-                ticketList[i] = ticketLocalDataSource.getTicketListFromDB()[i].let {
-                    ticketMapper.get().toMapper(it)
+        if (netWorkHelper.isNetworkConnected()) {
+            if (ticketRemoteDataSource.getTicketsFromRemote(id).isSuccessful &&
+                ticketRemoteDataSource.getTicketsFromRemote(id).body() != null
+            ) {
+                ticketLocalDataSource.deleteTicketFromDB()
+                val response = ticketRemoteDataSource.getTicketsFromRemote(id).body()
+                for (i in 0..response?.size!!) {
+                    ticketList[i] = response[i].let {
+                        ticketMapper.get().toMapper(it)
+                    }
+                    ticketLocalDataSource.saveTicketFromDB(response[i])
                 }
-            }
-            return ticketList
-        } else {
-            if (netWorkHelper.isNetworkConnected()) {
-                if (ticketRemoteDataSource.getTicketsFromRemote(id).isSuccessful &&
-                    ticketRemoteDataSource.getTicketsFromRemote(id).body() != null
-                ) {
-                    val response = ticketRemoteDataSource.getTicketsFromRemote(id).body()
-                    for (i in 0..response?.size!!) {
-                        ticketList[i] = response[i].let {
+                return ticketList
+            } else {
+                if (ticketLocalDataSource.getTicketListFromDB().size > 0) {
+                    for (i in 0..ticketLocalDataSource.getTicketListFromDB().size) {
+                        ticketList[i] = ticketLocalDataSource.getTicketListFromDB()[i].let {
                             ticketMapper.get().toMapper(it)
                         }
-                        ticketLocalDataSource.saveTicketFromDB(response[i])
                     }
                     return ticketList
-                } else {
-                    throw IOException("Server is Not Responding")
                 }
-            } else {
-                throw IOException("No Internet Connection")
+            }
+        } else {
+            if (ticketLocalDataSource.getTicketListFromDB().size > 0) {
+                for (i in 0..ticketLocalDataSource.getTicketListFromDB().size) {
+                    ticketList[i] = ticketLocalDataSource.getTicketListFromDB()[i].let {
+                        ticketMapper.get().toMapper(it)
+                    }
+                }
+                return ticketList
             }
         }
+        return ticketList
     }
 }

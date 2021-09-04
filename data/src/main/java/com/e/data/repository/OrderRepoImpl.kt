@@ -40,7 +40,7 @@ class OrderRepoImpl @Inject constructor(
                 order = response.let {
                     orderRequestMapper.get().toMapper(it!!)
                 }
-                orderLocalDataSource.saveOrderFromDB(response?.order!!)
+
                 return order
             } else {
                 throw IOException("Server is Not Responding")
@@ -55,36 +55,45 @@ class OrderRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun getOrders(id: Int): MutableList<OrderModel> {
         lateinit var orderList: MutableList<OrderModel>
-        if (orderLocalDataSource.getOrderListFromDB().size > 0) {
-            for (i in 0..orderLocalDataSource.getOrderListFromDB().size) {
-                orderList[i] = orderLocalDataSource.getOrderListFromDB()[i].let {
-                    orderMapper.get().toMapper(it)
+
+        if (netWorkHelper.isNetworkConnected()) {
+            if (orderRemoteDataSource.getOrderListFromRemote(id.toString()).isSuccessful &&
+                orderRemoteDataSource.getOrderListFromRemote(
+                    id.toString()
+                ).body() != null
+            ) {
+                orderLocalDataSource.deleteOrderFromDB()
+                val response = orderRemoteDataSource.getOrderListFromRemote(id.toString()).body()
+                for (i in 0..response?.size!!) {
+                    orderLocalDataSource.saveOrderFromDB(response[i])
+                    orderList[i] = response[i].let {
+                        orderMapper.get().toMapper(it)
+                    }
                 }
-            }
-            return orderList
-        } else {
-            if (netWorkHelper.isNetworkConnected()) {
-                if (orderRemoteDataSource.getOrderListFromRemote(id.toString()).isSuccessful &&
-                    orderRemoteDataSource.getOrderListFromRemote(
-                        id.toString()
-                    ).body() != null
-                ) {
-                    val response =
-                        orderRemoteDataSource.getOrderListFromRemote(id.toString()).body()
-                    for (i in 0..response?.size!!) {
-                        orderList[i] = response[i].let {
+                return orderList
+            } else {
+                if (orderLocalDataSource.getOrderListFromDB().size > 0) {
+                    for (i in 0..orderLocalDataSource.getOrderListFromDB().size) {
+                        orderList[i] = orderLocalDataSource.getOrderListFromDB()[i].let {
                             orderMapper.get().toMapper(it)
                         }
                     }
                     return orderList
-                } else {
-                    throw IOException("Server is Not Responding")
                 }
-            } else {
-                throw IOException("No Internet Connection")
+            }
+        } else {
+            if (orderLocalDataSource.getOrderListFromDB().size > 0) {
+                for (i in 0..orderLocalDataSource.getOrderListFromDB().size) {
+                    orderList[i] = orderLocalDataSource.getOrderListFromDB()[i].let {
+                        orderMapper.get().toMapper(it)
+                    }
+                }
+                return orderList
             }
         }
+        return orderList
     }
+
 
 }
 
