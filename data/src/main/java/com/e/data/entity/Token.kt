@@ -15,10 +15,10 @@ data class Token(
     @PrimaryKey(autoGenerate = true)
     var id: Int?,
 
-    @Json(name = "accessToken")
+    @Json(name = "access_token")
     var accessToken : String?,
 
-    @Json(name = "tokenType")
+    @Json(name = "token_type")
     var tokenType:String?,
 
     @Json(name = "expires")
@@ -27,7 +27,7 @@ data class Token(
     @Json(name = "user")
     var user: User?,
 
-    @Json(name = "accessResult")
+    @Json(name = "access_result")
     var result: Boolean?,
 
     @Json(name = "errors")

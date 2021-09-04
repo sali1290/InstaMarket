@@ -1,5 +1,6 @@
 package com.e.instamarket.viewmodel.enterApp
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -19,6 +20,7 @@ class EnterAppViewModel @Inject constructor(
 
     fun login(email: String, password: String) = liveData  {
         val token = MutableLiveData(loginUseCase.execute(email , password))
+        Log.i("My tag" , "value in viewModel is: " + token.value?.id.toString())
         emit(token)
     }
 
@@ -29,11 +31,11 @@ class EnterAppViewModel @Inject constructor(
 
     fun register(
         email: String, phone: String, type: String,
-        description: String, username: String, password: String
+        description: String, username: String, password: String , confirmPassword:String
     ) = liveData {
          val token = MutableLiveData(registerUseCase.execute(
             email, phone, type,
-            description, username, password
+            description, username, password , confirmPassword
         ))
         emit(token)
     }

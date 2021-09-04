@@ -1,6 +1,7 @@
 package com.e.instamarket.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +48,7 @@ class LoginFragment() : Fragment() {
             viewModel.login(email, password).observe(viewLifecycleOwner , Observer {
                 token = it.value!!
             })
-                Toast.makeText(requireContext() , token?.id.toString() , Toast.LENGTH_SHORT).show()
+                Log.i("My tag" , "value in fragment is: " + token?.id.toString())
         }
 
 

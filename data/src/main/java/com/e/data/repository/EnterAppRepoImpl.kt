@@ -1,8 +1,6 @@
 package com.e.data.repository
 
-import com.e.data.api.LoginRequest
-import com.e.data.api.LoginTypeConverter
-import com.e.data.entity.Token
+import android.util.Log
 import com.e.data.mapper.TokenMapper
 import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
 import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSource
@@ -10,7 +8,6 @@ import com.e.data.utile.NetWorkHelper
 import com.e.domain.models.TokenModel
 import com.e.domain.repository.EnterAppRepo
 import java.io.IOException
-import java.lang.Exception
 import javax.inject.Inject
 
 class EnterAppRepoImpl @Inject constructor(
@@ -23,7 +20,6 @@ class EnterAppRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun login(email: String, password: String): TokenModel {
         lateinit var token: TokenModel
-//        var loginRequest: LoginRequest = LoginTypeConverter().converter(email , password)
         if (netWorkHelper.isNetworkConnected()) {
             if (enterAppRemoteDataSource.loginFromRemote(email , password).isSuccessful &&
                 enterAppRemoteDataSource.loginFromRemote(email , password)
@@ -34,6 +30,7 @@ class EnterAppRepoImpl @Inject constructor(
                     tokenMapper.get().toMapper(it!!)
                 }
                 enterAppLocalDataSource.saveTokenFromDB(response.body()!!)
+                Log.i("My tag" , "value in repoImpl is: " + token.id.toString())
                 return token
             } else {
                 throw IOException("Server is Not Responding")
@@ -50,23 +47,24 @@ class EnterAppRepoImpl @Inject constructor(
         firstName: String,
         lastName: String,
         username: String,
-        password: String
+        password: String,
+        confirmPassword: String
     ): TokenModel {
         lateinit var token: TokenModel
         if (netWorkHelper.isNetworkConnected()) {
             if (enterAppRemoteDataSource.registerFromRemote(
                     email, phone, firstName,
-                    lastName, username, password
+                    lastName, username, password , confirmPassword
                 ).isSuccessful &&
                 enterAppRemoteDataSource.registerFromRemote(
                     email, phone, firstName,
-                    lastName, username, password
+                    lastName, username, password , confirmPassword
                 )
                     .body() != null
             ) {
                 val response = enterAppRemoteDataSource.registerFromRemote(
                     email, phone, firstName,
-                    lastName, username, password
+                    lastName, username, password , confirmPassword
                 )
                 token = response.body().let {
                     tokenMapper.get().toMapper(it!!)

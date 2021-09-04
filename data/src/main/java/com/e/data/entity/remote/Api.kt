@@ -18,7 +18,7 @@ data class Api(
     @Json(name = "created")
     val created: String?,
 
-    @Json(name = "currencyCode")
+    @Json(name = "currency_code")
     val currencyCode: String?,
 
     @Json(name = "description")

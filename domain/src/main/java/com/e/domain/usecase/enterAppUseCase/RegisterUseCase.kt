@@ -11,10 +11,11 @@ class RegisterUseCase @Inject constructor(private val enterAppRepo: EnterAppRepo
         type: String,
         description: String,
         username: String,
-        password: String
+        password: String,
+        confirmPassword: String
     ) = enterAppRepo.register(
         email, phone, type,
-        description, username, password
+        description, username, password , confirmPassword
     )
 
 }

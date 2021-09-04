@@ -12,6 +12,7 @@ interface ApiService {
     //Enter app api
     @POST("auth/login")
     @FormUrlEncoded
+    @Headers("Accept:application/json")
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
@@ -25,7 +26,8 @@ interface ApiService {
         @Field("first_name") firstName: String,
         @Field("last_name") lastName: String,
         @Field("user_name") userName: String,
-        @Field("password") password: String
+        @Field("password") password: String,
+        @Field("confirm_password") confirmPassword: String
     ): Response<Token>
 
     @POST("auth/user")

@@ -17,7 +17,8 @@ interface EnterAppRemoteDataSource {
         firstName: String,
         lastName: String,
         username: String,
-        password: String
+        password: String ,
+        confirmPassword: String
     ): Response<Token>
 
     suspend fun getUserFromRemote(

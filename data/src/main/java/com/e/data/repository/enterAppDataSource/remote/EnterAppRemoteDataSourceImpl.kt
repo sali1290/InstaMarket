@@ -17,9 +17,10 @@ class EnterAppRemoteDataSourceImpl @Inject constructor(private val apiService: A
         firstName: String,
         lastName: String,
         username: String,
-        password: String
+        password: String,
+        confirmPassword: String
     ): Response<Token> {
-        return apiService.register(email, phone, firstName, lastName, username, password)
+        return apiService.register(email, phone, firstName, lastName, username, password , confirmPassword)
     }
 
     override suspend fun getUserFromRemote(
