@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group>
-
         <item
             android:id="@+id/notif"
             android:title="امکانات بیشتر"
-            android:icon="@drawable/ic_more"/>
+            android:icon="@drawable/ic_more"
+            />
 
         <item
             android:id="@+id/common_question"
@@ -17,9 +16,7 @@
         <item
             android:id="@+id/rule"
             android:title="پروفایل"
-            android:icon="@drawable/ic_profile"/>
-
-
-    </group>
+            android:icon="@drawable/ic_profile"
+            />
 
 </menu>

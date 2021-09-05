@@ -1,6 +1,8 @@
 package com.e.data.repository
 
 import android.util.Log
+import com.e.data.api.LoginRequest
+import com.e.data.api.LoginTypeConverter
 import com.e.data.mapper.TokenMapper
 import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
 import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSource
@@ -20,17 +22,17 @@ class EnterAppRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun login(email: String, password: String): TokenModel {
         lateinit var token: TokenModel
+        val loginRequest:LoginRequest = LoginTypeConverter().converter(email , password)
         if (netWorkHelper.isNetworkConnected()) {
-            if (enterAppRemoteDataSource.loginFromRemote(email, password).isSuccessful &&
-                enterAppRemoteDataSource.loginFromRemote(email, password)
+            if (enterAppRemoteDataSource.loginFromRemote(loginRequest).isSuccessful &&
+                enterAppRemoteDataSource.loginFromRemote(loginRequest)
                     .body() != null
             ) {
-                val response = enterAppRemoteDataSource.loginFromRemote(email, password)
+                val response = enterAppRemoteDataSource.loginFromRemote(loginRequest)
                 token = response.body().let {
                     tokenMapper.get().toMapper(it!!)
                 }
                 enterAppLocalDataSource.saveTokenFromDB(response.body()!!)
-                Log.i("My tag", "value in repoImpl is: " + token.id.toString())
                 return token
             } else {
                 throw IOException("Server is Not Responding")

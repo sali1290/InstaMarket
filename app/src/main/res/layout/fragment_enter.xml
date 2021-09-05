@@ -18,16 +18,16 @@
         </androidx.viewpager2.widget.ViewPager2>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
             android:text="ورود"
-            android:textSize="@dimen/_14sdp"
             android:textColor="@color/white"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
             android:textSize="@dimen/_14sdp"

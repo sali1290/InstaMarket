@@ -22,4 +22,15 @@
     <string name="login">اگر قبلا در سایت ما ثبت نام کرده اید با همان مشخصات و پسورد میتوانید وارد برنامه شوید</string>
     <string name="email">نام کاربری یا پست الکترونیک (ایمیل)</string>
     <string name="password">رمز عبور (password)</string>
+
+    <string name="register">با ثبت نام در این برنامه به صورت همزمان بصورت اتوماتیک در سایت هم برای شما ثبت نام انجام می شود و با همین اطلاعات می توانید وارد پنا کاربری خود در سایت شوید</string>
+
+    <string name="f_name">نام</string>
+    <string name="l_name">نام خانوادگی</string>
+    <string name="register_email">پست الکترونیک (ایمیل)</string>
+    <string name="username">نام کاربری (username)</string>
+    <string name="phone">شماره همراه</string>
+    <string name="re_password">تکرار رمز عبور</string>
+
+
 </resources>

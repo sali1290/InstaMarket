@@ -1,14 +1,15 @@
 package com.e.data.repository.enterAppDataSource.remote
 
 import com.e.data.api.ApiService
+import com.e.data.api.LoginRequest
 import com.e.data.entity.Token
 import retrofit2.Response
 import javax.inject.Inject
 
 class EnterAppRemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) : EnterAppRemoteDataSource {
 
-    override suspend fun loginFromRemote(email: String, password: String): Response<Token> {
-        return apiService.login(email, password)
+    override suspend fun loginFromRemote(loginRequest: LoginRequest): Response<Token> {
+        return apiService.login(loginRequest)
     }
 
     override suspend fun registerFromRemote(

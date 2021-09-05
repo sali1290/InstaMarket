@@ -20,7 +20,6 @@ class EnterAppViewModel @Inject constructor(
 
     fun login(email: String, password: String) = liveData  {
         val token = MutableLiveData(loginUseCase.execute(email , password))
-        Log.i("My tag" , "value in viewModel is: " + token.value?.id.toString())
         emit(token)
     }
 

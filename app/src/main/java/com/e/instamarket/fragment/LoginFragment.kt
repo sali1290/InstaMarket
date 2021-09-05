@@ -9,9 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.e.data.di.ApiModule
 import com.e.domain.models.ApiModel
 import com.e.domain.models.TokenModel
+import com.e.instamarket.R
 import com.e.instamarket.databinding.FragmentLoginBinding
 import com.e.instamarket.viewmodel.enterApp.EnterAppViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,9 +36,6 @@ class LoginFragment() : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(
             EnterAppViewModel::class.java
         )
-        email = "arz1379n@gmail.com"
-        password = "sali1290"
-
         return binding.root
     }
 
@@ -45,18 +44,31 @@ class LoginFragment() : Fragment() {
 
 
         binding.button.setOnClickListener {
-            viewModel.login(email, password).observe(viewLifecycleOwner , Observer {
-                token = it.value!!
-            })
-                Log.i("My tag" , "value in fragment is: " + token?.id.toString())
+            email = binding.etUsername.text.toString()
+            password = binding.etPassword.text.toString()
+
+            if (email.isEmpty()) {
+                binding.tvUsername.setText("لطفا ایمیل خود را وارد کنید")
+                binding.tvUsername.setTextColor(resources.getColor(R.color.red))
+            } else if (password.isEmpty()) {
+                binding.tvPassword.setText("لطفا رمزعبور را وارد کنید")
+                binding.tvPassword.setTextColor(resources.getColor(R.color.red))
+            } else {
+                observe()
+                observe()
+                findNavController().navigate(R.id.homeFragment)
+            }
+
         }
 
 
     }
 
-
-
-
+    private fun observe() {
+        viewModel.login(email, password).observe(viewLifecycleOwner, Observer {
+            token = it.value!!
+        })
+    }
 
 
 }

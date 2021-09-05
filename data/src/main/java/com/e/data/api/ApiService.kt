@@ -11,12 +11,9 @@ interface ApiService {
 
     //Enter app api
     @POST("auth/login")
-    @FormUrlEncoded
-    @Headers("Accept:application/json")
     suspend fun login(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): Response<Token>
+        @Body loginRequest: LoginRequest
+            ): Response<Token>
 
     @POST("auth/register")
     @FormUrlEncoded

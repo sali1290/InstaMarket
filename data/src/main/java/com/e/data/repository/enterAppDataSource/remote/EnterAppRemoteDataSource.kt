@@ -1,5 +1,6 @@
 package com.e.data.repository.enterAppDataSource.remote
 
+import com.e.data.api.LoginRequest
 import com.e.data.entity.Token
 import retrofit2.Response
 
@@ -7,8 +8,7 @@ import retrofit2.Response
 interface EnterAppRemoteDataSource {
 
     suspend fun loginFromRemote(
-        email: String,
-        password: String
+        loginRequest: LoginRequest
     ): Response<Token>
 
     suspend fun registerFromRemote(

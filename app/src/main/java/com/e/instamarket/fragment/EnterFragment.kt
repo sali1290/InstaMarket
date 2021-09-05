@@ -28,8 +28,11 @@ lateinit var binding: FragmentEnterBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.button2.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.loginFragment)
+        }
+        binding.btnRegister.setOnClickListener{
+            findNavController().navigate(R.id.registerFragment)
         }
     }
 }
