@@ -16,7 +16,6 @@ import com.e.domain.Result
 @HiltViewModel
 class EnterAppViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val getUserTokenUseCase: GetUserTokenUseCase,
     private val registerUseCase: RegisterUseCase,
 ) : ViewModel() {
 
@@ -45,14 +44,16 @@ class EnterAppViewModel @Inject constructor(
         userName: String,
         password: String,
         confirmPassword: String
-    ) = liveData {
-        val token = MutableLiveData(
-            registerUseCase.execute(
-                email, phone, firstName,
-                lastName, userName, password, confirmPassword
-            )
-        )
-        emit(token)
+    ) = viewModelScope.launch(Dispatchers.IO + handler) {
+        _token.postValue(Result.Loading)
+        registerUseCase.execute(
+            email, phone, firstName,
+            lastName, userName, password, confirmPassword
+        ).let {
+            _token.postValue(Result.Success(it))
+        }
+
+
     }
 
 

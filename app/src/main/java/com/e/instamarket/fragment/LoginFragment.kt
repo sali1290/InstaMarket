@@ -23,8 +23,8 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: EnterAppViewModel
-    lateinit var email: String
-    lateinit var password: String
+    private lateinit var email: String
+    private lateinit var password: String
     private lateinit var sessionManager: SessionManager
 
 
@@ -34,20 +34,11 @@ class LoginFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
 
-        sessionManager = SessionManager(requireContext())
-        if (!sessionManager.fetchAuthToken().isNullOrEmpty()) {
-            findNavController().navigate(R.id.homeFragment)
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
-            }
-        }
-
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(
             EnterAppViewModel::class.java
         )
-
-
-
+        sessionManager = SessionManager(requireContext())
         return binding.root
     }
 
@@ -102,6 +93,8 @@ class LoginFragment : Fragment() {
     private fun checkToken(token: TokenModel) {
         if (!token.accessToken.isNullOrEmpty()) {
             findNavController().navigate(R.id.homeFragment)
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
+            }
         } else {
             Toast.makeText(
                 requireActivity(),
