@@ -63,7 +63,8 @@ class UserTypeConverter {
     fun toSource(user: String): User {
         val json = JSONObject(user)
         return User(
-            json.getInt("id"), json.getInt("ids"),
+            json.getInt("id"),
+            json.getInt("ids"),
             json.getString("role"),
             json.getString("loginType"),
             json.getString("firstName"),

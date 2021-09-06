@@ -9,8 +9,8 @@ import javax.inject.Inject
 class ErrorsMapper @Inject constructor(){
     fun toMapper(error: Errors): ErrorsModel {
         return ErrorsModel(
-            error.email ?: "",
-            error.password ?: ""
+            error.email ?: listOf(),
+            error.password ?: listOf()
         )
     }
 }

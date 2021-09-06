@@ -2,6 +2,7 @@ package com.e.data.di
 
 import android.content.Context
 import com.e.data.api.ApiService
+import com.e.data.utile.AuthInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -25,6 +26,7 @@ class ApiModule {
         val okHttpBuilder = OkHttpClient.Builder()
         okHttpBuilder.connectTimeout(30, TimeUnit.SECONDS)
         okHttpBuilder.readTimeout(30, TimeUnit.SECONDS)
+        okHttpBuilder.addInterceptor(AuthInterceptor(context))
         return okHttpBuilder.build()
     }
 

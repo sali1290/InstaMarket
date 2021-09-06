@@ -16,15 +16,8 @@ interface ApiService {
             ): Response<Token>
 
     @POST("auth/register")
-    @FormUrlEncoded
     suspend fun register(
-        @Field("email") email: String,
-        @Field("phone") phone: String,
-        @Field("first_name") firstName: String,
-        @Field("last_name") lastName: String,
-        @Field("user_name") userName: String,
-        @Field("password") password: String,
-        @Field("confirm_password") confirmPassword: String
+         @Body registerRequest: RegisterRequest
     ): Response<Token>
 
     @POST("auth/user")

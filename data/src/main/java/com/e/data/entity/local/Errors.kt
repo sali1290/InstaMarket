@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Errors(
     @Json(name = "email")
-    var email : String?,
+    var email : List<String>?,
     @Json(name = "password")
-    var password : String?
+    var password : List<String>?
 )

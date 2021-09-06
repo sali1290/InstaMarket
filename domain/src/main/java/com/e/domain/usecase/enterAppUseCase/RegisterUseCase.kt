@@ -8,14 +8,14 @@ class RegisterUseCase @Inject constructor(private val enterAppRepo: EnterAppRepo
     suspend fun execute(
         email: String,
         phone: String,
-        type: String,
-        description: String,
-        username: String,
+        firstName: String,
+        lastName: String,
+        userName: String,
         password: String,
         confirmPassword: String
     ) = enterAppRepo.register(
-        email, phone, type,
-        description, username, password , confirmPassword
+        email, phone, firstName, lastName,
+        userName, password, confirmPassword
     )
 
 }

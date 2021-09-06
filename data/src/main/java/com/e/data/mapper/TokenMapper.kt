@@ -6,20 +6,19 @@ import com.e.domain.models.TokenModel
 import com.e.domain.models.UserModel
 import javax.inject.Inject
 
-class TokenMapper @Inject constructor(){
+class TokenMapper @Inject constructor() {
 
     fun toMapper(token: Token): TokenModel {
         return TokenModel(
-            token.id ,
-            token.accessToken,
-            token.tokenType,
-            token.expires,
+            token.id ?: 0,
+            token.accessToken ?: "",
+            token.tokenType ?: "",
+            token.expires ?: "",
             UserMapper().toMapper(token.user!!),
-            token.result,
+            token.result ?: false,
             token.errors?.let { ErrorsMapper().toMapper(it) }
         )
     }
-
 
 
 }

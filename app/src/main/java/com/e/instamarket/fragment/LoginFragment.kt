@@ -1,17 +1,17 @@
 package com.e.instamarket.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.e.data.di.ApiModule
-import com.e.domain.models.ApiModel
+import com.e.data.utile.SessionManager
+import com.e.domain.Result
 import com.e.domain.models.TokenModel
 import com.e.instamarket.R
 import com.e.instamarket.databinding.FragmentLoginBinding
@@ -19,23 +19,35 @@ import com.e.instamarket.viewmodel.enterApp.EnterAppViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment() : Fragment() {
+class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: EnterAppViewModel
     lateinit var email: String
     lateinit var password: String
-    var token: TokenModel? = null
+    private lateinit var sessionManager: SessionManager
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+
+        sessionManager = SessionManager(requireContext())
+        if (!sessionManager.fetchAuthToken().isNullOrEmpty()) {
+            findNavController().navigate(R.id.homeFragment)
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
+            }
+        }
+
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(
             EnterAppViewModel::class.java
         )
+
+
+
         return binding.root
     }
 
@@ -47,16 +59,19 @@ class LoginFragment() : Fragment() {
             email = binding.etUsername.text.toString()
             password = binding.etPassword.text.toString()
 
-            if (email.isEmpty()) {
-                binding.tvUsername.setText("لطفا ایمیل خود را وارد کنید")
-                binding.tvUsername.setTextColor(resources.getColor(R.color.red))
-            } else if (password.isEmpty()) {
-                binding.tvPassword.setText("لطفا رمزعبور را وارد کنید")
-                binding.tvPassword.setTextColor(resources.getColor(R.color.red))
-            } else {
-                observe()
-                observe()
-                findNavController().navigate(R.id.homeFragment)
+            when {
+                email.isEmpty() -> {
+                    binding.tvUsername.text = "لطفا ایمیل خود را وارد کنید"
+                    binding.tvUsername.setTextColor(resources.getColor(R.color.red))
+                }
+                password.isEmpty() -> {
+                    binding.tvPassword.text = "لطفا رمزعبور را وارد کنید"
+                    binding.tvPassword.setTextColor(resources.getColor(R.color.red))
+                }
+                else -> {
+                    viewModel.login(email, password)
+                    observe()
+                }
             }
 
         }
@@ -65,10 +80,35 @@ class LoginFragment() : Fragment() {
     }
 
     private fun observe() {
-        viewModel.login(email, password).observe(viewLifecycleOwner, Observer {
-            token = it.value!!
+        viewModel.token.observe(viewLifecycleOwner, Observer {
+            when (it) {
+
+                is Result.Success -> {
+                    checkToken(it.data)
+                    sessionManager.saveAuthToken(it.data.accessToken!!)
+                }
+
+                is Result.Loading -> {
+                    Toast.makeText(requireActivity(), "Loading", Toast.LENGTH_SHORT).show()
+                }
+
+                is Result.Error -> {
+                    Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show()
+                }
+            }
         })
     }
 
+    private fun checkToken(token: TokenModel) {
+        if (!token.accessToken.isNullOrEmpty()) {
+            findNavController().navigate(R.id.homeFragment)
+        } else {
+            Toast.makeText(
+                requireActivity(),
+                "نام کاربری یا رمز عبور اشتباه است",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
 }
