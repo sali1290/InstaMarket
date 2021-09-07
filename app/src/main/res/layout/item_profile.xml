@@ -13,11 +13,11 @@
             android:text="@string/email"
             android:textColor="@color/black"
             android:textDirection="rtl"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_name"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="@dimen/_40sdp"
@@ -25,9 +25,10 @@
             android:background="@drawable/gray_background"
             android:padding="@dimen/_4sdp"
             android:textDirection="rtl"
-            android:hint="example@gmail.com"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/black"
             android:paddingEnd="@dimen/_8sdp"
+            android:gravity="center_vertical"
             android:paddingStart="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

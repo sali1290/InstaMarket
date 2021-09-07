@@ -1,11 +1,15 @@
 package com.e.data.entity.local
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Entity
 @JsonClass(generateAdapter = true)
 data class User(
 
+    @PrimaryKey(autoGenerate = true)
     @Json(name = "id")
     val id: Int?,
 

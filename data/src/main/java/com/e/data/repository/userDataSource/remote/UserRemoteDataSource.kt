@@ -1,4 +1,4 @@
-package com.e.data.repository.userDataSource
+package com.e.data.repository.userDataSource.remote
 
 import com.e.data.entity.Token
 import retrofit2.Response

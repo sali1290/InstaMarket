@@ -8,12 +8,13 @@ import com.e.data.dao.*
 import com.e.data.entity.*
 import com.e.data.entity.local.Order
 import com.e.data.entity.local.Ticket
+import com.e.data.entity.local.User
 import com.e.data.entity.remote.Transaction
 
 @Database(
     entities = [Ticket::class, Order::class, Token::class,
         Transaction::class, TicketRequest::class,
-        OrderRequest::class, LuckRequest::class],
+        OrderRequest::class, LuckRequest::class , User::class],
     version = 1,
     exportSchema = false
 )
@@ -34,4 +35,5 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun tokenDao(): TokenDao
 
+    abstract fun userDao(): UserDao
 }

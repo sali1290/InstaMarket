@@ -77,6 +77,7 @@ class LoginFragment : Fragment() {
                 is Result.Success -> {
                     checkToken(it.data)
                     sessionManager.saveAuthToken(it.data.accessToken!!)
+                    Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show()
                 }
 
                 is Result.Loading -> {
@@ -84,7 +85,10 @@ class LoginFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+
                 }
             }
         })

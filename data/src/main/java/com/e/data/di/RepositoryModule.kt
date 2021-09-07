@@ -21,8 +21,10 @@ import com.e.data.repository.ticketDataSource.remote.TicketRemoteDataSource
 import com.e.data.repository.ticketDataSource.remote.TicketRemoteDataSourceImpl
 import com.e.data.repository.transactionDataSource.remote.TransactionRemoteDataSource
 import com.e.data.repository.transactionDataSource.remote.TransactionRemoteDataSourceImpl
-import com.e.data.repository.userDataSource.UserRemoteDataSource
-import com.e.data.repository.userDataSource.UserRemoteDataSourceImpl
+import com.e.data.repository.userDataSource.local.UserLocalDataSource
+import com.e.data.repository.userDataSource.local.UserLocalDataSourceImpl
+import com.e.data.repository.userDataSource.remote.UserRemoteDataSource
+import com.e.data.repository.userDataSource.remote.UserRemoteDataSourceImpl
 import com.e.domain.repository.*
 import dagger.Binds
 import dagger.Module
@@ -75,6 +77,7 @@ abstract class RepositoryModule {
     abstract fun bindEnterAppRemoteDataSource(
         enterAppRemoteDataSourceImpl: EnterAppRemoteDataSourceImpl
     ): EnterAppRemoteDataSource
+
     @Binds
     abstract fun bindEnterAppLocalDataSource(
         enterAppLocalDataSourceImpl: EnterAppLocalDataSourceImpl
@@ -89,6 +92,7 @@ abstract class RepositoryModule {
     abstract fun bindLuckWheelRemoteDataSource(
         luckWheelRemoteDataSourceImpl: LuckWheelRemoteDataSourceImpl
     ): LuckWheelRemoteDataSource
+
     @Binds
     abstract fun bindLuckWheelLocalDataSource(
         luckWheelLocalDataSourceImpl: LuckWheelLocalDataSourceImpl
@@ -98,6 +102,7 @@ abstract class RepositoryModule {
     abstract fun bindOrderRemoteDataSource(
         orderRemoteDataSourceImpl: OrderRemoteDataSourceImpl
     ): OrderRemoteDataSource
+
     @Binds
     abstract fun bindOrderLocalDataSource(
         orderLocalDataSourceImpl: OrderLocalDataSourceImpl
@@ -107,6 +112,7 @@ abstract class RepositoryModule {
     abstract fun bindTicketRemoteDataSource(
         ticketRemoteDataSourceImpl: TicketRemoteDataSourceImpl
     ): TicketRemoteDataSource
+
     @Binds
     abstract fun bindTicketLocalDataSource(
         ticketLocalDataSourceImpl: TicketLocalDataSourceImpl
@@ -122,6 +128,10 @@ abstract class RepositoryModule {
         userRemoteDataSourceImpl: UserRemoteDataSourceImpl
     ): UserRemoteDataSource
 
+    @Binds
+    abstract fun bindUserLocalDataSource(
+        userLocalDataSourceImpl: UserLocalDataSourceImpl
+    ): UserLocalDataSource
 
 
 }

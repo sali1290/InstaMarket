@@ -1,6 +1,5 @@
 package com.e.data.repository
 
-import android.util.Log
 import com.e.data.api.LoginRequest
 import com.e.data.api.LoginTypeConverter
 import com.e.data.api.RegisterRequest
@@ -8,6 +7,7 @@ import com.e.data.api.RegisterTypeConverter
 import com.e.data.mapper.TokenMapper
 import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
 import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSource
+import com.e.data.repository.userDataSource.local.UserLocalDataSource
 import com.e.data.utile.NetWorkHelper
 import com.e.data.utile.SessionManager
 import com.e.domain.models.TokenModel
@@ -18,9 +18,11 @@ import javax.inject.Inject
 class EnterAppRepoImpl @Inject constructor(
     private val enterAppRemoteDataSource: EnterAppRemoteDataSource,
     private val enterAppLocalDataSource: EnterAppLocalDataSource,
+    private val userLocalDataSource: UserLocalDataSource,
     private val netWorkHelper: NetWorkHelper,
     private val tokenMapper: dagger.Lazy<TokenMapper>,
     private val sessionManager: SessionManager
+
 ) : EnterAppRepo {
 
     @Throws(IOException::class)
@@ -37,7 +39,7 @@ class EnterAppRepoImpl @Inject constructor(
                     tokenMapper.get().toMapper(it!!)
                 }
 //                enterAppLocalDataSource.saveTokenFromDB(response.body()!!)
-
+                userLocalDataSource.saveUserFromDB(response.body()?.user!!)
                 return token
             } else {
                 throw IOException("Server is Not Responding")
@@ -58,7 +60,7 @@ class EnterAppRepoImpl @Inject constructor(
         confirmPassword: String
     ): TokenModel {
         lateinit var token: TokenModel
-        var registerRequest: RegisterRequest = RegisterTypeConverter().converter(
+        val registerRequest: RegisterRequest = RegisterTypeConverter().converter(
             email, phone, firstName,
             lastName, username, password, confirmPassword
         )
@@ -124,7 +126,9 @@ class EnterAppRepoImpl @Inject constructor(
                     email, phone, type,
                     description, username, password
                 ).body()!!
-                enterAppLocalDataSource.deleteTokenFromDB()
+//                enterAppLocalDataSource.deleteTokenFromDB()
+                sessionManager.saveAuthToken("")
+                userLocalDataSource.deleteUserFromDB()
                 return message
             } else {
                 throw IOException("Server is Not Responding")

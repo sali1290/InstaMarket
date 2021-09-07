@@ -39,5 +39,9 @@ class RoomModule {
     @Provides
     fun provideTokenDao(db: AppDatabase) = db.tokenDao()
 
+    @Singleton
+    @Provides
+    fun provideUserDao(db: AppDatabase) = db.userDao()
+
 
 }

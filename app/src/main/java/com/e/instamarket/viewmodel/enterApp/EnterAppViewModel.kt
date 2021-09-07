@@ -1,8 +1,11 @@
 package com.e.instamarket.viewmodel.enterApp
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.e.domain.Result
 import com.e.domain.models.TokenModel
-import com.e.domain.usecase.enterAppUseCase.GetUserTokenUseCase
 import com.e.domain.usecase.enterAppUseCase.LoginUseCase
 import com.e.domain.usecase.enterAppUseCase.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,7 +13,6 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.e.domain.Result
 
 
 @HiltViewModel
