@@ -41,7 +41,6 @@ class EnterFragment : Fragment() {
 
         binding.viewpager.adapter = EnterAppViewPagerAdapter(requireActivity())
 
-
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.loginFragment)
         }

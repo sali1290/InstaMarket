@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <item
-            android:id="@+id/notif"
-            android:title="امکانات بیشتر"
-            android:icon="@drawable/ic_more"
-            />
 
         <item
-            android:id="@+id/common_question"
-            android:title="خانه"
-            android:icon="@drawable/ic_home"
-            />
+            android:id="@+id/more"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="امکانات بیشتر" />
 
         <item
-            android:id="@+id/rule"
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="خانه" />
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@android:drawable/ic_menu_myplaces"
             android:title="پروفایل"
-            android:icon="@drawable/ic_profile"
             />
 
 </menu>

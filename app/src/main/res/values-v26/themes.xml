@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="BottomNav" parent="Theme.MaterialComponents">
-        <item name="android:backgroundTint">@color/white</item>
-        <item name="tint">@color/teal_200</item>
-        <item name="android:iconTint">@color/teal_200</item>
-    </style>
-</resources>

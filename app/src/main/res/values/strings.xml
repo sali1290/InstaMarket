@@ -32,15 +32,19 @@
     <string name="phone">شماره همراه</string>
     <string name="re_password">تکرار رمز عبور</string>
 
-        <string name="title1">فالوور و لایک رایگان</string>
-        <string name="title2">گردونه شانس</string>
-        <string name="title3">نمایندگی مستقل</string>
-        <string name="title4">امکانات بی نظیر</string>
+    <string name="title1">فالوور و لایک رایگان</string>
+    <string name="title2">گردونه شانس</string>
+    <string name="title3">نمایندگی مستقل</string>
+    <string name="title4">امکانات بی نظیر</string>
 
-        <string name="body1">بدون هیچ سوال و جوابی فالوور و لایک رایگان از ما هدیه بگیرید</string>
-        <string name="body2">بدون داشتن گزینه پوچ و بدون انجام هیچ کاری پول نقد از ما هدیه بگیرید</string>
-        <string name="body3">فقط در عرض (2 ثانیه) سایت تحویل بگیرید و کسب و کار خودتون رو با نام خودتون راه اندازی کنید و پول پارو کنید</string>
-        <string name="body4">امکانات انحصاری و شگفت انگیز سایت ما، شما را بهت زده خواهد کرد</string>
+    <string name="body1">بدون هیچ سوال و جوابی فالوور و لایک رایگان از ما هدیه بگیرید</string>
+    <string name="body2">بدون داشتن گزینه پوچ و بدون انجام هیچ کاری پول نقد از ما هدیه بگیرید</string>
+    <string name="body3">فقط در عرض (2 ثانیه) سایت تحویل بگیرید و کسب و کار خودتون رو با نام خودتون راه اندازی کنید و پول پارو کنید</string>
+    <string name="body4">امکانات انحصاری و شگفت انگیز سایت ما، شما را بهت زده خواهد کرد</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 
 </resources>
