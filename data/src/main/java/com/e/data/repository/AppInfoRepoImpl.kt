@@ -1,9 +1,12 @@
 package com.e.data.repository
 
 
+import android.util.Log
+import android.widget.Toast
 import com.e.data.mapper.*
 import com.e.data.repository.appInfoDataSource.AppInfoRemoteDataSource
 import com.e.data.utile.NetWorkHelper
+import com.e.data.utile.SessionManager
 import com.e.domain.models.*
 import com.e.domain.repository.AppInfoRepo
 import java.io.IOException
@@ -20,7 +23,8 @@ class AppInfoRepoImpl @Inject constructor(
     private val serviceMapper: dagger.Lazy<ServiceMapper>,
     private val siteMapper: dagger.Lazy<SiteMapper>,
     private val appInfoRemoteDataSource: AppInfoRemoteDataSource,
-    private val netWorkHelper: NetWorkHelper
+    private val netWorkHelper: NetWorkHelper,
+    private val sessionManager: SessionManager
 ) : AppInfoRepo {
 
     @Throws(IOException::class)
@@ -135,17 +139,17 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getNews(): MutableList<NewsModel> {
+        lateinit var newsList: MutableList<NewsModel>
+        val accessToken: String = sessionManager.fetchAuthToken()!!
         if (netWorkHelper.isNetworkConnected()) {
-            lateinit var newsList: MutableList<NewsModel>
-            if (appInfoRemoteDataSource.getNewsFromRemote().isSuccessful && appInfoRemoteDataSource.getNewsFromRemote()
-                    .body() != null
+            if (appInfoRemoteDataSource.getNewsFromRemote("Bearer $accessToken").isSuccessful &&
+                appInfoRemoteDataSource.getNewsFromRemote("Bearer $accessToken").body() != null
             ) {
-                val response = appInfoRemoteDataSource.getNewsFromRemote()
-                for (i in 0..response.body()?.size!!) {
-                    newsList[i] = response.body()!![i].let {
+                val response = appInfoRemoteDataSource.getNewsFromRemote("Bearer $accessToken")
+                    newsList = response.body()!!.newsList.map {
                         newsMapper.get().toMapper(it)
-                    }
-                }
+                    }.toMutableList()
+
                 return newsList
             } else {
                 throw IOException("Server is Not Responding")

@@ -87,8 +87,7 @@ interface ApiService {
     suspend fun getAgents(): Response<MutableList<Agents>>
 
     @POST("general/news")
-    @FormUrlEncoded
-    suspend fun getNews(): Response<MutableList<News>>
+    suspend fun getNews(@Header("Authorization")accessToken: String): Response<NewsList>
 
 
     //user api

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.e.instamarket.R
 import com.e.instamarket.adapter.ImageSliderAdapter
 import com.e.instamarket.databinding.FragmentMoreFeatureBinding
@@ -28,8 +29,15 @@ class MoreFeatureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.visibility = View.VISIBLE
 
         binding.imageSlider3.adapter = ImageSliderAdapter()
+
+        binding.news.setOnClickListener {
+            findNavController().navigate(R.id.newsFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
     }
 }

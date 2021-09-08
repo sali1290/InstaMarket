@@ -1,6 +1,7 @@
 package com.e.data.repository.appInfoDataSource
 
 import com.e.data.api.ApiService
+import com.e.data.entity.NewsList
 import com.e.data.entity.remote.Banner
 import com.e.data.entity.remote.*
 import retrofit2.Response
@@ -38,7 +39,7 @@ class AppInfoRemoteDataSourceImpl @Inject constructor(
         return apiService.getService()
     }
 
-    override suspend fun getNewsFromRemote(): Response<MutableList<News>> {
-        return apiService.getNews()
+    override suspend fun getNewsFromRemote(accessToken: String): Response<NewsList> {
+        return apiService.getNews(accessToken)
     }
 }

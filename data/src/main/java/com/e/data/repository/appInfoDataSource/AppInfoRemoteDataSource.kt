@@ -1,5 +1,6 @@
 package com.e.data.repository.appInfoDataSource
 
+import com.e.data.entity.NewsList
 import com.e.data.entity.remote.Banner
 import com.e.data.entity.remote.*
 import retrofit2.Response
@@ -20,7 +21,7 @@ interface AppInfoRemoteDataSource {
 
     suspend fun getServiceFromRemote(): Response<MutableList<Service>>
 
-    suspend fun getNewsFromRemote(): Response<MutableList<News>>
+    suspend fun getNewsFromRemote(accessToken: String): Response<NewsList>
 
 
 }

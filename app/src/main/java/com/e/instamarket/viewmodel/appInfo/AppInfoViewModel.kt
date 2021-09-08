@@ -1,12 +1,15 @@
 package com.e.instamarket.viewmodel.appInfo
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
+import com.e.domain.Result
+import com.e.domain.models.NewsModel
 import com.e.domain.usecase.appInfoUseCase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
+
 
 @HiltViewModel
 class AppInfoViewModel @Inject constructor(
@@ -19,6 +22,21 @@ class AppInfoViewModel @Inject constructor(
     private val getServiceUseCase: GetServiceUseCase,
     private val getSiteUseCase: GetSiteUseCase
 ): ViewModel() {
+
+    private val _news = MutableLiveData<Result<MutableList<NewsModel>>>()
+    val news: LiveData<Result<MutableList<NewsModel>>>
+        get() = _news
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        _news.postValue(exception.message?.let { Result.Error(it) })
+    }
+    fun getNews() = viewModelScope.launch(Dispatchers.IO+handler) {
+        _news.postValue(Result.Loading)
+        getNewsUseCase.execute().let {
+            _news.postValue(Result.Success(it))
+        }
+    }
+
+
 
     fun getAgent() = liveData {
         val agentsList = getAgentUseCase.execute()
@@ -45,10 +63,7 @@ class AppInfoViewModel @Inject constructor(
         emit(faqList)
     }
 
-    fun getNews() = liveData {
-        val newsList = getNewsUseCase.execute()
-        emit(newsList)
-    }
+
 
     fun getService() = liveData {
         val serviceList = getServiceUseCase.execute()

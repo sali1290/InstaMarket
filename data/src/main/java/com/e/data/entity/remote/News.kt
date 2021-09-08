@@ -1,10 +1,11 @@
 package com.e.data.entity.remote
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class News(
     
@@ -34,4 +35,4 @@ data class News(
 
     @Json(name = "uid")
     val uid: String?
-)
+): Parcelable
