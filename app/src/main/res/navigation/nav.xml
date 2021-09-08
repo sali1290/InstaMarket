@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreFeatureFragment"
@@ -66,4 +69,8 @@
         android:name="com.e.instamarket.fragment.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.e.instamarket.fragment.CategoryFragment"
+        android:label="CategoryFragment" />
 </navigation>

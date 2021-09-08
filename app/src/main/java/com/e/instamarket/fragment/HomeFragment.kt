@@ -66,6 +66,10 @@ class HomeFragment : Fragment() {
         viewModel.getUser()
         observe()
 
+        binding.btnCategory.setOnClickListener {
+            findNavController().navigate(R.id.categoryFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
 
     }
 

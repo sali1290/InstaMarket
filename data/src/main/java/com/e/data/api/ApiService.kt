@@ -13,11 +13,11 @@ interface ApiService {
     @POST("auth/login")
     suspend fun login(
         @Body loginRequest: LoginRequest
-            ): Response<Token>
+    ): Response<Token>
 
     @POST("auth/register")
     suspend fun register(
-         @Body registerRequest: RegisterRequest
+        @Body registerRequest: RegisterRequest
     ): Response<Token>
 
     @POST("auth/user")
@@ -59,16 +59,14 @@ interface ApiService {
 
     //info api
     @POST("general/categories")
-    @FormUrlEncoded
-    suspend fun getCategory(): Response<MutableList<Category>>
+    suspend fun getCategory(@Header("Authorization") accessToken: String): Response<CategoryList>
 
     @POST("general/faqs")
     @FormUrlEncoded
     suspend fun getFaq(): Response<MutableList<Faq>>
 
     @POST("general/services")
-    @FormUrlEncoded
-    suspend fun getService(): Response<MutableList<Service>>
+    suspend fun getService(@Header("Authorization") accessToken: String): Response<ServiceList>
 
     @POST("general/sites")
     @FormUrlEncoded
@@ -87,7 +85,7 @@ interface ApiService {
     suspend fun getAgents(): Response<MutableList<Agents>>
 
     @POST("general/news")
-    suspend fun getNews(@Header("Authorization")accessToken: String): Response<NewsList>
+    suspend fun getNews(@Header("Authorization") accessToken: String): Response<NewsList>
 
 
     //user api

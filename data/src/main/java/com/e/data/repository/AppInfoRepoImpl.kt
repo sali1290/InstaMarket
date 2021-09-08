@@ -97,15 +97,15 @@ class AppInfoRepoImpl @Inject constructor(
     override suspend fun getCategory(): MutableList<CategoryModel> {
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var categoryList: MutableList<CategoryModel>
-            if (appInfoRemoteDataSource.getCategoryFromRemote().isSuccessful && appInfoRemoteDataSource.getCategoryFromRemote()
+            val accessToken: String = sessionManager.fetchAuthToken()!!
+            if (appInfoRemoteDataSource.getCategoryFromRemote(accessToken).isSuccessful && appInfoRemoteDataSource.getCategoryFromRemote(accessToken)
                     .body() != null
             ) {
-                val response = appInfoRemoteDataSource.getCategoryFromRemote()
-                for (i in 0..response.body()?.size!!) {
-                    categoryList[i] = response.body()!![i].let {
-                        categoryMapper.get().toMapper(it)
-                    }
-                }
+                val response = appInfoRemoteDataSource.getCategoryFromRemote(accessToken)
+                categoryList = response.body()!!.categoryList.map {
+                    categoryMapper.get().toMapper(it)
+                }.toMutableList()
+
                 return categoryList
             } else {
                 throw IOException("Server is Not Responding")
@@ -163,15 +163,14 @@ class AppInfoRepoImpl @Inject constructor(
     override suspend fun getService(): MutableList<ServiceModel> {
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var serviceList: MutableList<ServiceModel>
-            if (appInfoRemoteDataSource.getServiceFromRemote().isSuccessful &&
-                appInfoRemoteDataSource.getServiceFromRemote().body() != null
+            val accessToken: String = sessionManager.fetchAuthToken()!!
+            if (appInfoRemoteDataSource.getServiceFromRemote(accessToken).isSuccessful &&
+                appInfoRemoteDataSource.getServiceFromRemote(accessToken).body() != null
             ) {
-                val response = appInfoRemoteDataSource.getServiceFromRemote()
-                for (i in 0..response.body()?.size!!) {
-                    serviceList[i] = response.body()!![i].let {
-                        serviceMapper.get().toMapper(it)
-                    }
-                }
+                val response = appInfoRemoteDataSource.getServiceFromRemote(accessToken)
+                serviceList = response.body()!!.serviceList.map {
+                    serviceMapper.get().toMapper(it)
+                }.toMutableList()
                 return serviceList
             } else {
                 throw IOException("Server is Not Responding")
