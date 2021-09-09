@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.e.domain.Result
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import com.e.domain.Result
 import com.e.instamarket.R
 import com.e.instamarket.adapter.ImageSliderAdapter
 import com.e.instamarket.databinding.FragmentHomeBinding
@@ -68,6 +64,11 @@ class HomeFragment : Fragment() {
 
         binding.btnCategory.setOnClickListener {
             findNavController().navigate(R.id.categoryFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
+        binding.btnTransaction.setOnClickListener {
+            findNavController().navigate(R.id.transactionFragment)
             bottomNav.visibility = View.INVISIBLE
         }
 

@@ -5,10 +5,9 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@Entity
+
 @JsonClass(generateAdapter = true)
 data class Transaction(
-    @PrimaryKey(autoGenerate = true)
     @Json(name = "id")
     var id: Int?,
 
@@ -21,7 +20,7 @@ data class Transaction(
     @Json(name = "type")
     var type: String?,
 
-    @Json(name = "transactionId")
+    @Json(name = "transaction_id")
     var transactionId: Float?,
 
     @Json(name = "amount")
@@ -36,13 +35,13 @@ data class Transaction(
     @Json(name = "log")
     var log: String?,
 
-    @Json(name = "created")
+    @Json(name = "systemi")
     var systemi: String?,
 
-    @Json(name = "payerEmail")
+    @Json(name = "payer_email")
     var payerEmail: String?,
 
-    @Json(name = "txnFee")
+    @Json(name = "txn_fee")
     var txnFee: String?,
 
     @Json(name = "note")

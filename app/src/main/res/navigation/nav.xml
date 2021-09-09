@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreFeatureFragment"
@@ -73,4 +76,9 @@
         android:id="@+id/categoryFragment"
         android:name="com.e.instamarket.fragment.CategoryFragment"
         android:label="CategoryFragment" />
+    <fragment
+        android:id="@+id/transactionFragment"
+        android:name="com.e.instamarket.fragment.TransactionFragment"
+        android:label="fragment_transaction"
+        tools:layout="@layout/fragment_transaction" />
 </navigation>

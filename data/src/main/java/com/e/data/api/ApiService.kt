@@ -133,10 +133,10 @@ interface ApiService {
     ): Response<String>
 
     @POST("transaction/get")
-    @FormUrlEncoded
     suspend fun getUserTransaction(
-        @Field("id") id: String
-    ): Response<MutableList<Transaction>>
+        @Header("Authorization") accessToken: String,
+        @Body transactionRequest: TransactionRequest
+    ): Response<TransactionList>
 
 
     //ticket api

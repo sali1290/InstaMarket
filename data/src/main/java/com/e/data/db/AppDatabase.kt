@@ -13,8 +13,7 @@ import com.e.data.entity.remote.Transaction
 
 @Database(
     entities = [Ticket::class, Order::class, Token::class,
-        Transaction::class, TicketRequest::class,
-        OrderRequest::class, LuckRequest::class , User::class],
+        TicketRequest::class, OrderRequest::class, LuckRequest::class , User::class],
     version = 1,
     exportSchema = false
 )
