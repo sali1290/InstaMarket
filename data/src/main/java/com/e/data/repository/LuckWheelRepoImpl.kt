@@ -1,10 +1,12 @@
 package com.e.data.repository
 
+import android.util.Log
 import com.e.data.mapper.LuckRequestMapper
 import com.e.data.mapper.LuckSliceMapper
 import com.e.data.repository.luckWheelDataSource.local.LuckWheelLocalDataSource
 import com.e.data.repository.luckWheelDataSource.remote.LuckWheelRemoteDataSource
 import com.e.data.utile.NetWorkHelper
+import com.e.data.utile.SessionManager
 import com.e.domain.models.LuckRequestModel
 import com.e.domain.models.LuckSliceModel
 import com.e.domain.repository.LuckWheelRepo
@@ -17,21 +19,22 @@ class LuckWheelRepoImpl @Inject constructor(
     private val luckWheelLocalDataSource: LuckWheelLocalDataSource,
     private val netWorkHelper: NetWorkHelper,
     private val luckSliceMapper: dagger.Lazy<LuckSliceMapper>,
-    private val luckRequestMapper: dagger.Lazy<LuckRequestMapper>
+    private val luckRequestMapper: dagger.Lazy<LuckRequestMapper>,
+    private val sessionManager: SessionManager
 ) : LuckWheelRepo {
 
     @Throws(IOException::class)
     override suspend fun getSlices(): MutableList<LuckSliceModel> {
         lateinit var sliceList: MutableList<LuckSliceModel>
+        val accessToken = sessionManager.fetchAuthToken()
         if (netWorkHelper.isNetworkConnected()) {
-            if (luckWheelRemoteDataSource.getSlicesFromRemote().isSuccessful &&
-                luckWheelRemoteDataSource.getSlicesFromRemote().body() != null
+            if (luckWheelRemoteDataSource.getSlicesFromRemote(accessToken!!).isSuccessful &&
+                luckWheelRemoteDataSource.getSlicesFromRemote(accessToken).body() != null
             ) {
-                for (i in 0..luckWheelRemoteDataSource.getSlicesFromRemote().body()!!.size) {
-                    sliceList[i] = luckWheelRemoteDataSource.getSlicesFromRemote().body()!![i].let {
-                        luckSliceMapper.get().toMapper(it)
-                    }
-                }
+                val response = luckWheelRemoteDataSource.getSlicesFromRemote(accessToken).body()
+                sliceList = response!!.luckSliceList.map {
+                    luckSliceMapper.get().toMapper(it)
+                }.toMutableList()
                 return sliceList
             } else {
                 throw IOException("Server is Not Responding")
@@ -44,11 +47,12 @@ class LuckWheelRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun checkUserLuck(): Boolean {
         var luck by Delegates.notNull<Boolean>()
+        val accessToken = sessionManager.fetchAuthToken()
         if (netWorkHelper.isNetworkConnected()) {
-            if (luckWheelRemoteDataSource.getUserLuckFromRemote().isSuccessful &&
-                luckWheelRemoteDataSource.getUserLuckFromRemote().body() != null
+            if (luckWheelRemoteDataSource.getUserLuckFromRemote(accessToken!!).isSuccessful &&
+                luckWheelRemoteDataSource.getUserLuckFromRemote(accessToken).body() != null
             ) {
-                luck = luckWheelRemoteDataSource.getUserLuckFromRemote().body()!!
+                luck = luckWheelRemoteDataSource.getUserLuckFromRemote(accessToken).body()!!
                 return luck
             } else {
                 throw IOException("Server is Not Responding")
@@ -61,11 +65,13 @@ class LuckWheelRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun createUserLuck(coin: String): LuckRequestModel {
         lateinit var luckRequest: LuckRequestModel
+        val accessToken = sessionManager.fetchAuthToken()
         if (netWorkHelper.isNetworkConnected()) {
-            if (luckWheelRemoteDataSource.createLuckFromRemote(coin).isSuccessful &&
-                luckWheelRemoteDataSource.createLuckFromRemote(coin).body() != null
+            if (luckWheelRemoteDataSource.createLuckFromRemote(accessToken!!, coin).isSuccessful &&
+                luckWheelRemoteDataSource.createLuckFromRemote(accessToken, coin).body() != null
             ) {
-                val response = luckWheelRemoteDataSource.createLuckFromRemote(coin).body()
+                val response =
+                    luckWheelRemoteDataSource.createLuckFromRemote(accessToken, coin).body()
                 luckRequest = response.let {
                     luckRequestMapper.get().toMapper(it!!)
                 }

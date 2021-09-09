@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_transactionFragment"
             app:destination="@id/transactionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_luckWheelFragment"
+            app:destination="@id/luckWheelFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreFeatureFragment"
@@ -81,4 +84,9 @@
         android:name="com.e.instamarket.fragment.TransactionFragment"
         android:label="fragment_transaction"
         tools:layout="@layout/fragment_transaction" />
+    <fragment
+        android:id="@+id/luckWheelFragment"
+        android:name="com.e.instamarket.fragment.LuckWheelFragment"
+        android:label="fragment_luck_wheel"
+        tools:layout="@layout/fragment_luck_wheel" />
 </navigation>

@@ -45,16 +45,16 @@ interface ApiService {
 
     //luck api
     @POST("luck/slices")
-    @FormUrlEncoded
-    suspend fun getLuckSlice(): Response<MutableList<LuckSlice>>
+    suspend fun getLuckSlice(@Header("Authorization") accessToken: String): Response<LuckSliceList>
 
     @POST("luck/check")
-    @FormUrlEncoded
-    suspend fun checkUserLuck(): Response<Boolean>
+    suspend fun checkUserLuck(@Header("Authorization") accessToken: String): Response<Boolean>
 
     @POST("luck/store")
-    @FormUrlEncoded
-    suspend fun createLuck(@Field("coin") coin: String): Response<LuckRequest>
+    suspend fun createLuck(
+        @Header("Authorization") accessToken: String,
+        @Body coin: String
+    ): Response<LuckRequest>
 
 
     //info api

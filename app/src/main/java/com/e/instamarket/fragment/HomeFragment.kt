@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
         bottomNav.visibility = View.VISIBLE
 
         bottomNav.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.profile -> {
                     findNavController().navigate(R.id.profileFragment)
                     return@setOnItemSelectedListener true
@@ -69,6 +69,11 @@ class HomeFragment : Fragment() {
 
         binding.btnTransaction.setOnClickListener {
             findNavController().navigate(R.id.transactionFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
+        binding.btnLuck.setOnClickListener {
+            findNavController().navigate(R.id.luckWheelFragment)
             bottomNav.visibility = View.INVISIBLE
         }
 
