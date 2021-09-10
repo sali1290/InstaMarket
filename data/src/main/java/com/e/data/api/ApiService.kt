@@ -69,19 +69,16 @@ interface ApiService {
     suspend fun getService(@Header("Authorization") accessToken: String): Response<ServiceList>
 
     @POST("general/sites")
-    @FormUrlEncoded
     suspend fun getSites(): Response<MutableList<Site>>
 
     @POST("general/banners")
-    @FormUrlEncoded
     suspend fun getBanners(): Response<MutableList<Banner>>
 
     @POST("general/api")
     suspend fun getApi(@Header("Authorization") accessToken: String): Response<ApiList>
 
     @POST("general/agents")
-    @FormUrlEncoded
-    suspend fun getAgents(): Response<MutableList<Agents>>
+    suspend fun getAgents(@Header("Authorization") accessToken: String): Response<AgentList>
 
     @POST("general/news")
     suspend fun getNews(@Header("Authorization") accessToken: String): Response<NewsList>

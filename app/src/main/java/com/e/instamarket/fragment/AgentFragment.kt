@@ -1,22 +1,21 @@
 package com.e.instamarket.fragment
 
+import android.app.ProgressDialog
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.domain.Result
-import com.e.instamarket.adapter.ApiAdapter
-import com.e.instamarket.databinding.FragmentApiBinding
+import com.e.instamarket.adapter.AgentAdapter
+import com.e.instamarket.databinding.FragmentAgentBinding
 import com.e.instamarket.viewmodel.appInfo.AppInfoViewModel
-import okhttp3.internal.notify
 
+class AgentFragment : Fragment() {
 
-class ApiFragment : Fragment() {
-
-    private lateinit var binding: FragmentApiBinding
+    private lateinit var binding: FragmentAgentBinding
     private lateinit var viewModel: AppInfoViewModel
 
 
@@ -26,9 +25,8 @@ class ApiFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
 
-        binding = FragmentApiBinding.inflate(inflater, container, false)
+        binding = FragmentAgentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(AppInfoViewModel::class.java)
-        observe()
 
 
         return binding.root
@@ -37,16 +35,17 @@ class ApiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getApi()
+        viewModel.getAgent()
+        observe()
     }
 
     private fun observe() {
-
-        viewModel.apiList.observe(viewLifecycleOwner, {
+        viewModel.agentList.observe(viewLifecycleOwner, {
 
             when (it) {
+
                 is Result.Success -> {
-                    binding.apiRecycler.adapter = ApiAdapter(it.data, requireContext())
+                    binding.agentRecycler.adapter = AgentAdapter(it.data, requireContext())
                 }
 
                 is Result.Loading -> {
@@ -58,9 +57,11 @@ class ApiFragment : Fragment() {
                 }
 
             }
+
         })
 
 
     }
+
 
 }

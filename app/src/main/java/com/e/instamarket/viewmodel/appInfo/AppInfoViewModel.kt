@@ -2,10 +2,7 @@ package com.e.instamarket.viewmodel.appInfo
 
 import androidx.lifecycle.*
 import com.e.domain.Result
-import com.e.domain.models.ApiModel
-import com.e.domain.models.CategoryModel
-import com.e.domain.models.NewsModel
-import com.e.domain.models.ServiceModel
+import com.e.domain.models.*
 import com.e.domain.usecase.appInfoUseCase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -46,7 +43,8 @@ class AppInfoViewModel @Inject constructor(
     private val apiHandler = CoroutineExceptionHandler { coroutineContext, exception ->
         _apiList.postValue(exception.message?.let { Result.Error(it) })
     }
-    fun getApi() = viewModelScope.launch(Dispatchers.IO+apiHandler) {
+
+    fun getApi() = viewModelScope.launch(Dispatchers.IO + apiHandler) {
         _apiList.postValue(Result.Loading)
         getApiUseCase.execute().let {
             _apiList.postValue(Result.Success(it))
@@ -54,9 +52,18 @@ class AppInfoViewModel @Inject constructor(
     }
 
 
-    fun getAgent() = liveData {
-        val agentsList = getAgentUseCase.execute()
-        emit(agentsList)
+    private val _agentList = MutableLiveData<Result<MutableList<AgentsModel>>>()
+    val agentList: LiveData<Result<MutableList<AgentsModel>>>
+        get() = _agentList
+    private val agentHandler = CoroutineExceptionHandler { coroutineContext, exception ->
+        _agentList.postValue(exception.message?.let { Result.Error(it) })
+    }
+    fun getAgent() = viewModelScope.launch(Dispatchers.IO + agentHandler) {
+        _agentList.postValue(Result.Loading)
+        getAgentUseCase.execute().let {
+            _agentList.postValue(Result.Success(it))
+        }
+
     }
 
     fun getBanner() = liveData {

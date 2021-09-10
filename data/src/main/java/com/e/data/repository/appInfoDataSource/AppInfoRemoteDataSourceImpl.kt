@@ -1,10 +1,7 @@
 package com.e.data.repository.appInfoDataSource
 
 import com.e.data.api.ApiService
-import com.e.data.entity.ApiList
-import com.e.data.entity.CategoryList
-import com.e.data.entity.NewsList
-import com.e.data.entity.ServiceList
+import com.e.data.entity.*
 import com.e.data.entity.remote.Banner
 import com.e.data.entity.remote.*
 import retrofit2.Response
@@ -14,8 +11,8 @@ class AppInfoRemoteDataSourceImpl @Inject constructor(
     private val apiService: ApiService
 ) : AppInfoRemoteDataSource {
 
-    override suspend fun getAgentsFromRemote(): Response<MutableList<Agents>> {
-        return apiService.getAgents()
+    override suspend fun getAgentsFromRemote(accessToken: String): Response<AgentList> {
+        return apiService.getAgents(accessToken)
     }
 
     override suspend fun getApiFromRemote(accessToken: String): Response<ApiList> {

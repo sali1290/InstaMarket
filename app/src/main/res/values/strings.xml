@@ -52,4 +52,10 @@
     <string name="transaction_amount">مبلغ:</string>
     <string name="transaction_status">وضعیت تراکنش:</string>
     <string name="transaction_date">تاریخ:</string>
+
+
+    <string name="agent_name">نام طرح: </string>
+    <string name="agent_price">قیمت: </string>
+    <string name="agent_date">مدت نمایندگی: </string>
+    <string name="agent_desc">اطلاعات بیشتر</string>
 </resources>

@@ -29,17 +29,16 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getAgent(): MutableList<AgentsModel> {
+        val accessToken = sessionManager.fetchAuthToken()!!
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var agentList: MutableList<AgentsModel>
-            if (appInfoRemoteDataSource.getAgentsFromRemote().isSuccessful &&
-                appInfoRemoteDataSource.getAgentsFromRemote().body() != null
+            if (appInfoRemoteDataSource.getAgentsFromRemote(accessToken).isSuccessful &&
+                appInfoRemoteDataSource.getAgentsFromRemote(accessToken).body() != null
             ) {
-                val response = appInfoRemoteDataSource.getAgentsFromRemote()
-                for (i in 0..response.body()?.size!!) {
-                    agentList[i] = response.body()!![i].let {
-                        agentMapper.get().toMapper(it)
-                    }
-                }
+                val response = appInfoRemoteDataSource.getAgentsFromRemote(accessToken).body()
+                agentList = response!!.agentList.map {
+                    agentMapper.get().toMapper(it)
+                }.toMutableList()
             } else {
                 throw IOException("Server is Not Responding")
             }

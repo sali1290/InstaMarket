@@ -1,16 +1,13 @@
 package com.e.data.repository.appInfoDataSource
 
-import com.e.data.entity.ApiList
-import com.e.data.entity.CategoryList
-import com.e.data.entity.NewsList
-import com.e.data.entity.ServiceList
+import com.e.data.entity.*
 import com.e.data.entity.remote.Banner
 import com.e.data.entity.remote.*
 import retrofit2.Response
 
 interface AppInfoRemoteDataSource {
 
-    suspend fun getAgentsFromRemote(): Response<MutableList<Agents>>
+    suspend fun getAgentsFromRemote(accessToken: String): Response<AgentList>
 
     suspend fun getApiFromRemote(accessToken: String): Response<ApiList>
 

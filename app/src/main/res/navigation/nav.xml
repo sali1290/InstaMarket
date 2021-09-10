@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_moreFeatureFragment_to_apiFragment"
             app:destination="@id/apiFragment" />
+        <action
+            android:id="@+id/action_moreFeatureFragment_to_agentFragment"
+            app:destination="@id/agentFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -97,4 +100,9 @@
         android:name="com.e.instamarket.fragment.ApiFragment"
         android:label="fragment_api"
         tools:layout="@layout/fragment_api" />
+    <fragment
+        android:id="@+id/agentFragment"
+        android:name="com.e.instamarket.fragment.AgentFragment"
+        android:label="fragment_agent"
+        tools:layout="@layout/fragment_agent" />
 </navigation>
