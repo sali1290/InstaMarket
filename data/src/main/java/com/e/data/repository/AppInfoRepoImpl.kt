@@ -53,15 +53,16 @@ class AppInfoRepoImpl @Inject constructor(
     override suspend fun getApi(): MutableList<ApiModel> {
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var apiList: MutableList<ApiModel>
-            if (appInfoRemoteDataSource.getApiFromRemote().isSuccessful && appInfoRemoteDataSource.getApiFromRemote()
+            val accessToken = sessionManager.fetchAuthToken()!!
+            if (appInfoRemoteDataSource.getApiFromRemote(accessToken).isSuccessful && appInfoRemoteDataSource.getApiFromRemote(
+                    accessToken
+                )
                     .body() != null
             ) {
-                val response = appInfoRemoteDataSource.getApiFromRemote()
-                for (i in 0..response.body()?.size!!) {
-                    apiList[i] = response.body()!![i].let {
-                        apiMapper.get().toMapper(it)
-                    }
-                }
+                val response = appInfoRemoteDataSource.getApiFromRemote(accessToken).body()
+                apiList = response!!.apiList.map {
+                    apiMapper.get().toMapper(it)
+                }.toMutableList()
                 return apiList
             } else {
                 throw IOException("Server is Not Responding")
@@ -98,7 +99,9 @@ class AppInfoRepoImpl @Inject constructor(
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var categoryList: MutableList<CategoryModel>
             val accessToken: String = sessionManager.fetchAuthToken()!!
-            if (appInfoRemoteDataSource.getCategoryFromRemote(accessToken).isSuccessful && appInfoRemoteDataSource.getCategoryFromRemote(accessToken)
+            if (appInfoRemoteDataSource.getCategoryFromRemote(accessToken).isSuccessful && appInfoRemoteDataSource.getCategoryFromRemote(
+                    accessToken
+                )
                     .body() != null
             ) {
                 val response = appInfoRemoteDataSource.getCategoryFromRemote(accessToken)
@@ -146,9 +149,9 @@ class AppInfoRepoImpl @Inject constructor(
                 appInfoRemoteDataSource.getNewsFromRemote("Bearer $accessToken").body() != null
             ) {
                 val response = appInfoRemoteDataSource.getNewsFromRemote("Bearer $accessToken")
-                    newsList = response.body()!!.newsList.map {
-                        newsMapper.get().toMapper(it)
-                    }.toMutableList()
+                newsList = response.body()!!.newsList.map {
+                    newsMapper.get().toMapper(it)
+                }.toMutableList()
 
                 return newsList
             } else {

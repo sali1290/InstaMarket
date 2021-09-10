@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_moreFeatureFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_moreFeatureFragment_to_apiFragment"
+            app:destination="@id/apiFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -89,4 +92,9 @@
         android:name="com.e.instamarket.fragment.LuckWheelFragment"
         android:label="fragment_luck_wheel"
         tools:layout="@layout/fragment_luck_wheel" />
+    <fragment
+        android:id="@+id/apiFragment"
+        android:name="com.e.instamarket.fragment.ApiFragment"
+        android:label="fragment_api"
+        tools:layout="@layout/fragment_api" />
 </navigation>

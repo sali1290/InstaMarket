@@ -39,5 +39,10 @@ class MoreFeatureFragment : Fragment() {
             bottomNav.visibility = View.INVISIBLE
         }
 
+        binding.btnApi.setOnClickListener {
+            findNavController().navigate(R.id.apiFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
     }
 }

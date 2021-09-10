@@ -1,6 +1,7 @@
 package com.e.data.repository.appInfoDataSource
 
 import com.e.data.api.ApiService
+import com.e.data.entity.ApiList
 import com.e.data.entity.CategoryList
 import com.e.data.entity.NewsList
 import com.e.data.entity.ServiceList
@@ -17,8 +18,8 @@ class AppInfoRemoteDataSourceImpl @Inject constructor(
         return apiService.getAgents()
     }
 
-    override suspend fun getApiFromRemote(): Response<MutableList<Api>> {
-        return apiService.getApi()
+    override suspend fun getApiFromRemote(accessToken: String): Response<ApiList> {
+        return apiService.getApi(accessToken)
     }
 
     override suspend fun getBannerFromRemote(): Response<MutableList<Banner>> {
