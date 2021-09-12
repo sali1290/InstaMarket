@@ -77,7 +77,7 @@ class LoginFragment : Fragment() {
                 is Result.Success -> {
                     checkToken(it.data)
                     sessionManager.saveAuthToken(it.data.accessToken!!)
-                    Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), "خوش آمدید", Toast.LENGTH_SHORT).show()
                 }
 
                 is Result.Loading -> {

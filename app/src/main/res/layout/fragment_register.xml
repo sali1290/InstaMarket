@@ -1,240 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.RegisterFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp">
 
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView6"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ثبت نام"
-                    android:gravity="center"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/black"
-                    android:layout_margin="@dimen/_5sdp"/>
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:gravity="center"
-                    android:text="@string/register"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:gravity="center"
+                        android:text="ثبت نام"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:text="@string/f_name"
-                    android:textColor="@color/black"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="@string/register"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
 
-                <EditText
-                    android:id="@+id/et_first_name"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_32sdp"
-                    android:background="@drawable/gray_background"
-                    android:hint="نام خود را وارد کنید"
-                    android:padding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:text="@string/f_name"
+                        android:textColor="@color/black"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:text="@string/l_name"
-                    android:textColor="@color/black"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <EditText
+                        android:id="@+id/et_first_name"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_32sdp"
+                        android:background="@drawable/gray_background"
+                        android:hint="نام خود را وارد کنید"
+                        android:padding="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <EditText
-                    android:id="@+id/et_last_name"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_32sdp"
-                    android:background="@drawable/gray_background"
-                    android:hint="نام خانوادگی خود را وارد کنید"
-                    android:padding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:text="@string/l_name"
+                        android:textColor="@color/black"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:text="@string/register_email"
-                    android:textColor="@color/black"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <EditText
+                        android:id="@+id/et_last_name"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_32sdp"
+                        android:background="@drawable/gray_background"
+                        android:hint="نام خانوادگی خود را وارد کنید"
+                        android:padding="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <EditText
-                    android:id="@+id/et_email"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_32sdp"
-                    android:background="@drawable/gray_background"
-                    android:hint="example@gmail.com"
-                    android:padding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:text="@string/register_email"
+                        android:textColor="@color/black"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:text="@string/username"
-                    android:textColor="@color/black"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_32sdp"
+                        android:background="@drawable/gray_background"
+                        android:hint="example@gmail.com"
+                        android:padding="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <EditText
-                    android:id="@+id/et_username"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_32sdp"
-                    android:background="@drawable/gray_background"
-                    android:hint="نام کاربری خود را وارد کنید"
-                    android:padding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:text="@string/username"
+                        android:textColor="@color/black"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:text="@string/phone"
-                    android:textColor="@color/black"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <EditText
+                        android:id="@+id/et_username"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_32sdp"
+                        android:background="@drawable/gray_background"
+                        android:hint="نام کاربری خود را وارد کنید"
+                        android:padding="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <EditText
-                    android:id="@+id/et_phone"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_32sdp"
-                    android:background="@drawable/gray_background"
-                    android:hint="شماره همراه"
-                    android:padding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:text="@string/phone"
+                        android:textColor="@color/black"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:text="@string/password"
-                    android:textColor="@color/black"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <EditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_32sdp"
+                        android:background="@drawable/gray_background"
+                        android:hint="شماره همراه"
+                        android:padding="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <EditText
-                    android:id="@+id/et_pass"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_32sdp"
-                    android:background="@drawable/gray_background"
-                    android:hint="12345"
-                    android:padding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:text="@string/password"
+                        android:textColor="@color/black"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:text="@string/re_password"
-                    android:textColor="@color/black"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <EditText
+                        android:id="@+id/et_pass"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_32sdp"
+                        android:background="@drawable/gray_background"
+                        android:hint="12345"
+                        android:padding="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <EditText
-                    android:id="@+id/et_re_pass"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_32sdp"
-                    android:background="@drawable/gray_background"
-                    android:hint="12345"
-                    android:padding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:text="@string/re_password"
+                        android:textColor="@color/black"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-                <Button
-                    android:id="@+id/button2"
-                    style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:backgroundTint="@color/teal_200"
-                    android:text="ثبت نام"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </ScrollView>
+                    <EditText
+                        android:id="@+id/et_re_pass"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_32sdp"
+                        android:background="@drawable/gray_background"
+                        android:hint="12345"
+                        android:padding="@dimen/_4sdp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/_10sdp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_15sdp"
+                        app:cardCornerRadius="15dp">
+
+                        <TextView
+                            android:id="@+id/button2"
+                            style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:background="@drawable/button_background"
+                            android:text="ثبت نام"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </FrameLayout>

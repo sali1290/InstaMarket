@@ -14,7 +14,7 @@ interface TransactionRemoteDataSource {
 
     suspend fun getUserTransactionFromRemote(
         accessToken: String,
-        transactionRequest: TransactionRequest
+        id: String
     ): Response<TransactionList>
 
 }

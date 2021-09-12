@@ -129,9 +129,10 @@ interface ApiService {
     ): Response<String>
 
     @POST("transaction/get")
+    @FormUrlEncoded
     suspend fun getUserTransaction(
         @Header("Authorization") accessToken: String,
-        @Body transactionRequest: TransactionRequest
+        @Field("id") id: String?
     ): Response<TransactionList>
 
 

@@ -1,21 +1,17 @@
 package com.e.instamarket.activity
 
 import android.os.Bundle
-import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.e.domain.Result
-import com.e.domain.models.LuckSliceModel
 import com.e.instamarket.R
 import com.e.instamarket.adapter.LuckWheelAdapter
 import com.e.instamarket.adapter.MenuItemData
 import com.e.instamarket.viewmodel.luck.LuckViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import github.hellocsl.cursorwheel.CursorWheelLayout
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
 
 @AndroidEntryPoint
 class LuckWheelActivity : AppCompatActivity() {
@@ -23,6 +19,7 @@ class LuckWheelActivity : AppCompatActivity() {
     private lateinit var viewModel: LuckViewModel
     private var textList: MutableList<MenuItemData> = ArrayList()
     private lateinit var wheelText: CursorWheelLayout
+    private lateinit var wheelButton: Button
     private lateinit var adapter: LuckWheelAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,12 +41,14 @@ class LuckWheelActivity : AppCompatActivity() {
         textList.add(MenuItemData("OFF"))
         adapter = LuckWheelAdapter(textList, baseContext)
         wheelText.setAdapter(adapter)
+        wheelText.isClickable = false
 
     }
 
 
     private fun initViews() {
         wheelText = findViewById(R.id.wheel_text)
+        wheelButton = findViewById(R.id.btn_lucky_wheel)
     }
 
     private fun observe() {
@@ -57,12 +56,24 @@ class LuckWheelActivity : AppCompatActivity() {
 
             when (it) {
                 is Result.Success -> {
-                    textList.remove(MenuItemData("OFF"))
+                    textList.removeFirst()
                     for (i in 0 until it.data.size) {
-                        textList.add(MenuItemData(it.data[i].name.toString() + "تومان" ))
+                        textList.add(MenuItemData(it.data[i].name.toString() + "تومان"))
                     }
+                    textList.add(MenuItemData("OFF"))
+                    wheelText.removeViewAt(0)
                     adapter = LuckWheelAdapter(textList, baseContext)
                     wheelText.setAdapter(adapter)
+
+
+                    wheelText.setOnMenuSelectedListener { parent, view, pos ->
+                        Toast.makeText(this, textList[pos].mTitle, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
+
+
+
                 }
 
                 is Result.Loading -> {

@@ -8,6 +8,8 @@
     android:background="@color/teal_200">
 
 
+
+
         <github.hellocsl.cursorwheel.CursorWheelLayout
             android:id="@+id/wheel_text"
             android:layout_width="@dimen/_320sdp"
@@ -17,6 +19,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:wheelSelectedAngle="270"
+            />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/wheel_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wheel"
+        app:tint="#FBFB18" />
+
+
+
+        <Button
+            android:id="@+id/btn_lucky_wheel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wheel_text"
+
             />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

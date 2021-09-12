@@ -2,14 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/_60sdp"
         android:layout_height="wrap_content"
         android:backgroundTint="#F8E10B"
         android:elevation="20dp"
-        app:cardCornerRadius="@dimen/_15sdp">
+        app:cardCornerRadius="@dimen/_15sdp"
+        >
 
         <TextView
             android:id="@+id/textView29"
@@ -21,7 +23,8 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            />
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>

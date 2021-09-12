@@ -18,8 +18,8 @@ class TransactionRemoteDataSourceImpl @Inject constructor(private val apiService
 
     override suspend fun getUserTransactionFromRemote(
         accessToken: String,
-        transactionRequest: TransactionRequest
+        id: String
     ): Response<TransactionList> {
-        return apiService.getUserTransaction(accessToken, transactionRequest)
+        return apiService.getUserTransaction(accessToken, id)
     }
 }
