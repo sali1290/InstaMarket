@@ -44,7 +44,7 @@ class TransactionFragment : Fragment() {
             when (it) {
 
                 is Result.Success -> {
-                    Log.i("My Tag" , it.data[0].type.toString())
+                    Toast.makeText(requireContext(), "RESULT IN FM:"+ it.data[0].transactionId, Toast.LENGTH_SHORT).show()
                     binding.transactionRecycler.adapter = TransactionAdapter(it.data, requireContext())
                 }
 

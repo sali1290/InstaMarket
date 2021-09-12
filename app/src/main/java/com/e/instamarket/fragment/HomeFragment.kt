@@ -73,8 +73,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnLuck.setOnClickListener {
-            findNavController().navigate(R.id.luckWheelFragment)
-            bottomNav.visibility = View.INVISIBLE
+            findNavController().navigate(R.id.luckWheelActivity)
         }
 
     }
