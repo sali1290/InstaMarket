@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_380sdp"
+            android:layout_height="@dimen/_340sdp"
             app:srcCompat="@drawable/instamarket_test" />
 
         <TextView

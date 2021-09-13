@@ -28,6 +28,7 @@ class LuckWheelAdapter(
         if (position == 4) {
             textView.setTextColor(mContext.getColor(R.color.teal_700))
         }
+
         return root
     }
 

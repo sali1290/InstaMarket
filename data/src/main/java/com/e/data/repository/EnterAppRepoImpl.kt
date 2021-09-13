@@ -61,8 +61,12 @@ class EnterAppRepoImpl @Inject constructor(
     ): TokenModel {
         lateinit var token: TokenModel
         val registerRequest: RegisterRequest = RegisterTypeConverter().converter(
-            email, phone, firstName,
-            lastName, username, password, confirmPassword
+            email,
+            phone,
+            firstName,
+            lastName,
+            username,
+            password
         )
         if (netWorkHelper.isNetworkConnected()) {
             if (enterAppRemoteDataSource.registerFromRemote(
@@ -79,8 +83,6 @@ class EnterAppRepoImpl @Inject constructor(
                 token = response.body().let {
                     tokenMapper.get().toMapper(it!!)
                 }
-//                enterAppLocalDataSource.saveTokenFromDB(response.body()!!)
-
                 return token
             } else {
                 throw IOException("Server is Not Responding")

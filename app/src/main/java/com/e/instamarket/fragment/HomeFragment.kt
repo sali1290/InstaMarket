@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
 
         binding.imageSlider2.adapter = ImageSliderAdapter()
 
+
         viewModel.getUser()
         observe()
 

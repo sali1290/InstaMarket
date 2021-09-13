@@ -62,23 +62,23 @@ class RegisterFragment : Fragment() {
             pass = binding.etPass.text.toString()
             rePass = binding.etRePass.text.toString()
 
-            if (binding.etFirstName.text.isEmpty() ||
-                binding.etLastName.text.isEmpty() ||
-                binding.etEmail.text.isEmpty() ||
-                binding.etUsername.text.isEmpty() ||
-                binding.etPhone.text.isEmpty() ||
-                binding.etPass.text.isEmpty() ||
-                binding.etRePass.text.isEmpty()
-            ) {
-                Toast.makeText(
-                    requireActivity(),
-                    "لطفا تمامی مقادیر را وارد کنید",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
+//            if (binding.etFirstName.text.isEmpty() ||
+//                binding.etLastName.text.isEmpty() ||
+//                binding.etEmail.text.isEmpty() ||
+//                binding.etUsername.text.isEmpty() ||
+//                binding.etPhone.text.isEmpty() ||
+//                binding.etPass.text.isEmpty() ||
+//                binding.etRePass.text.isEmpty()
+//            ) {
+//                Toast.makeText(
+//                    requireActivity(),
+//                    "لطفا تمامی مقادیر را وارد کنید",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            } else {
                 viewModel.register(email, phone, fName, lName, username, pass, rePass)
                 observe()
-            }
+         //   }
         }
     }
 
@@ -96,7 +96,7 @@ class RegisterFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
 

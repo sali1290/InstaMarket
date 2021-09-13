@@ -10,8 +10,7 @@ class RegisterTypeConverter {
         firstName: String?,
         lastName: String?,
         userName: String?,
-        password: String?,
-        confirmPassword: String?
+        password: String?
     ): RegisterRequest {
         return RegisterRequest(
             email,
@@ -20,18 +19,23 @@ class RegisterTypeConverter {
             lastName,
             userName,
             password,
-            confirmPassword
-        )
+
+            )
     }
 }
 
 @JsonClass(generateAdapter = true)
 data class RegisterRequest(
+    @Json(name = "email")
     var email: String?,
+    @Json(name = "phone")
     var phone: String?,
+    @Json(name = "first_name")
     var firstName: String?,
+    @Json(name = "last_name")
     var lastName: String?,
+    @Json(name = "username")
     var userName: String?,
-    var password: String?,
-    var confirmPassword: String?
+    @Json(name = "password")
+    var password: String?
 )
