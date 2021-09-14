@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,6 +22,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: UserViewModel
+//    private lateinit var bannerViewModel: AppInfoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +31,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+//        bannerViewModel = ViewModelProvider(requireActivity()).get(AppInfoViewModel::class.java)
         return binding.root
     }
 
@@ -61,7 +64,9 @@ class HomeFragment : Fragment() {
 
 
         viewModel.getUser()
-        observe()
+//        bannerViewModel.getBanners()
+//        observeBanner()
+        observeUser()
 
         binding.btnCategory.setOnClickListener {
             findNavController().navigate(R.id.categoryFragment)
@@ -77,9 +82,12 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.luckWheelActivity)
         }
 
+
+
+
     }
 
-    private fun observe() {
+    private fun observeUser() {
         viewModel.user.observe(viewLifecycleOwner, {
 
             when (it) {
@@ -104,6 +112,20 @@ class HomeFragment : Fragment() {
 
 
     }
+
+//    private fun observeBanner() {
+//        bannerViewModel.banner.observe(viewLifecycleOwner, {
+//
+//            when (it) {
+//
+//                is Result.Success -> {}
+//                is Result.Loading -> {}
+//                is Result.Error -> {
+//                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+//                }
+//            }
+//        })
+//    }
 
 
 }

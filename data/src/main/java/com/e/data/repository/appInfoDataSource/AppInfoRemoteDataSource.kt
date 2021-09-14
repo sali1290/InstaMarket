@@ -11,7 +11,7 @@ interface AppInfoRemoteDataSource {
 
     suspend fun getApiFromRemote(accessToken: String): Response<ApiList>
 
-    suspend fun getBannerFromRemote(): Response<MutableList<Banner>>
+    suspend fun getBannerFromRemote(accessToken: String): Response<BannerList>
 
     suspend fun getFaqFromRemote(): Response<MutableList<Faq>>
 

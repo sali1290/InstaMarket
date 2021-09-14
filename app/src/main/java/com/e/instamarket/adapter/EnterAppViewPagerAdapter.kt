@@ -26,21 +26,25 @@ class EnterAppViewPagerAdapter(fA: FragmentActivity) :
 
         when (position) {
             0 -> {
+                holder.image.setImageDrawable(fragmentActivity.getDrawable(R.drawable.fallow_like))
                 holder.title.text = fragmentActivity.getString(R.string.title1)
                 holder.body.text = fragmentActivity.getString(R.string.body1)
             }
 
             1 -> {
+                holder.image.setImageDrawable(fragmentActivity.getDrawable(R.drawable.gardone))
                 holder.title.text = fragmentActivity.getString(R.string.title2)
                 holder.body.text = fragmentActivity.getString(R.string.body2)
             }
 
             2 -> {
+                holder.image.setImageDrawable(fragmentActivity.getDrawable(R.drawable.nemayandegi))
                 holder.title.text = fragmentActivity.getString(R.string.title3)
                 holder.body.text = fragmentActivity.getString(R.string.body3)
             }
 
             3 -> {
+                holder.image.setImageDrawable(fragmentActivity.getDrawable(R.drawable.options))
                 holder.title.text = fragmentActivity.getString(R.string.title4)
                 holder.body.text = fragmentActivity.getString(R.string.body4)
             }

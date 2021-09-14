@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.addCallback
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
@@ -37,8 +38,6 @@ class EnterFragment : Fragment() {
         sessionManager = SessionManager(requireContext())
         if (!sessionManager.fetchAuthToken().isNullOrEmpty()) {
             findNavController().navigate(R.id.homeFragment)
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
-            }
         }
         return binding.root
     }

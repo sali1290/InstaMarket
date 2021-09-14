@@ -72,7 +72,7 @@ interface ApiService {
     suspend fun getSites(): Response<MutableList<Site>>
 
     @POST("general/banners")
-    suspend fun getBanners(): Response<MutableList<Banner>>
+    suspend fun getBanners(@Header("Authorization") accessToken: String): Response<BannerList>
 
     @POST("general/api")
     suspend fun getApi(@Header("Authorization") accessToken: String): Response<ApiList>

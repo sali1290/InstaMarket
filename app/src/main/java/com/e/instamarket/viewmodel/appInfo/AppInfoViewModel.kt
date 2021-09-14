@@ -58,6 +58,7 @@ class AppInfoViewModel @Inject constructor(
     private val agentHandler = CoroutineExceptionHandler { coroutineContext, exception ->
         _agentList.postValue(exception.message?.let { Result.Error(it) })
     }
+
     fun getAgent() = viewModelScope.launch(Dispatchers.IO + agentHandler) {
         _agentList.postValue(Result.Loading)
         getAgentUseCase.execute().let {
@@ -66,9 +67,21 @@ class AppInfoViewModel @Inject constructor(
 
     }
 
-    fun getBanner() = liveData {
-        val bannersList = getBannerUseCase.execute()
-        emit(bannersList)
+    private val _banner = MutableLiveData<Result<MutableList<BannerModel>>>()
+    val banner: LiveData<Result<MutableList<BannerModel>>>
+        get() = _banner
+
+    private val bannerHandler = CoroutineExceptionHandler { coroutineContext, exception ->
+        _banner.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getBanners() = viewModelScope.launch(Dispatchers.IO + bannerHandler) {
+        _banner.postValue(Result.Loading)
+        getBannerUseCase.execute().let {
+            _banner.postValue(Result.Success(it))
+        }
+
+
     }
 
 

@@ -19,8 +19,8 @@ class AppInfoRemoteDataSourceImpl @Inject constructor(
         return apiService.getApi(accessToken)
     }
 
-    override suspend fun getBannerFromRemote(): Response<MutableList<Banner>> {
-        return apiService.getBanners()
+    override suspend fun getBannerFromRemote(accessToken: String): Response<BannerList> {
+        return apiService.getBanners(accessToken)
     }
 
     override suspend fun getFaqFromRemote(): Response<MutableList<Faq>> {

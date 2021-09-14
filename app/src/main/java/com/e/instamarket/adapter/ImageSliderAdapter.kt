@@ -1,16 +1,23 @@
 package com.e.instamarket.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.e.domain.models.BannerModel
 import com.e.instamarket.R
 
-class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
+class ImageSliderAdapter(
+//    private val banners: MutableList<BannerModel>,
+//    private val context: Context
+) :
+    RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
 
     inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView : ImageView = itemView.findViewById(R.id.imageView4)
+        val imageView: ImageView = itemView.findViewById(R.id.imageView4)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -20,7 +27,7 @@ class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHold
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-
+//        Glide.with(context).load(banners[position].src).into(holder.imageView)
     }
 
     override fun getItemCount(): Int = 4

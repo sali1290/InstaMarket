@@ -73,17 +73,20 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getBanner(): MutableList<BannerModel> {
+        val accessToken = sessionManager.fetchAuthToken()
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var bannerList: MutableList<BannerModel>
-            if (appInfoRemoteDataSource.getBannerFromRemote().isSuccessful && appInfoRemoteDataSource.getBannerFromRemote()
+            if (appInfoRemoteDataSource.getBannerFromRemote(accessToken!!).isSuccessful && appInfoRemoteDataSource.getBannerFromRemote(
+                    accessToken
+                )
                     .body() != null
             ) {
-                val response = appInfoRemoteDataSource.getBannerFromRemote()
-                for (i in 0..response.body()?.size!!) {
-                    bannerList[i] = response.body()!![i].let {
-                        bannerMapper.get().toMapper(it)
-                    }
-                }
+                val response = appInfoRemoteDataSource.getBannerFromRemote(accessToken).body()
+                bannerList = response!!.bannerList.map {
+                    bannerMapper.get().toMapper(it)
+                }.toMutableList()
+
+
                 return bannerList
             } else {
                 throw IOException("Server is Not Responding")
