@@ -46,7 +46,7 @@
                             android:layout_height="@dimen/_50sdp"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:src="@drawable/ic_notif" />
+                            android:src="@drawable/ic_announcement" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -274,7 +274,7 @@
                             android:layout_height="@dimen/_50sdp"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:src="@drawable/ic_back_up" />
+                            android:src="@drawable/ic_customer_service" />
 
                         <TextView
                             android:layout_width="match_parent"
