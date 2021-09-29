@@ -48,21 +48,19 @@ class TransactionRepoImpl @Inject constructor(
     override suspend fun getTransactions(id: String): MutableList<TransactionModel> {
         lateinit var transactions: MutableList<TransactionModel>
         val accessToken: String = sessionManager.fetchAuthToken()!!
-        val transactionRequest: TransactionRequest = GetTransactionConverter().converter("12")
+        val transactionRequest: TransactionRequest = GetTransactionConverter().converter(id)
         if (netWorkHelper.isNetworkConnected()) {
             if (transactionRemoteDataSource.getUserTransactionFromRemote(
-                    accessToken,
-                    "12"
+                    transactionRequest
                 ).isSuccessful &&
                 transactionRemoteDataSource.getUserTransactionFromRemote(
-                    accessToken, "12"
+                    transactionRequest
                 ).body() != null
             ) {
                 val response = transactionRemoteDataSource.getUserTransactionFromRemote(
-                    accessToken,
-                    "12"
+                    transactionRequest
                 ).body()
-                Log.i("tag", response!!.transactionList[2].transactionId.toString())
+                Log.v("tag", "sdfsdfsd")
                 transactions = response!!.transactionList.map {
                     transactionMapper.get()!!.toMapper(it)
                 }.toMutableList()

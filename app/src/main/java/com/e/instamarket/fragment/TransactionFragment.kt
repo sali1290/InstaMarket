@@ -27,14 +27,15 @@ class TransactionFragment : Fragment() {
 
         binding = FragmentTransactionBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(TransactionViewModel::class.java)
-        observe()
+        viewModel.getTransactions("1250")
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getTransactions("12")
+        observe()
+
 
     }
 
@@ -44,8 +45,9 @@ class TransactionFragment : Fragment() {
             when (it) {
 
                 is Result.Success -> {
-                    Toast.makeText(requireContext(), "RESULT IN FM:"+ it.data[0].transactionId, Toast.LENGTH_SHORT).show()
-//                    binding.transactionRecycler.adapter = TransactionAdapter(it.data, requireContext())
+                    Log.v("tag", "sdfsdfsd55555")
+                    binding.transactionRecycler.adapter =
+                        TransactionAdapter(it.data, requireContext())
                 }
 
                 is Result.Loading -> {
@@ -53,7 +55,7 @@ class TransactionFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    Log.i("My Tag" , it.message)
+                    Log.i("My Tag", it.message)
                 }
             }
         })

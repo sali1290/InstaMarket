@@ -45,7 +45,7 @@ interface ApiService {
 
     //luck api
     @POST("luck/slices")
-    suspend fun getLuckSlice(@Header("Authorization") accessToken: String): Response<LuckSliceList>
+    suspend fun getLuckSlice(): Response<LuckSliceList>
 
     @POST("luck/check")
     suspend fun checkUserLuck(@Header("Authorization") accessToken: String): Response<Boolean>
@@ -59,29 +59,29 @@ interface ApiService {
 
     //info api
     @POST("general/categories")
-    suspend fun getCategory(@Header("Authorization") accessToken: String): Response<CategoryList>
+    suspend fun getCategory(): Response<CategoryList>
 
     @POST("general/faqs")
     @FormUrlEncoded
     suspend fun getFaq(): Response<MutableList<Faq>>
 
     @POST("general/services")
-    suspend fun getService(@Header("Authorization") accessToken: String): Response<ServiceList>
+    suspend fun getService(): Response<ServiceList>
 
     @POST("general/sites")
     suspend fun getSites(): Response<MutableList<Site>>
 
     @POST("general/banners")
-    suspend fun getBanners(@Header("Authorization") accessToken: String): Response<BannerList>
+    suspend fun getBanners(): Response<BannerList>
 
     @POST("general/api")
-    suspend fun getApi(@Header("Authorization") accessToken: String): Response<ApiList>
+    suspend fun getApi(): Response<ApiList>
 
     @POST("general/agents")
-    suspend fun getAgents(@Header("Authorization") accessToken: String): Response<AgentList>
+    suspend fun getAgents(): Response<AgentList>
 
     @POST("general/news")
-    suspend fun getNews(@Header("Authorization") accessToken: String): Response<NewsList>
+    suspend fun getNews(): Response<NewsList>
 
 
     //user api
@@ -129,10 +129,8 @@ interface ApiService {
     ): Response<String>
 
     @POST("transaction/get")
-    @FormUrlEncoded
     suspend fun getUserTransaction(
-        @Header("Authorization") accessToken: String,
-        @Field("id") id: String?
+        @Body transactionRequest: TransactionRequest
     ): Response<TransactionList>
 
 

@@ -2,8 +2,8 @@ package com.e.data.repository.appInfoDataSource
 
 import com.e.data.api.ApiService
 import com.e.data.entity.*
-import com.e.data.entity.remote.Banner
-import com.e.data.entity.remote.*
+import com.e.data.entity.remote.Faq
+import com.e.data.entity.remote.Site
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -11,16 +11,16 @@ class AppInfoRemoteDataSourceImpl @Inject constructor(
     private val apiService: ApiService
 ) : AppInfoRemoteDataSource {
 
-    override suspend fun getAgentsFromRemote(accessToken: String): Response<AgentList> {
-        return apiService.getAgents(accessToken)
+    override suspend fun getAgentsFromRemote(): Response<AgentList> {
+        return apiService.getAgents()
     }
 
-    override suspend fun getApiFromRemote(accessToken: String): Response<ApiList> {
-        return apiService.getApi(accessToken)
+    override suspend fun getApiFromRemote(): Response<ApiList> {
+        return apiService.getApi()
     }
 
-    override suspend fun getBannerFromRemote(accessToken: String): Response<BannerList> {
-        return apiService.getBanners(accessToken)
+    override suspend fun getBannerFromRemote(): Response<BannerList> {
+        return apiService.getBanners()
     }
 
     override suspend fun getFaqFromRemote(): Response<MutableList<Faq>> {
@@ -31,15 +31,15 @@ class AppInfoRemoteDataSourceImpl @Inject constructor(
         return apiService.getSites()
     }
 
-    override suspend fun getCategoryFromRemote(accessToken: String): Response<CategoryList> {
-        return apiService.getCategory(accessToken)
+    override suspend fun getCategoryFromRemote(): Response<CategoryList> {
+        return apiService.getCategory()
     }
 
-    override suspend fun getServiceFromRemote(accessToken: String): Response<ServiceList> {
-        return apiService.getService(accessToken)
+    override suspend fun getServiceFromRemote(): Response<ServiceList> {
+        return apiService.getService()
     }
 
-    override suspend fun getNewsFromRemote(accessToken: String): Response<NewsList> {
-        return apiService.getNews(accessToken)
+    override suspend fun getNewsFromRemote(): Response<NewsList> {
+        return apiService.getNews()
     }
 }

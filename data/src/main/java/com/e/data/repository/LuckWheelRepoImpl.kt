@@ -1,6 +1,5 @@
 package com.e.data.repository
 
-import android.util.Log
 import com.e.data.mapper.LuckRequestMapper
 import com.e.data.mapper.LuckSliceMapper
 import com.e.data.repository.luckWheelDataSource.local.LuckWheelLocalDataSource
@@ -28,10 +27,10 @@ class LuckWheelRepoImpl @Inject constructor(
         lateinit var sliceList: MutableList<LuckSliceModel>
         val accessToken = sessionManager.fetchAuthToken()
         if (netWorkHelper.isNetworkConnected()) {
-            if (luckWheelRemoteDataSource.getSlicesFromRemote(accessToken!!).isSuccessful &&
-                luckWheelRemoteDataSource.getSlicesFromRemote(accessToken).body() != null
+            if (luckWheelRemoteDataSource.getSlicesFromRemote().isSuccessful &&
+                luckWheelRemoteDataSource.getSlicesFromRemote().body() != null
             ) {
-                val response = luckWheelRemoteDataSource.getSlicesFromRemote(accessToken).body()
+                val response = luckWheelRemoteDataSource.getSlicesFromRemote().body()
                 sliceList = response!!.luckSliceList.map {
                     luckSliceMapper.get().toMapper(it)
                 }.toMutableList()

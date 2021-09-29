@@ -7,7 +7,7 @@ import retrofit2.Response
 
 interface LuckWheelRemoteDataSource {
 
-    suspend fun getSlicesFromRemote(accessToken: String): Response<LuckSliceList>
+    suspend fun getSlicesFromRemote(): Response<LuckSliceList>
 
     suspend fun getUserLuckFromRemote(accessToken: String): Response<Boolean>
 

@@ -64,7 +64,7 @@ class UserTypeConverter {
         val json = JSONObject(user)
         return User(
             json.getInt("id"),
-            json.getInt("ids"),
+            json.getString("ids"),
             json.getString("role"),
             json.getString("loginType"),
             json.getString("firstName"),

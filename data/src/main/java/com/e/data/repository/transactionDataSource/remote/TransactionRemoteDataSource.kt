@@ -13,8 +13,7 @@ interface TransactionRemoteDataSource {
     ): Response<String>
 
     suspend fun getUserTransactionFromRemote(
-        accessToken: String,
-        id: String
+        transactionRequest: TransactionRequest
     ): Response<TransactionList>
 
 }

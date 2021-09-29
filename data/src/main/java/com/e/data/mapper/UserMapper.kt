@@ -10,7 +10,7 @@ class UserMapper @Inject constructor(){
     fun toMapper(user: User): UserModel {
         return UserModel(
             user.id ?: 0,
-            user.ids ?: 0,
+            user.ids ?: "",
             user.role ?: "",
             user.loginType ?: "",
             user.firstName ?: "",

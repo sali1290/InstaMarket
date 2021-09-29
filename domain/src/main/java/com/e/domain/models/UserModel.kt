@@ -4,7 +4,7 @@ data class UserModel(
 
     val id: Int?,
 
-    val ids: Int?,
+    val ids: String?,
 
     var role: String?,
 

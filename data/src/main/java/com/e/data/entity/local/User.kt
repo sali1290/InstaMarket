@@ -14,7 +14,7 @@ data class User(
     val id: Int?,
 
     @Json(name = "ids")
-    val ids: Int?,
+    val ids: String?,
 
     @Json(name = "role")
     var role: String?,
