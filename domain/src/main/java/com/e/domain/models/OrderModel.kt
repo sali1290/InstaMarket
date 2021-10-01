@@ -18,7 +18,7 @@ data class OrderModel(
 
     var changed: Any?,
 
-    var charge: String?,
+    var charge: Int?,
 
     var comments: Any?,
 
@@ -86,7 +86,7 @@ data class OrderModel(
 
     var type: String?,
 
-    var uid: String?,
+    var uid: Int?,
 
     var userName: Any?,
 

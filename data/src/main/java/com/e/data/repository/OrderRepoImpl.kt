@@ -1,10 +1,12 @@
 package com.e.data.repository
 
+import com.e.data.api.OrderTypeConverter
 import com.e.data.mapper.OrderMapper
 import com.e.data.mapper.OrderRequestMapper
 import com.e.data.repository.orderDataSource.local.OrderLocalDataSource
 import com.e.data.repository.orderDataSource.remote.OrderRemoteDataSource
 import com.e.data.utile.NetWorkHelper
+import com.e.data.utile.SessionManager
 import com.e.domain.models.OrderModel
 import com.e.domain.models.OrderRequestModel
 import com.e.domain.repository.OrderRepo
@@ -16,7 +18,8 @@ class OrderRepoImpl @Inject constructor(
     private val orderRemoteDataSource: OrderRemoteDataSource,
     private val netWorkHelper: NetWorkHelper,
     private val orderRequestMapper: dagger.Lazy<OrderRequestMapper>,
-    private val orderMapper: dagger.Lazy<OrderMapper>
+    private val orderMapper: dagger.Lazy<OrderMapper>,
+    private val sessionManager: SessionManager
 ) : OrderRepo {
 
     @Throws(IOException::class)
@@ -27,20 +30,22 @@ class OrderRepoImpl @Inject constructor(
         link: String
     ): OrderRequestModel {
         lateinit var order: OrderRequestModel
+        val orderConverted = OrderTypeConverter().converter(categoryId, serviceId, quantity, link)
+        val token = sessionManager.fetchAuthToken()!!
         if (netWorkHelper.isNetworkConnected()) {
             if (orderRemoteDataSource.createOrderFromRemote(
-                    categoryId, serviceId, quantity, link
+                    orderConverted
                 ).isSuccessful && orderRemoteDataSource.createOrderFromRemote(
-                    categoryId, serviceId, quantity, link
+                    orderConverted
                 ).body() != null
             ) {
                 val response = orderRemoteDataSource.createOrderFromRemote(
-                    categoryId, serviceId, quantity, link
+                    orderConverted
                 ).body()
                 order = response.let {
                     orderRequestMapper.get().toMapper(it!!)
                 }
-
+//                orderLocalDataSource.saveOrderFromDB(response!!)
                 return order
             } else {
                 throw IOException("Server is Not Responding")
@@ -65,7 +70,7 @@ class OrderRepoImpl @Inject constructor(
                 orderLocalDataSource.deleteOrderFromDB()
                 val response = orderRemoteDataSource.getOrderListFromRemote(id.toString()).body()
                 for (i in 0..response?.size!!) {
-                    orderLocalDataSource.saveOrderFromDB(response[i])
+//                    orderLocalDataSource.saveOrderFromDB(response[i])
                     orderList[i] = response[i].let {
                         orderMapper.get().toMapper(it)
                     }
@@ -74,9 +79,9 @@ class OrderRepoImpl @Inject constructor(
             } else {
                 if (orderLocalDataSource.getOrderListFromDB().size > 0) {
                     for (i in 0..orderLocalDataSource.getOrderListFromDB().size) {
-                        orderList[i] = orderLocalDataSource.getOrderListFromDB()[i].let {
-                            orderMapper.get().toMapper(it)
-                        }
+//                        orderList[i] = orderLocalDataSource.getOrderListFromDB()[i].let {
+//                            orderMapper.get().toMapper(it)
+//                        }
                     }
                     return orderList
                 }
@@ -84,9 +89,9 @@ class OrderRepoImpl @Inject constructor(
         } else {
             if (orderLocalDataSource.getOrderListFromDB().size > 0) {
                 for (i in 0..orderLocalDataSource.getOrderListFromDB().size) {
-                    orderList[i] = orderLocalDataSource.getOrderListFromDB()[i].let {
-                        orderMapper.get().toMapper(it)
-                    }
+//                    orderList[i] = orderLocalDataSource.getOrderListFromDB()[i].let {
+//                        orderMapper.get().toMapper(it)
+//                    }
                 }
                 return orderList
             }

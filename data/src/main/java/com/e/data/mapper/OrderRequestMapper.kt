@@ -7,11 +7,9 @@ import javax.inject.Inject
 class OrderRequestMapper @Inject constructor(){
     fun toMapper(agents: OrderRequest): OrderRequestModel {
         return OrderRequestModel(
-            agents.id ?: 0,
             OrderMapper().toMapper(agents.order!!),
             agents.result ?: true,
             agents.message ?: "",
-            ErrorsMapper().toMapper(agents.errors!!)
         )
     }
 }

@@ -61,6 +61,7 @@ class OrderTypeConverter {
         val json = JSONObject(user)
         return Order(
             json.getInt("orderId"),
+            json.getInt("id"),
             json.getString("apiOrderId"),
             json.getString("apiProvider_id"),
             json.getString("apiResponse"),
@@ -68,15 +69,14 @@ class OrderTypeConverter {
             json.getString("apiSite"),
             json.getString("cateId"),
             json.getString("changed"),
-            json.getString("charge"),
             json.getString("comments"),
+            json.getInt("charge"),
             json.getString("created"),
             json.getString("dripfeedQuantity"),
             json.getString("finish"),
             json.getString("formalCharge"),
             json.getString("hashtag"),
             json.getString("hashtags"),
-            json.getInt("id"),
             json.getString("ids"),
             json.getString("interval"),
             json.getString("isDripFeed"),
@@ -87,7 +87,7 @@ class OrderTypeConverter {
             json.getString("quantity"),
             json.getString("remains"),
             json.getString("returnAmount"),
-            json.getString("returnId"),
+            json.getInt("uid"),
             json.getString("runs"),
             json.getString("serviceId"),
             json.getString("serviceType"),
@@ -102,7 +102,7 @@ class OrderTypeConverter {
             json.getString("subResponsePosts"),
             json.getString("subStatus"),
             json.getString("type"),
-            json.getString("uid"),
+            json.getString("returnId"),
             json.getString("userName"),
             json.getString("userNames")
         )

@@ -17,7 +17,7 @@ class OrderMapper @Inject constructor(){
             agents.apiSite ?: "",
             agents.cateId ?: "",
             agents.changed ?: "",
-            agents.charge ?: "",
+            agents.charge ?: 0,
             agents.comments ?: "",
             agents.created ?: "",
             agents.dripfeedQuantity ?: "",
@@ -51,7 +51,7 @@ class OrderMapper @Inject constructor(){
             agents.subResponsePosts ?: "",
             agents.subStatus ?: "",
             agents.type ?: "",
-            agents.uid ?: "",
+            agents.uid ?: 0,
             agents.userName ?: "",
             agents.userNames ?: ""
         )

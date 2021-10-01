@@ -1,5 +1,6 @@
 package com.e.instamarket.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.e.data.utile.SessionManager
 import com.e.domain.Result
 import com.e.instamarket.R
 import com.e.instamarket.databinding.FragmentProfileBinding
 import com.e.instamarket.viewmodel.user.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -37,8 +40,34 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility =
+            View.VISIBLE
         viewModel.getUser()
+
+        val sessionManager = SessionManager(requireContext())
+
+        binding.btnLogout.setOnClickListener {
+            val dialog = AlertDialog.Builder(context)
+            dialog.setPositiveButton("بله") { _, _ ->
+                sessionManager.saveAuthToken(null)
+
+                try {
+                    // clearing app data
+                    val packageName: String = requireContext().applicationContext.packageName
+                    val runtime = Runtime.getRuntime()
+                    runtime.exec("pm clear $packageName")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+                requireActivity().finishAndRemoveTask()
+            }
+            dialog.setNegativeButton("خیر", null)
+            dialog.setMessage("خروج از حساب کاربری؟")
+            dialog.show()
+        }
+
+
     }
 
     private fun observe() {

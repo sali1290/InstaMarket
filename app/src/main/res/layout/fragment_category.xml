@@ -127,6 +127,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <EditText
+                    android:id="@+id/quantity_field"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginLeft="@dimen/_10sdp"

@@ -8,20 +8,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OrderLocalDataSourceImpl @Inject constructor(private val orderDao: OrderDao): OrderLocalDataSource {
-    override suspend fun saveOrderFromDB(order: Order) {
+class OrderLocalDataSourceImpl @Inject constructor(private val orderRequestDao: OrderDao) :
+    OrderLocalDataSource {
+    override suspend fun saveOrderFromDB(orderRequest: Order) {
         CoroutineScope(Dispatchers.IO).launch {
-            orderDao.saveOrders(order)
+            orderRequestDao.saveOrders(orderRequest)
         }
     }
 
     override suspend fun deleteOrderFromDB() {
         CoroutineScope(Dispatchers.IO).launch {
-            orderDao.deleteOrders()
+            orderRequestDao.deleteOrders()
         }
     }
 
     override suspend fun getOrderListFromDB(): MutableList<Order> {
-        return orderDao.getOrderList()
-        }
+        return orderRequestDao.getOrderList()
+    }
 }

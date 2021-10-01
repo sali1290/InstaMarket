@@ -107,12 +107,8 @@ interface ApiService {
 
     //order api
     @POST("order/create")
-    @FormUrlEncoded
     suspend fun createOrder(
-        @Field("category_id") categoryId: String,
-        @Field("service_id") serviceId: String,
-        @Field("quantity") quantity: String,
-        @Field("link") link: String
+        @Body orderRequestConverter: OrderRequestConverter
     ): Response<OrderRequest>
 
     @POST("order/get")

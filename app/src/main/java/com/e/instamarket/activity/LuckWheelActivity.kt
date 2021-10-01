@@ -60,7 +60,7 @@ class LuckWheelActivity : AppCompatActivity() {
                 is Result.Success -> {
                     textList.removeFirst()
                     for (i in 0 until it.data.size) {
-                        textList.add(MenuItemData(it.data[i].name.toString() + "تومان"))
+                        textList.add(MenuItemData(it.data[i].name.toString() + "\nتومان"))
                     }
                     textList.add(MenuItemData("پوچ"))
                     wheelText.removeViewAt(0)

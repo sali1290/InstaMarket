@@ -1,18 +1,13 @@
 package com.e.instamarket.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.activity.OnBackPressedDispatcher
-import androidx.activity.addCallback
-import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
-import androidx.core.view.size
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.e.data.utile.SessionManager

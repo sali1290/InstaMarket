@@ -71,12 +71,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.token.observe(viewLifecycleOwner, Observer {
+        viewModel.token.observe(viewLifecycleOwner, {
             when (it) {
 
                 is Result.Success -> {
-                    checkToken(it.data)
                     sessionManager.saveAuthToken(it.data.accessToken!!)
+                    checkToken(it.data)
                     Toast.makeText(requireActivity(), "خوش آمدید", Toast.LENGTH_SHORT).show()
                 }
 

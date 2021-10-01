@@ -2,24 +2,30 @@ package com.e.instamarket.fragment
 
 import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.domain.Result
 import com.e.instamarket.databinding.FragmentCategoryBinding
 import com.e.instamarket.viewmodel.appInfo.AppInfoViewModel
-import java.text.FieldPosition
+import com.e.instamarket.viewmodel.order.OrderViewModel
 
 class CategoryFragment : Fragment() {
 
     private lateinit var binding: FragmentCategoryBinding
     private lateinit var viewModel: AppInfoViewModel
+    private lateinit var orderViewModel: OrderViewModel
+
+    private var categoryId: String = ""
+    private var serviceId: String = ""
+    private var quantity: String = ""
+    private var link: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +37,8 @@ class CategoryFragment : Fragment() {
         viewModel.getCategory()
         viewModel.getService()
 
+        orderViewModel = ViewModelProvider(requireActivity()).get(OrderViewModel::class.java)
+
         return binding.root
     }
 
@@ -39,6 +47,25 @@ class CategoryFragment : Fragment() {
         binding.serviceSpinner.isClickable = false
         binding.button3.isClickable = false
         observeCategory()
+
+        binding.button3.setOnClickListener {
+
+            link = binding.textView16.text.toString()
+            quantity = binding.quantityField.text.toString()
+
+            if (categoryId != "" && serviceId != "" && link != "" && quantity != "" && binding.checkBox.isChecked) {
+                orderViewModel.createOrder(categoryId, serviceId, quantity, link)
+                observeOrder()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "please fill all: \n$categoryId \n$serviceId \n$quantity \n$link ",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+
+        }
 
     }
 
@@ -65,6 +92,7 @@ class CategoryFragment : Fragment() {
                                 for (i in 0 until list.size) {
                                     if (name == it.data[i].name) {
                                         observeService(it.data[i].id!!)
+                                        categoryId = it.data[i].id.toString()
                                     }
                                 }
                                 binding.serviceSpinner.isClickable = true
@@ -113,6 +141,12 @@ class CategoryFragment : Fragment() {
                                         binding.tvDescription.text = it.data[i].desc.toString()
                                     }
                                 }
+                                for (i in 0 until it.data.size){
+                                    if(name == it.data[i].name){
+                                        serviceId = it.data[i].id.toString()
+                                        binding.button3.isClickable = true
+                                    }
+                                }
                             }
 
                             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -125,11 +159,38 @@ class CategoryFragment : Fragment() {
                     Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Result.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
             }
         })
     }
 
+    private fun observeOrder() {
+        orderViewModel.order.observe(viewLifecycleOwner, {
 
+            when (it) {
+
+                is Result.Success -> {
+                    Toast.makeText(
+                        requireContext(),
+                        "Succeed " + it.data.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                    Log.i("my tag", it.data.message!!)
+                }
+
+                is Result.Loading -> {
+                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                }
+
+                is Result.Error -> {
+                    Log.i("my tag", it.message)
+                }
+
+            }
+
+
+        })
+
+    }
 }
