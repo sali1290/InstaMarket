@@ -50,26 +50,26 @@ class TransactionRepoImpl @Inject constructor(
         val accessToken: String = sessionManager.fetchAuthToken()!!
         val transactionRequest: TransactionRequest = GetTransactionConverter().converter(id)
         if (netWorkHelper.isNetworkConnected()) {
-            if (transactionRemoteDataSource.getUserTransactionFromRemote(
-                    transactionRequest
-                ).isSuccessful &&
-                transactionRemoteDataSource.getUserTransactionFromRemote(
-                    transactionRequest
-                ).body() != null
-            ) {
+//            if (transactionRemoteDataSource.getUserTransactionFromRemote(
+//                    transactionRequest
+//                ).isSuccessful &&
+//                transactionRemoteDataSource.getUserTransactionFromRemote(
+//                    transactionRequest
+//                ).body() != null
+//            ) {
                 val response = transactionRemoteDataSource.getUserTransactionFromRemote(
                     transactionRequest
                 ).body()
-                Log.v("tag", "sdfsdfsd")
+                Log.v("tag", "transactions working")
                 transactions = response!!.transactionList.map {
                     transactionMapper.get()!!.toMapper(it)
                 }.toMutableList()
 
 
                 return transactions
-            } else {
-                throw IOException("Server is Not Responding")
-            }
+//            } else {
+//                throw IOException("Server is Not Responding")
+//            }
         } else {
             throw IOException("No Internet Connection")
         }

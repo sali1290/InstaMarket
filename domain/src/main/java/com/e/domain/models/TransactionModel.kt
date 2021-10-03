@@ -10,13 +10,13 @@ data class TransactionModel(
 
     var type: String?,
 
-    var transactionId: Float?,
+    var transactionId: String?,
 
-    var amount: Float?,
+    var amount: String?,
 
     var status: String?,
 
-    var created: Int?,
+    var created: String?,
 
     var log: String?,
 

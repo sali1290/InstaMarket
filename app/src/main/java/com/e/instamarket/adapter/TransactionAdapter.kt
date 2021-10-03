@@ -30,7 +30,7 @@ class TransactionAdapter(
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         holder.typeTextView.text = transactionList[position].type.toString()
-        holder.amountTextView.text = transactionList[position].amount.toString() + "تومان "
+        holder.amountTextView.text = transactionList[position].amount + "تومان "
         if (transactionList[position].status.toString() == "1") {
             holder.statusTextView.text = "موفق"
             holder.statusTextView.setTextColor(context.getColor(R.color.green))

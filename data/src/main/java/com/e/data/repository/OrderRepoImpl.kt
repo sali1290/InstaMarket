@@ -31,7 +31,6 @@ class OrderRepoImpl @Inject constructor(
     ): OrderRequestModel {
         lateinit var order: OrderRequestModel
         val orderConverted = OrderTypeConverter().converter(categoryId, serviceId, quantity, link)
-        val token = sessionManager.fetchAuthToken()!!
         if (netWorkHelper.isNetworkConnected()) {
             if (orderRemoteDataSource.createOrderFromRemote(
                     orderConverted

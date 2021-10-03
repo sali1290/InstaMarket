@@ -18,16 +18,16 @@ data class Transaction(
     var type: String?,
 
     @Json(name = "transaction_id")
-    var transactionId: Float?,
+    var transactionId: String?,
 
     @Json(name = "amount")
-    var amount: Float?,
+    var amount: String?,
 
     @Json(name = "status")
     var status: String?,
 
     @Json(name = "created")
-    var created: Int?,
+    var created: String?,
 
     @Json(name = "log")
     var log: String?,

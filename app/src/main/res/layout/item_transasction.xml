@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/_170sdp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_height="@dimen/_160sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,9 +24,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_40sdp"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                >
 
                 <TextView
                     android:id="@+id/textView27"
@@ -55,9 +55,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_40sdp"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                >
 
                 <TextView
                     android:id="@+id/textView25"
@@ -87,9 +87,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_40sdp"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                >
 
                 <TextView
                     android:id="@+id/textView23"
@@ -118,9 +118,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_40sdp"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                >
 
                 <TextView
                     android:id="@+id/textView21"
