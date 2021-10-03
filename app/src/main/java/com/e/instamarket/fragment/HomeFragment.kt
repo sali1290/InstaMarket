@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -23,6 +23,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: UserViewModel
 //    private lateinit var bannerViewModel: AppInfoViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,8 +83,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.luckWheelActivity)
         }
 
-
-
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
     }
 
@@ -93,13 +93,24 @@ class HomeFragment : Fragment() {
             when (it) {
 
                 is Result.Success -> {
-                    binding.textView5.text = it.data.firstName + " " + it.data.lastName
-                    binding.textView10.text = it.data.balance
+
+                    binding.progressBar.visibility = View.INVISIBLE
+                    val role = it.data.role
+
+                    if (role == "admin") {
+                        binding.textView5.text = "مدیر"
+                    } else {
+                        binding.textView5.text = "کاربر"
+                    }
+
+
+                    binding.textView10.text = it.data.firstName + " " + it.data.lastName
+                    binding.textView31.text = it.data.balance
 
                 }
 
                 is Result.Loading -> {
-                    Toast.makeText(requireActivity(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.VISIBLE
                 }
 
                 is Result.Error -> {

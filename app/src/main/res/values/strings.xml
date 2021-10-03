@@ -58,4 +58,8 @@
     <string name="agent_price">قیمت: </string>
     <string name="agent_date">مدت نمایندگی: </string>
     <string name="agent_desc">اطلاعات بیشتر</string>
+    <string name="stock">موجودی</string>
+    <string name="accept">ثبت</string>
+    <string name="choose_category">دسته بندی خود را انتخاب کنید</string>
+    <string name="choose_service">سرویس خود را انتخاب کنید</string>
 </resources>

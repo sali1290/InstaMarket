@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -105,7 +106,12 @@ class CategoryFragment : Fragment() {
 
                 }
                 is Result.Loading -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.categoryProgress.visibility = View.VISIBLE
+                    requireActivity().window.setFlags(
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                    )
                 }
                 is Result.Error -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
@@ -141,8 +147,8 @@ class CategoryFragment : Fragment() {
                                         binding.tvDescription.text = it.data[i].desc.toString()
                                     }
                                 }
-                                for (i in 0 until it.data.size){
-                                    if(name == it.data[i].name){
+                                for (i in 0 until it.data.size) {
+                                    if (name == it.data[i].name) {
                                         serviceId = it.data[i].id.toString()
                                         binding.button3.isClickable = true
                                     }
@@ -153,10 +159,12 @@ class CategoryFragment : Fragment() {
                             }
                         }
 
-
+                    binding.categoryProgress.visibility = View.INVISIBLE
+                    requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                 }
                 is Result.Loading -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.categoryProgress.visibility = View.VISIBLE
                 }
                 is Result.Error -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
@@ -171,6 +179,10 @@ class CategoryFragment : Fragment() {
             when (it) {
 
                 is Result.Success -> {
+
+                    binding.categoryProgress.visibility = View.INVISIBLE
+                    requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
                     Toast.makeText(
                         requireContext(),
                         "Succeed " + it.data.message,
@@ -180,7 +192,12 @@ class CategoryFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    binding.categoryProgress.visibility = View.VISIBLE
+                    requireActivity().window.setFlags(
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                    )
                 }
 
                 is Result.Error -> {

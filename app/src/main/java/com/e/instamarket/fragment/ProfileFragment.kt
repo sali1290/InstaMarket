@@ -60,7 +60,7 @@ class ProfileFragment : Fragment() {
                     e.printStackTrace()
                 }
 
-                requireActivity().finishAndRemoveTask()
+//                requireActivity().finishAndRemoveTask()
             }
             dialog.setNegativeButton("خیر", null)
             dialog.setMessage("خروج از حساب کاربری؟")

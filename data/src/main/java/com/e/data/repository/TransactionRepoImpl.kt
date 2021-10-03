@@ -1,9 +1,6 @@
 package com.e.data.repository
 
-import android.app.Activity
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.e.data.api.GetTransactionConverter
 import com.e.data.api.TransactionRequest
 import com.e.data.mapper.TransactionMapper
@@ -47,7 +44,6 @@ class TransactionRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun getTransactions(id: String): MutableList<TransactionModel> {
         lateinit var transactions: MutableList<TransactionModel>
-        val accessToken: String = sessionManager.fetchAuthToken()!!
         val transactionRequest: TransactionRequest = GetTransactionConverter().converter(id)
         if (netWorkHelper.isNetworkConnected()) {
 //            if (transactionRemoteDataSource.getUserTransactionFromRemote(
