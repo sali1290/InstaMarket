@@ -62,4 +62,7 @@
     <string name="accept">ثبت</string>
     <string name="choose_category">دسته بندی خود را انتخاب کنید</string>
     <string name="choose_service">سرویس خود را انتخاب کنید</string>
+
+    <string name="salb">تذکر: لطفا قبل از خرید سایت ابتدا از پروفایل خود بخش (اطلاعات کاربری) و بخش (اطلاعات دامین) را تکمیل کنید. "سلب مسئولیت"</string>
+    <string name="more_info">اطلاعات بیشتر</string>
 </resources>

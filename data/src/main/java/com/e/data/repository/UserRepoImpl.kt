@@ -31,7 +31,7 @@ class UserRepoImpl @Inject constructor(
     }
 
     override suspend fun updateUser(): UserModel? {
-        var user: UserModel? = null
+        val user: UserModel? = null
         return user!!
     }
 }

@@ -19,7 +19,6 @@ class OrderRepoImpl @Inject constructor(
     private val netWorkHelper: NetWorkHelper,
     private val orderRequestMapper: dagger.Lazy<OrderRequestMapper>,
     private val orderMapper: dagger.Lazy<OrderMapper>,
-    private val sessionManager: SessionManager
 ) : OrderRepo {
 
     @Throws(IOException::class)
@@ -31,16 +30,10 @@ class OrderRepoImpl @Inject constructor(
     ): OrderRequestModel {
         lateinit var order: OrderRequestModel
         val orderConverted = OrderTypeConverter().converter(categoryId, serviceId, quantity, link)
+        val request = orderRemoteDataSource.createOrderFromRemote(orderConverted)
         if (netWorkHelper.isNetworkConnected()) {
-            if (orderRemoteDataSource.createOrderFromRemote(
-                    orderConverted
-                ).isSuccessful && orderRemoteDataSource.createOrderFromRemote(
-                    orderConverted
-                ).body() != null
-            ) {
-                val response = orderRemoteDataSource.createOrderFromRemote(
-                    orderConverted
-                ).body()
+            if (request.isSuccessful && request.body() != null) {
+                val response = request.body()
                 order = response.let {
                     orderRequestMapper.get().toMapper(it!!)
                 }

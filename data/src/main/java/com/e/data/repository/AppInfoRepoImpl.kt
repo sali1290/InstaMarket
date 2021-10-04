@@ -4,7 +4,6 @@ package com.e.data.repository
 import com.e.data.mapper.*
 import com.e.data.repository.appInfoDataSource.AppInfoRemoteDataSource
 import com.e.data.utile.NetWorkHelper
-import com.e.data.utile.SessionManager
 import com.e.domain.models.*
 import com.e.domain.repository.AppInfoRepo
 import java.io.IOException
@@ -22,7 +21,6 @@ class AppInfoRepoImpl @Inject constructor(
     private val siteMapper: dagger.Lazy<SiteMapper>,
     private val appInfoRemoteDataSource: AppInfoRemoteDataSource,
     private val netWorkHelper: NetWorkHelper,
-    private val sessionManager: SessionManager
 ) : AppInfoRepo {
 
     @Throws(IOException::class)
@@ -30,10 +28,11 @@ class AppInfoRepoImpl @Inject constructor(
 
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var agentList: MutableList<AgentsModel>
-            if (appInfoRemoteDataSource.getAgentsFromRemote().isSuccessful &&
-                appInfoRemoteDataSource.getAgentsFromRemote().body() != null
+            val request = appInfoRemoteDataSource.getAgentsFromRemote()
+            if (request.isSuccessful &&
+                request.body() != null
             ) {
-                val response = appInfoRemoteDataSource.getAgentsFromRemote().body()
+                val response = request.body()
                 agentList = response!!.agentList.map {
                     agentMapper.get().toMapper(it)
                 }.toMutableList()
@@ -50,11 +49,9 @@ class AppInfoRepoImpl @Inject constructor(
     override suspend fun getApi(): MutableList<ApiModel> {
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var apiList: MutableList<ApiModel>
-
-            if (appInfoRemoteDataSource.getApiFromRemote().isSuccessful && appInfoRemoteDataSource.getApiFromRemote()
-                    .body() != null
-            ) {
-                val response = appInfoRemoteDataSource.getApiFromRemote().body()
+            val request = appInfoRemoteDataSource.getApiFromRemote()
+            if (request.isSuccessful && request.body() != null) {
+                val response = request.body()
                 apiList = response!!.apiList.map {
                     apiMapper.get().toMapper(it)
                 }.toMutableList()
@@ -69,20 +66,14 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getBanner(): MutableList<BannerModel> {
-
+        lateinit var bannerList: MutableList<BannerModel>
+        val request = appInfoRemoteDataSource.getBannerFromRemote()
         if (netWorkHelper.isNetworkConnected()) {
-            lateinit var bannerList: MutableList<BannerModel>
-            if (appInfoRemoteDataSource.getBannerFromRemote().isSuccessful && appInfoRemoteDataSource.getBannerFromRemote(
-
-                )
-                    .body() != null
-            ) {
-                val response = appInfoRemoteDataSource.getBannerFromRemote().body()
+            if (request.isSuccessful && request.body() != null) {
+                val response = request.body()
                 bannerList = response!!.bannerList.map {
                     bannerMapper.get().toMapper(it)
                 }.toMutableList()
-
-
                 return bannerList
             } else {
                 throw IOException("Server is Not Responding")
@@ -94,15 +85,12 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getCategory(): MutableList<CategoryModel> {
+        lateinit var categoryList: MutableList<CategoryModel>
+        val request = appInfoRemoteDataSource.getCategoryFromRemote()
         if (netWorkHelper.isNetworkConnected()) {
-            lateinit var categoryList: MutableList<CategoryModel>
-            if (appInfoRemoteDataSource.getCategoryFromRemote().isSuccessful && appInfoRemoteDataSource.getCategoryFromRemote(
-
-                )
-                    .body() != null
-            ) {
-                val response = appInfoRemoteDataSource.getCategoryFromRemote()
-                categoryList = response.body()!!.categoryList.map {
+            if (request.isSuccessful && request.body() != null) {
+                val response = request.body()
+                categoryList = response!!.categoryList.map {
                     categoryMapper.get().toMapper(it)
                 }.toMutableList()
 
@@ -117,14 +105,12 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getFaq(): MutableList<FaqModel> {
+        lateinit var faqList: MutableList<FaqModel>
+        val request = appInfoRemoteDataSource.getFaqFromRemote()
         if (netWorkHelper.isNetworkConnected()) {
-            lateinit var faqList: MutableList<FaqModel>
-            if (appInfoRemoteDataSource.getFaqFromRemote().isSuccessful && appInfoRemoteDataSource.getFaqFromRemote()
-                    .body() != null
-            ) {
-                val response = appInfoRemoteDataSource.getFaqFromRemote()
-                for (i in 0..response.body()?.size!!) {
-                    faqList[i] = response.body()!![i].let {
+            if (request.isSuccessful && request.body() != null) {
+                for (i in 0..request.body()?.size!!) {
+                    faqList[i] = request.body()!![i].let {
                         faqMapper.get().toMapper(it)
                     }
                 }
@@ -140,12 +126,12 @@ class AppInfoRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun getNews(): MutableList<NewsModel> {
         lateinit var newsList: MutableList<NewsModel>
+        val request = appInfoRemoteDataSource.getNewsFromRemote()
         if (netWorkHelper.isNetworkConnected()) {
-            if (appInfoRemoteDataSource.getNewsFromRemote().isSuccessful &&
-                appInfoRemoteDataSource.getNewsFromRemote().body() != null
+            if (request.isSuccessful &&
+                request.body() != null
             ) {
-                val response = appInfoRemoteDataSource.getNewsFromRemote()
-                newsList = response.body()!!.newsList.map {
+                newsList = request.body()!!.newsList.map {
                     newsMapper.get().toMapper(it)
                 }.toMutableList()
 
@@ -160,13 +146,13 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getService(): MutableList<ServiceModel> {
+        lateinit var serviceList: MutableList<ServiceModel>
+        val request = appInfoRemoteDataSource.getServiceFromRemote()
         if (netWorkHelper.isNetworkConnected()) {
-            lateinit var serviceList: MutableList<ServiceModel>
-            if (appInfoRemoteDataSource.getServiceFromRemote().isSuccessful &&
-                appInfoRemoteDataSource.getServiceFromRemote().body() != null
+            if (request.isSuccessful &&
+                request.body() != null
             ) {
-                val response = appInfoRemoteDataSource.getServiceFromRemote()
-                serviceList = response.body()!!.serviceList.map {
+                serviceList = request.body()!!.serviceList.map {
                     serviceMapper.get().toMapper(it)
                 }.toMutableList()
                 return serviceList
@@ -180,17 +166,15 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getSite(): MutableList<SiteModel> {
+        lateinit var siteList: MutableList<SiteModel>
+        val request = appInfoRemoteDataSource.getSiteFromRemote()
         if (netWorkHelper.isNetworkConnected()) {
-            lateinit var siteList: MutableList<SiteModel>
-            if (appInfoRemoteDataSource.getSiteFromRemote().isSuccessful && appInfoRemoteDataSource.getSiteFromRemote()
+            if (request.isSuccessful && request
                     .body() != null
             ) {
-                val response = appInfoRemoteDataSource.getSiteFromRemote()
-                for (i in 0..response.body()?.size!!) {
-                    siteList[i] = response.body()!![i].let {
-                        siteMapper.get().toMapper(it)
-                    }
-                }
+                siteList = request.body()!!.siteList.map {
+                    siteMapper.get().toMapper(it)
+                }.toMutableList()
                 return siteList
             } else {
                 throw IOException("Server is Not Responding")

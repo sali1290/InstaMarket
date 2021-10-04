@@ -29,17 +29,16 @@ class EnterAppRepoImpl @Inject constructor(
     override suspend fun login(email: String, password: String): TokenModel {
         lateinit var token: TokenModel
         val loginRequest: LoginRequest = LoginTypeConverter().converter(email, password)
+        val request = enterAppRemoteDataSource.loginFromRemote(loginRequest)
         if (netWorkHelper.isNetworkConnected()) {
-            if (enterAppRemoteDataSource.loginFromRemote(loginRequest).isSuccessful &&
-                enterAppRemoteDataSource.loginFromRemote(loginRequest)
+            if (request.isSuccessful &&
+                request
                     .body() != null
             ) {
-                val response = enterAppRemoteDataSource.loginFromRemote(loginRequest)
-                token = response.body().let {
+                token = request.body().let {
                     tokenMapper.get().toMapper(it!!)
                 }
-//                enterAppLocalDataSource.saveTokenFromDB(response.body()!!)
-                userLocalDataSource.saveUserFromDB(response.body()?.user!!)
+                userLocalDataSource.saveUserFromDB(request.body()?.user!!)
                 return token
             } else {
                 throw IOException("Server is Not Responding")

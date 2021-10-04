@@ -69,7 +69,7 @@ interface ApiService {
     suspend fun getService(): Response<ServiceList>
 
     @POST("general/sites")
-    suspend fun getSites(): Response<MutableList<Site>>
+    suspend fun getSites(): Response<SiteList>
 
     @POST("general/banners")
     suspend fun getBanners(): Response<BannerList>

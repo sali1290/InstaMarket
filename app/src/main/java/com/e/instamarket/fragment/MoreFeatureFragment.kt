@@ -49,5 +49,10 @@ class MoreFeatureFragment : Fragment() {
             bottomNav.visibility = View.INVISIBLE
         }
 
+        binding.buySite.setOnClickListener {
+            findNavController().navigate(R.id.sitesFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
     }
 }

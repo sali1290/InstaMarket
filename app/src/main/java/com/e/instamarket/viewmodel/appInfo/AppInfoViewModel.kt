@@ -84,10 +84,20 @@ class AppInfoViewModel @Inject constructor(
 
     }
 
+    private val _siteList = MutableLiveData<Result<MutableList<SiteModel>>>()
+    val siteList: LiveData<Result<MutableList<SiteModel>>>
+        get() = _siteList
 
-    fun getSite() = liveData {
-        val siteList = getSiteUseCase.execute()
-        emit(siteList)
+    private val siteHandler = CoroutineExceptionHandler { _, exception ->
+        _siteList.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getSites() = viewModelScope.launch(Dispatchers.IO + siteHandler) {
+        _siteList.postValue(Result.Loading)
+        getSiteUseCase.execute().let {
+            _siteList.postValue(Result.Success(it))
+        }
+
     }
 
     fun getFaq() = liveData {

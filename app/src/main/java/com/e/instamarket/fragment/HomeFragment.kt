@@ -114,9 +114,8 @@ class HomeFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), it.message , Toast.LENGTH_SHORT).show()
                 }
-
             }
 
         })

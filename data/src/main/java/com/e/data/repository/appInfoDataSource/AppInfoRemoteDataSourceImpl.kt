@@ -3,7 +3,6 @@ package com.e.data.repository.appInfoDataSource
 import com.e.data.api.ApiService
 import com.e.data.entity.*
 import com.e.data.entity.remote.Faq
-import com.e.data.entity.remote.Site
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -27,7 +26,7 @@ class AppInfoRemoteDataSourceImpl @Inject constructor(
         return apiService.getFaq()
     }
 
-    override suspend fun getSiteFromRemote(): Response<MutableList<Site>> {
+    override suspend fun getSiteFromRemote(): Response<SiteList> {
         return apiService.getSites()
     }
 

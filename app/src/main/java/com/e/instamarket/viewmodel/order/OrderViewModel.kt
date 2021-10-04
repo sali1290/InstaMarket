@@ -1,17 +1,18 @@
 package com.e.instamarket.viewmodel.order
 
-import androidx.lifecycle.*
-import com.e.domain.models.OrderModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.e.domain.Result
+import com.e.domain.models.OrderRequestModel
 import com.e.domain.usecase.orderUseCase.CreateOrderUseCase
 import com.e.domain.usecase.orderUseCase.GetOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import com.e.domain.Result
-import com.e.domain.models.OrderRequestModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @HiltViewModel
 class OrderViewModel @Inject constructor(

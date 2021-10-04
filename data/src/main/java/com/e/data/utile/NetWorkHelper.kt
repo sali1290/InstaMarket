@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class NetWorkHelper @Inject constructor(@ApplicationContext private val context: Context) {
 
-    fun isNetworkConnected():Boolean{
+    fun isNetworkConnected(): Boolean {
 
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -36,5 +36,5 @@ class NetWorkHelper @Inject constructor(@ApplicationContext private val context:
             }
         }
     }
-    }
+}
 
