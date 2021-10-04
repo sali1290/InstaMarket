@@ -109,11 +109,9 @@ class AppInfoRepoImpl @Inject constructor(
         val request = appInfoRemoteDataSource.getFaqFromRemote()
         if (netWorkHelper.isNetworkConnected()) {
             if (request.isSuccessful && request.body() != null) {
-                for (i in 0..request.body()?.size!!) {
-                    faqList[i] = request.body()!![i].let {
-                        faqMapper.get().toMapper(it)
-                    }
-                }
+                faqList = request.body()!!.faqList.map {
+                    faqMapper.get().toMapper(it)
+                }.toMutableList()
                 return faqList
             } else {
                 throw IOException("Server is Not Responding")

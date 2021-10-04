@@ -3,7 +3,6 @@ package com.e.data.api
 import com.e.data.entity.*
 import com.e.data.entity.local.Order
 import com.e.data.entity.local.Ticket
-import com.e.data.entity.remote.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -62,8 +61,7 @@ interface ApiService {
     suspend fun getCategory(): Response<CategoryList>
 
     @POST("general/faqs")
-    @FormUrlEncoded
-    suspend fun getFaq(): Response<MutableList<Faq>>
+    suspend fun getFaq(): Response<FaqList>
 
     @POST("general/services")
     suspend fun getService(): Response<ServiceList>

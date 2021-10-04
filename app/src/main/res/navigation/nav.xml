@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_moreFeatureFragment_to_sitesFragment"
             app:destination="@id/sitesFragment" />
+        <action
+            android:id="@+id/action_moreFeatureFragment_to_faqFragment"
+            app:destination="@id/faqFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -113,4 +116,9 @@
         android:name="com.e.instamarket.fragment.SitesFragment"
         android:label="fragment_sites"
         tools:layout="@layout/fragment_sites" />
+    <fragment
+        android:id="@+id/faqFragment"
+        android:name="com.e.instamarket.fragment.FaqFragment"
+        android:label="fragment_faq"
+        tools:layout="@layout/fragment_faq" />
 </navigation>

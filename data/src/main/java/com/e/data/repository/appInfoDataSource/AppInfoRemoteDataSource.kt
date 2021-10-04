@@ -12,7 +12,7 @@ interface AppInfoRemoteDataSource {
 
     suspend fun getBannerFromRemote(): Response<BannerList>
 
-    suspend fun getFaqFromRemote(): Response<MutableList<Faq>>
+    suspend fun getFaqFromRemote(): Response<FaqList>
 
     suspend fun getSiteFromRemote(): Response<SiteList>
 

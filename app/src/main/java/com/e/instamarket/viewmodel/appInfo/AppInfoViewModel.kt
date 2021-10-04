@@ -40,7 +40,7 @@ class AppInfoViewModel @Inject constructor(
     private val _apiList = MutableLiveData<Result<MutableList<ApiModel>>>()
     val apiList: LiveData<Result<MutableList<ApiModel>>>
         get() = _apiList
-    private val apiHandler = CoroutineExceptionHandler { coroutineContext, exception ->
+    private val apiHandler = CoroutineExceptionHandler { _, exception ->
         _apiList.postValue(exception.message?.let { Result.Error(it) })
     }
 
@@ -55,7 +55,7 @@ class AppInfoViewModel @Inject constructor(
     private val _agentList = MutableLiveData<Result<MutableList<AgentsModel>>>()
     val agentList: LiveData<Result<MutableList<AgentsModel>>>
         get() = _agentList
-    private val agentHandler = CoroutineExceptionHandler { coroutineContext, exception ->
+    private val agentHandler = CoroutineExceptionHandler { _, exception ->
         _agentList.postValue(exception.message?.let { Result.Error(it) })
     }
 
@@ -71,7 +71,7 @@ class AppInfoViewModel @Inject constructor(
     val banner: LiveData<Result<MutableList<BannerModel>>>
         get() = _banner
 
-    private val bannerHandler = CoroutineExceptionHandler { coroutineContext, exception ->
+    private val bannerHandler = CoroutineExceptionHandler { _, exception ->
         _banner.postValue(exception.message?.let { Result.Error(it) })
     }
 
@@ -100,9 +100,19 @@ class AppInfoViewModel @Inject constructor(
 
     }
 
-    fun getFaq() = liveData {
-        val faqList = getFaqUseCase.execute()
-        emit(faqList)
+    private val _faqList = MutableLiveData<Result<MutableList<FaqModel>>>()
+    val faqList: LiveData<Result<MutableList<FaqModel>>>
+        get() = _faqList
+
+    private val faqHandler = CoroutineExceptionHandler { _, exception ->
+        _faqList.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getFaq() = viewModelScope.launch(Dispatchers.IO + faqHandler) {
+        _faqList.postValue(Result.Loading)
+        getFaqUseCase.execute().let {
+            _faqList.postValue(Result.Success(it))
+        }
     }
 
     private val _category = MutableLiveData<Result<MutableList<CategoryModel>>>()

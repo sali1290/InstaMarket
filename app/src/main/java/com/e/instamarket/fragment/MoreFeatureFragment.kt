@@ -15,14 +15,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MoreFeatureFragment : Fragment() {
 
-    private lateinit var binding : FragmentMoreFeatureBinding
+    private lateinit var binding: FragmentMoreFeatureBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentMoreFeatureBinding.inflate(inflater , container , false)
+        binding = FragmentMoreFeatureBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -51,6 +51,11 @@ class MoreFeatureFragment : Fragment() {
 
         binding.buySite.setOnClickListener {
             findNavController().navigate(R.id.sitesFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
+        binding.btnFaq.setOnClickListener {
+            findNavController().navigate(R.id.faqFragment)
             bottomNav.visibility = View.INVISIBLE
         }
 
