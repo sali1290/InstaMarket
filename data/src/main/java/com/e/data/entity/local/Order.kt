@@ -40,7 +40,7 @@ data class Order(
     var apiOrderId: String?,
 
     @Json(name = "uid")
-    var uid: Int?,
+    var uid: String?,
 
     @Json(name = "link")
     var link: String?,
@@ -91,7 +91,7 @@ data class Order(
     var subStatus: String?,
 
     @Json(name = "charge")
-    var charge: Int?,
+    var charge: String?,
 
     @Json(name = "status")
     var status: String?,

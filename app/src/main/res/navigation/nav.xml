@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_luckWheelActivity"
             app:destination="@id/luckWheelActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreFeatureFragment"
@@ -121,4 +124,9 @@
         android:name="com.e.instamarket.fragment.FaqFragment"
         android:label="fragment_faq"
         tools:layout="@layout/fragment_faq" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.e.instamarket.fragment.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
 </navigation>

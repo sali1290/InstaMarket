@@ -52,21 +52,16 @@ class OrderRepoImpl @Inject constructor(
     @Throws(IOException::class)
     override suspend fun getOrders(id: Int): MutableList<OrderModel> {
         lateinit var orderList: MutableList<OrderModel>
-
+        val request = orderRemoteDataSource.getOrderListFromRemote(id.toString())
         if (netWorkHelper.isNetworkConnected()) {
-            if (orderRemoteDataSource.getOrderListFromRemote(id.toString()).isSuccessful &&
-                orderRemoteDataSource.getOrderListFromRemote(
-                    id.toString()
-                ).body() != null
+            if (request.isSuccessful &&
+                request.body() != null
             ) {
                 orderLocalDataSource.deleteOrderFromDB()
-                val response = orderRemoteDataSource.getOrderListFromRemote(id.toString()).body()
-                for (i in 0..response?.size!!) {
-//                    orderLocalDataSource.saveOrderFromDB(response[i])
-                    orderList[i] = response[i].let {
-                        orderMapper.get().toMapper(it)
-                    }
-                }
+                val response = request.body()
+                orderList = response!!.orderList.map {
+                    orderMapper.get().toMapper(it)
+                }.toMutableList()
                 return orderList
             } else {
                 if (orderLocalDataSource.getOrderListFromDB().size > 0) {

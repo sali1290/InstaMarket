@@ -110,8 +110,7 @@ interface ApiService {
     ): Response<OrderRequest>
 
     @POST("order/get")
-    @FormUrlEncoded
-    suspend fun getUserOrders(@Field("id") id: String): Response<MutableList<Order>>
+    suspend fun getUserOrders(@Body id: String): Response<OrderList>
 
 
     //transaction api

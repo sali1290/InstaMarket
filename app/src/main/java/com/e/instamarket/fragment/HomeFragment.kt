@@ -83,6 +83,11 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.luckWheelActivity)
         }
 
+        binding.btnOrderReport.setOnClickListener {
+            findNavController().navigate(R.id.ordersFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
     }
@@ -114,7 +119,7 @@ class HomeFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    Toast.makeText(requireActivity(), it.message , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
 

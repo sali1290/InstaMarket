@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.e.domain.Result
+import com.e.domain.models.OrderModel
 import com.e.domain.models.OrderRequestModel
 import com.e.domain.usecase.orderUseCase.CreateOrderUseCase
 import com.e.domain.usecase.orderUseCase.GetOrderUseCase
@@ -36,8 +37,20 @@ class OrderViewModel @Inject constructor(
             }
         }
 
+    private val _orderList = MutableLiveData<Result<MutableList<OrderModel>>>()
+    val orderList: LiveData<Result<MutableList<OrderModel>>>
+        get() = _orderList
 
+    private val orderListHandler = CoroutineExceptionHandler { _, exception ->
+        _orderList.postValue(exception.message?.let { Result.Error(it) })
+    }
 
+    fun getOrder(id: Int) = viewModelScope.launch(Dispatchers.IO + orderListHandler) {
+        _orderList.postValue(Result.Loading)
+        getOrderUseCase.execute(id).let {
+            _orderList.postValue(Result.Success(it))
+        }
+    }
 
 
 }

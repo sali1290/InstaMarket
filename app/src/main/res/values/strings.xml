@@ -65,4 +65,7 @@
 
     <string name="salb">تذکر: لطفا قبل از خرید سایت ابتدا از پروفایل خود بخش (اطلاعات کاربری) و بخش (اطلاعات دامین) را تکمیل کنید. "سلب مسئولیت"</string>
     <string name="more_info">اطلاعات بیشتر</string>
+    <string name="order_reports">گزارش سفارشات</string>
+    <string name="order_address">آدرس سفارش:</string>
+    <string name="shenase_order">شناسه سفارش:</string>
 </resources>

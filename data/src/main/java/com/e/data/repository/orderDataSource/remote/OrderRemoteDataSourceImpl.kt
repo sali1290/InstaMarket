@@ -2,6 +2,7 @@ package com.e.data.repository.orderDataSource.remote
 
 import com.e.data.api.ApiService
 import com.e.data.api.OrderRequestConverter
+import com.e.data.entity.OrderList
 import com.e.data.entity.OrderRequest
 import com.e.data.entity.local.Order
 import retrofit2.Response
@@ -14,7 +15,7 @@ class OrderRemoteDataSourceImpl @Inject constructor(private val apiService: ApiS
         return apiService.createOrder( orderRequestConverter)
     }
 
-    override suspend fun getOrderListFromRemote(id: String): Response<MutableList<Order>> {
+    override suspend fun getOrderListFromRemote(id: String): Response<OrderList> {
         return apiService.getUserOrders(id)
     }
 }

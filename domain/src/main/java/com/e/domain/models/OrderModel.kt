@@ -4,93 +4,92 @@ data class OrderModel(
 
     var orderId: Int?,
 
-    var apiOrderId: String?,
-
-    var apiProvider_id: Any?,
-
-    var apiResponse: Any?,
-
-    var apiServiceId: Any?,
-
-    var apiSite: Any?,
-
-    var cateId: String?,
-
-    var changed: Any?,
-
-    var charge: Int?,
-
-    var comments: Any?,
-
-    var created: Any?,
-
-    var dripfeedQuantity: String?,
-
-    var finish: Any?,
-
-    var formalCharge: Any?,
-
-    var hashtag: Any?,
-
-    var hashtags: Any?,
-
     var id: Int?,
 
-    var ids: Any?,
+    var ids: String?,
 
-    var interval: String?,
+    var type: String?,
 
-    var isDripFeed: String?,
-
-    var link: String?,
-
-    var media: Any?,
-
-    var note: Any?,
-
-    var profit: Any?,
-
-    var quantity: String?,
-
-    var remains: String?,
-
-    var returnAmount: Any?,
-
-    var returnId: Any?,
-
-    var runs: String?,
+    var cateId: String?,
 
     var serviceId: String?,
 
     var serviceType: String?,
 
-    var start: String?,
+    var apiProvider_id: String?,
+
+    var apiServiceId: String?,
+
+    var apiOrderId: String?,
+
+    var uid: String?,
+
+    var link: String?,
+
+    var quantity: String?,
+
+    var userNames: String?,
+
+    var userName: String?,
+
+    var hashtags: String?,
+
+    var hashtag: String?,
+
+    var media: String?,
+
+    var comments: String?,
+
+    var subPosts: String?,
+
+    var subMin: String?,
+
+    var subMax: String?,
+
+    var subDelay: String?,
+
+    var subexpiry: String?,
+
+    var subResponseOrders: String?,
+
+    var subResponsePosts: String?,
+
+    var subStatus: String?,
+
+    var charge: String?,
 
     var status: String?,
 
-    var subDelay: Any?,
+    var start: String?,
 
-    var subexpiry: Any?,
+    var remains: String?,
 
-    var subMax: Any?,
+    var isDripFeed: String?,
 
-    var subMin: Any?,
+    var runs: String?,
 
-    var subPosts: Any?,
+    var interval: String?,
 
-    var subResponseOrders: Any?,
+    var dripfeedQuantity: String?,
 
-    var subResponsePosts: Any?,
+    var note: String?,
 
-    var subStatus: Any?,
+    var finish: String?,
 
-    var type: String?,
+    var changed: String?,
 
-    var uid: Int?,
+    var created: String?,
 
-    var userName: Any?,
+    var apiSite: String?,
 
-    var userNames: Any?
+    var formalCharge: String?,
 
+    var profit: String?,
 
-)
+    var returnAmount: String?,
+
+    var returnId: String?,
+
+    var apiResponse: String?,
+
+    )
