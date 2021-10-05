@@ -81,6 +81,15 @@ interface ApiService {
     @POST("general/news")
     suspend fun getNews(): Response<NewsList>
 
+    @POST("general/about_us")
+    suspend fun aboutUs(): Response<AboutUsResult>
+
+    @POST("general/rules")
+    suspend fun rules(): Response<AboutUsResult>
+
+    @POST("general/contact_us")
+    suspend fun contactUs(): Response<AboutUsResult>
+
 
     //user api
     @POST("user/update")

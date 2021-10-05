@@ -98,6 +98,7 @@
                     app:cardCornerRadius="10dp">
 
                     <LinearLayout
+                        android:id="@+id/btn_rule"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
@@ -267,6 +268,7 @@
                     app:cardCornerRadius="10dp">
 
                     <LinearLayout
+                        android:id="@+id/btn_contact_us"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
@@ -297,6 +299,7 @@
                     app:cardCornerRadius="10dp">
 
                     <LinearLayout
+                        android:id="@+id/btn_about_us"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">

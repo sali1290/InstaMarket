@@ -49,6 +49,15 @@
         <action
             android:id="@+id/action_moreFeatureFragment_to_faqFragment"
             app:destination="@id/faqFragment" />
+        <action
+            android:id="@+id/action_moreFeatureFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_moreFeatureFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment" />
+        <action
+            android:id="@+id/action_moreFeatureFragment_to_ruleFragment"
+            app:destination="@id/ruleFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -129,4 +138,19 @@
         android:name="com.e.instamarket.fragment.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.e.instamarket.fragment.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.e.instamarket.fragment.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/ruleFragment"
+        android:name="com.e.instamarket.fragment.RuleFragment"
+        android:label="fragment_rule"
+        tools:layout="@layout/fragment_rule" />
 </navigation>

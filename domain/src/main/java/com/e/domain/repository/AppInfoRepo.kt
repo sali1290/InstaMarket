@@ -20,4 +20,10 @@ interface AppInfoRepo {
 
     suspend fun getSite(): MutableList<SiteModel>
 
+    suspend fun getAboutUs(): AboutUsModel
+
+    suspend fun getRules(): AboutUsModel
+
+    suspend fun getContactUs(): AboutUsModel
+
 }

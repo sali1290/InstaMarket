@@ -40,4 +40,16 @@ class AppInfoRemoteDataSourceImpl @Inject constructor(
     override suspend fun getNewsFromRemote(): Response<NewsList> {
         return apiService.getNews()
     }
+
+    override suspend fun getAboutUsFromRemote(): Response<AboutUsResult> {
+        return apiService.aboutUs()
+    }
+
+    override suspend fun getRulesFromRemote(): Response<AboutUsResult> {
+        return apiService.rules()
+    }
+
+    override suspend fun getContactUsFromRemote(): Response<AboutUsResult> {
+        return apiService.contactUs()
+    }
 }

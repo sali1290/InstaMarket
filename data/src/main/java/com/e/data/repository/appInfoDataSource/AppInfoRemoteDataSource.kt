@@ -1,7 +1,6 @@
 package com.e.data.repository.appInfoDataSource
 
 import com.e.data.entity.*
-import com.e.data.entity.remote.*
 import retrofit2.Response
 
 interface AppInfoRemoteDataSource {
@@ -22,5 +21,10 @@ interface AppInfoRemoteDataSource {
 
     suspend fun getNewsFromRemote(): Response<NewsList>
 
+    suspend fun getAboutUsFromRemote(): Response<AboutUsResult>
+
+    suspend fun getRulesFromRemote(): Response<AboutUsResult>
+
+    suspend fun getContactUsFromRemote(): Response<AboutUsResult>
 
 }

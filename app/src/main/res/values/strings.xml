@@ -68,4 +68,6 @@
     <string name="order_reports">گزارش سفارشات</string>
     <string name="order_address">آدرس سفارش:</string>
     <string name="shenase_order">شناسه سفارش:</string>
+    <string name="rules">قوانین</string>
+    <string name="contact_us">تماس با ما</string>
 </resources>

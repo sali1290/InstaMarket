@@ -28,9 +28,11 @@
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/edit_prodile_buttons.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/edit_profile_image_item.xml" value="0.264" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/enter_app_view_pager.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_about_us.xml" value="0.24010416666666667" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_agent.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_api.xml" value="0.24010416666666667" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_category.xml" value="0.21516754850088182" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_contact_us.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_dashboard.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_edit_profile.xml" value="0.264" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_enter.xml" value="0.25416666666666665" />
@@ -47,6 +49,7 @@
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_orders.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_register.xml" value="0.264" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_rule.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_sites.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_transaction.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_viewPager.xml" value="0.25416666666666665" />

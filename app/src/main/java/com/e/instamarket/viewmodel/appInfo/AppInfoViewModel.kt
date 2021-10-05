@@ -20,7 +20,10 @@ class AppInfoViewModel @Inject constructor(
     private val getFaqUseCase: GetFaqUseCase,
     private val getNewsUseCase: GetNewsUseCase,
     private val getServiceUseCase: GetServiceUseCase,
-    private val getSiteUseCase: GetSiteUseCase
+    private val getSiteUseCase: GetSiteUseCase,
+    private val getAboutUsUseCase: GetAboutUsUseCase,
+    private val getRulesUseCase: GetRulesUseCase,
+    private val getContactUsUseCase: GetContactUsUseCase
 ) : ViewModel() {
 
     private val _news = MutableLiveData<Result<MutableList<NewsModel>>>()
@@ -142,5 +145,49 @@ class AppInfoViewModel @Inject constructor(
             _service.postValue(Result.Success(it))
         }
     }
+
+
+    private val _aboutUs = MutableLiveData<Result<AboutUsModel>>()
+    val aboutUs: LiveData<Result<AboutUsModel>>
+        get() = _aboutUs
+    private val aboutUsHandler = CoroutineExceptionHandler { _, exception ->
+        _aboutUs.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getAboutUs() = viewModelScope.launch(Dispatchers.IO + aboutUsHandler) {
+        _aboutUs.postValue(Result.Loading)
+        getAboutUsUseCase.execute().let {
+            _aboutUs.postValue(Result.Success(it))
+        }
+    }
+
+    private val _rules = MutableLiveData<Result<AboutUsModel>>()
+    val rules: LiveData<Result<AboutUsModel>>
+        get() = _rules
+    private val rulesHandler = CoroutineExceptionHandler { _, exception ->
+        _rules.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getRules() = viewModelScope.launch(Dispatchers.IO + rulesHandler) {
+        _rules.postValue(Result.Loading)
+        getRulesUseCase.execute().let {
+            _rules.postValue(Result.Success(it))
+        }
+    }
+
+    private val _contactUs = MutableLiveData<Result<AboutUsModel>>()
+    val contactUs: LiveData<Result<AboutUsModel>>
+        get() = _contactUs
+    private val contactUsHandler = CoroutineExceptionHandler { _, exception ->
+        _contactUs.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getContactUs() = viewModelScope.launch(Dispatchers.IO + contactUsHandler) {
+        _contactUs.postValue(Result.Loading)
+        getContactUsUseCase.execute().let {
+            _contactUs.postValue(Result.Success(it))
+        }
+    }
+
 
 }

@@ -19,6 +19,7 @@ class AppInfoRepoImpl @Inject constructor(
     private val newsMapper: dagger.Lazy<NewsMapper>,
     private val serviceMapper: dagger.Lazy<ServiceMapper>,
     private val siteMapper: dagger.Lazy<SiteMapper>,
+    private val aboutUsMapper: dagger.Lazy<AboutUsMapper>,
     private val appInfoRemoteDataSource: AppInfoRemoteDataSource,
     private val netWorkHelper: NetWorkHelper,
 ) : AppInfoRepo {
@@ -174,6 +175,54 @@ class AppInfoRepoImpl @Inject constructor(
                     siteMapper.get().toMapper(it)
                 }.toMutableList()
                 return siteList
+            } else {
+                throw IOException("Server is Not Responding")
+            }
+        } else {
+            throw IOException("No Internet Connection")
+        }
+    }
+
+    @Throws(IOException::class)
+    override suspend fun getAboutUs(): AboutUsModel {
+        lateinit var aboutUs: AboutUsModel
+        val request = appInfoRemoteDataSource.getAboutUsFromRemote()
+        if (netWorkHelper.isNetworkConnected()) {
+            if (request.isSuccessful && request.body() != null) {
+                aboutUs = aboutUsMapper.get().toMapper(request.body()!!)
+                return aboutUs
+            } else {
+                throw IOException("Server is Not Responding")
+            }
+        } else {
+            throw IOException("No Internet Connection")
+        }
+    }
+
+    @Throws(IOException::class)
+    override suspend fun getRules(): AboutUsModel {
+        lateinit var rules: AboutUsModel
+        val request = appInfoRemoteDataSource.getRulesFromRemote()
+        if (netWorkHelper.isNetworkConnected()) {
+            if (request.isSuccessful && request.body() != null) {
+                rules = aboutUsMapper.get().toMapper(request.body()!!)
+                return rules
+            } else {
+                throw IOException("Server is Not Responding")
+            }
+        } else {
+            throw IOException("No Internet Connection")
+        }
+    }
+
+    @Throws(IOException::class)
+    override suspend fun getContactUs(): AboutUsModel {
+        lateinit var contactUs: AboutUsModel
+        val request = appInfoRemoteDataSource.getContactUsFromRemote()
+        if (netWorkHelper.isNetworkConnected()) {
+            if (request.isSuccessful && request.body() != null) {
+                contactUs = aboutUsMapper.get().toMapper(request.body()!!)
+                return contactUs
             } else {
                 throw IOException("Server is Not Responding")
             }
