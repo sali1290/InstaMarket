@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,8 @@ import com.e.instamarket.databinding.FragmentHomeBinding
 import com.e.instamarket.viewmodel.user.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.fragment.app.FragmentActivity
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -45,14 +49,56 @@ class HomeFragment : Fragment() {
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.profile -> {
+
+                    requireActivity().onBackPressedDispatcher.addCallback(
+                        requireActivity(),
+                        object : OnBackPressedCallback(true) {
+                            override fun handleOnBackPressed() {
+                                if (bottomNav.selectedItemId == R.id.profile) {
+                                    bottomNav.selectedItemId = R.id.home
+                                } else {
+                                    isEnabled = false
+                                    requireActivity().onBackPressed()
+                                }
+                            }
+                        })
+
                     findNavController().navigate(R.id.profileFragment)
                     return@setOnItemSelectedListener true
                 }
                 R.id.home -> {
+
+                    requireActivity().onBackPressedDispatcher.addCallback(
+                        requireActivity(),
+                        object : OnBackPressedCallback(true) {
+                            override fun handleOnBackPressed() {
+                                if (bottomNav.selectedItemId == R.id.home) {
+                                    requireActivity().finish()
+                                } else {
+                                    isEnabled = false
+                                    requireActivity().onBackPressed()
+                                }
+                            }
+                        })
+
                     findNavController().navigate(R.id.homeFragment)
                     return@setOnItemSelectedListener true
                 }
                 R.id.more -> {
+
+                    requireActivity().onBackPressedDispatcher.addCallback(
+                        requireActivity(),
+                        object : OnBackPressedCallback(true) {
+                            override fun handleOnBackPressed() {
+                                if (bottomNav.selectedItemId == R.id.more) {
+                                    bottomNav.selectedItemId = R.id.home
+                                } else {
+                                    isEnabled = false
+                                    requireActivity().onBackPressed()
+                                }
+                            }
+                        })
+
                     findNavController().navigate(R.id.moreFeatureFragment)
                     return@setOnItemSelectedListener true
                 }
@@ -70,11 +116,13 @@ class HomeFragment : Fragment() {
         observeUser()
 
         binding.btnCategory.setOnClickListener {
+            bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.categoryFragment)
             bottomNav.visibility = View.INVISIBLE
         }
 
         binding.btnTransaction.setOnClickListener {
+            bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.transactionFragment)
             bottomNav.visibility = View.INVISIBLE
         }
@@ -84,6 +132,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnOrderReport.setOnClickListener {
+            bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.ordersFragment)
             bottomNav.visibility = View.INVISIBLE
         }
