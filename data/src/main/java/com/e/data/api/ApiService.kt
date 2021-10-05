@@ -1,7 +1,6 @@
 package com.e.data.api
 
 import com.e.data.entity.*
-import com.e.data.entity.local.Order
 import com.e.data.entity.local.Ticket
 import retrofit2.Response
 import retrofit2.http.*
@@ -47,12 +46,11 @@ interface ApiService {
     suspend fun getLuckSlice(): Response<LuckSliceList>
 
     @POST("luck/check")
-    suspend fun checkUserLuck(@Header("Authorization") accessToken: String): Response<Boolean>
+    suspend fun checkUserLuck(): Response<Boolean>
 
     @POST("luck/store")
     suspend fun createLuck(
-        @Header("Authorization") accessToken: String,
-        @Body coin: String
+        @Body coinRequest: CoinRequest
     ): Response<LuckRequest>
 
 

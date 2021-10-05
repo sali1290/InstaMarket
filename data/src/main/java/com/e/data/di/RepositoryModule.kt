@@ -7,8 +7,6 @@ import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
 import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSourceImpl
 import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSource
 import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSourceImpl
-import com.e.data.repository.luckWheelDataSource.local.LuckWheelLocalDataSource
-import com.e.data.repository.luckWheelDataSource.local.LuckWheelLocalDataSourceImpl
 import com.e.data.repository.luckWheelDataSource.remote.LuckWheelRemoteDataSource
 import com.e.data.repository.luckWheelDataSource.remote.LuckWheelRemoteDataSourceImpl
 import com.e.data.repository.orderDataSource.local.OrderLocalDataSource
@@ -92,11 +90,6 @@ abstract class RepositoryModule {
     abstract fun bindLuckWheelRemoteDataSource(
         luckWheelRemoteDataSourceImpl: LuckWheelRemoteDataSourceImpl
     ): LuckWheelRemoteDataSource
-
-    @Binds
-    abstract fun bindLuckWheelLocalDataSource(
-        luckWheelLocalDataSourceImpl: LuckWheelLocalDataSourceImpl
-    ): LuckWheelLocalDataSource
 
     @Binds
     abstract fun bindOrderRemoteDataSource(

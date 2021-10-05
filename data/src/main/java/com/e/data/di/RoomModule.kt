@@ -29,10 +29,6 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun provideLuckRequestDao(db: AppDatabase) = db.luckRequestDao()
-
-    @Singleton
-    @Provides
     fun provideTicketRequestDao(db: AppDatabase) = db.ticketRequestDao()
 
     @Singleton

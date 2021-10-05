@@ -6,6 +6,7 @@ import com.e.domain.usecase.luckUseCase.LuckWheelUseCase
 import com.e.domain.usecase.luckUseCase.UserLuckUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.e.domain.Result
+import com.e.domain.models.LuckRequestModel
 import com.e.domain.models.LuckSliceModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -27,23 +28,46 @@ class LuckViewModel @Inject constructor(
         _luckSliceList.postValue(exception.message?.let { Result.Error(it) })
     }
 
-    fun setLuckWheel() = viewModelScope.launch(Dispatchers.IO+handler) {
+    fun setLuckWheel() = viewModelScope.launch(Dispatchers.IO + handler) {
         _luckSliceList.postValue(Result.Loading)
-        luckWheelUseCase.execute().let{
+        luckWheelUseCase.execute().let {
             _luckSliceList.postValue(Result.Success(it))
         }
     }
 
 
-    fun haveLuck() = liveData {
-        val haveLuck = haveChanceUseCase.execute()
-        emit(haveLuck)
+    private val _luck = MutableLiveData<Result<Boolean>>()
+    val luck: LiveData<Result<Boolean>>
+        get() = _luck
+
+    private val luckHandler = CoroutineExceptionHandler { _, exception ->
+        _luck.postValue(exception.message?.let { Result.Error(it) })
     }
 
-    fun userLuck(coin: String) = liveData {
-        val userLuck = userLuckUseCase.execute(coin)
-        emit(userLuck)
+    fun haveLuck() = viewModelScope.launch(Dispatchers.IO + luckHandler) {
+        _luck.postValue(Result.Loading)
+        haveChanceUseCase.execute().let {
+            _luck.postValue(Result.Success(it))
+        }
+
     }
+
+    private val _luckResponse = MutableLiveData<Result<LuckRequestModel>>()
+    val luckResponse: LiveData<Result<LuckRequestModel>>
+        get() = _luckResponse
+
+    private val luckResponseHandler = CoroutineExceptionHandler { _, exception ->
+        _luckResponse.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getLuckResponse(coin: String) =
+        viewModelScope.launch(Dispatchers.IO + luckResponseHandler) {
+            _luckResponse.postValue(Result.Loading)
+            userLuckUseCase.execute(coin).let {
+                _luckResponse.postValue(Result.Success(it))
+            }
+
+        }
 
 
 }

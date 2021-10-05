@@ -6,7 +6,7 @@ import com.e.domain.models.LuckRequestModel
 import com.e.domain.models.ServiceModel
 import javax.inject.Inject
 
-class LuckRequestMapper @Inject constructor(){
+class LuckRequestMapper @Inject constructor() {
     fun toMapper(agents: LuckRequest): LuckRequestModel {
         return LuckRequestModel(
             agents.result ?: true,

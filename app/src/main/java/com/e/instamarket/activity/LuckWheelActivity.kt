@@ -11,6 +11,7 @@ import com.e.instamarket.R
 import com.e.instamarket.adapter.LuckWheelAdapter
 import com.e.instamarket.adapter.MenuItemData
 import com.e.instamarket.viewmodel.luck.LuckViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import github.hellocsl.cursorwheel.CursorWheelLayout
 import kotlin.random.Random
@@ -24,18 +25,33 @@ class LuckWheelActivity : AppCompatActivity() {
     private lateinit var wheelButton: Button
     private lateinit var adapter: LuckWheelAdapter
 
+    var number = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_luck_wheel)
 
-
         viewModel = ViewModelProvider(this).get(LuckViewModel::class.java)
+        wheelText = findViewById(R.id.wheel_text)
+        wheelButton = findViewById(R.id.btn_lucky_wheel)
+
+        //get slices
         viewModel.setLuckWheel()
-        initViews()
         loadData()
-        observe()
+        observeLuckSlice()
 
+        //check user luck
+        viewModel.haveLuck()
+        wheelButton.isClickable = observeUserLuck()
 
+        if (!observeUserLuck()) {
+            Snackbar.make(
+                wheelButton,
+                "امروز شانسی ندارید!! بعدا امتحان کنید",
+                Snackbar.LENGTH_LONG
+            )
+                .show()
+        }
     }
 
 
@@ -47,13 +63,7 @@ class LuckWheelActivity : AppCompatActivity() {
 
     }
 
-
-    private fun initViews() {
-        wheelText = findViewById(R.id.wheel_text)
-        wheelButton = findViewById(R.id.btn_lucky_wheel)
-    }
-
-    private fun observe() {
+    private fun observeLuckSlice() {
         viewModel.luckSliceList.observe({ lifecycle }, {
 
             when (it) {
@@ -67,38 +77,83 @@ class LuckWheelActivity : AppCompatActivity() {
                     adapter = LuckWheelAdapter(textList, baseContext)
                     wheelText.setAdapter(adapter)
                     wheelText.setOnMenuSelectedListener { parent, view, pos ->
-                        Toast.makeText(this, textList[pos].mTitle, Toast.LENGTH_SHORT)
-                            .show()
+                        if (number == 1) {
+                            Snackbar.make(wheelButton, textList[pos].mTitle, Snackbar.LENGTH_LONG)
+                                .show()
+                            viewModel.getLuckResponse(textList[pos].mTitle.substringBefore("تومان"))
+                            observeLuckResponse()
+                        }
                     }
 
-                    wheelButton.setOnClickListener {
-                        var index: Int = Random.nextInt(textList.size)
-                        wheelText.startAnimation(
-                            AnimationUtils.loadAnimation(
-                                this,
-                                R.anim.rotate_anim
+                    if (wheelButton.isClickable) {
+                        wheelButton.setOnClickListener {
+                            number++
+                            var index: Int = Random.nextInt(textList.size)
+                            wheelText.startAnimation(
+                                AnimationUtils.loadAnimation(
+                                    this,
+                                    R.anim.rotate_anim
+                                )
                             )
-                        )
-                        while (index == textList.size - 1) {
-                            index = Random.nextInt(textList.size)
+                            while (index == textList.size - 1) {
+                                index = Random.nextInt(textList.size)
+                            }
+                            wheelText.setSelection(index)
                         }
-                        wheelText.setSelection(index)
                     }
 
                 }
 
                 is Result.Loading -> {
-                    Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Result.Error -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
-
-
             }
 
 
         })
     }
+
+    private fun observeUserLuck(): Boolean {
+        var answer = false
+        viewModel.luck.observe({ lifecycle }, {
+
+            when (it) {
+                is Result.Success -> {
+                    answer = it.data
+                }
+
+                is Result.Loading -> {
+                }
+
+                is Result.Error -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    answer = false
+                }
+            }
+        })
+        return answer
+    }
+
+    private fun observeLuckResponse() {
+        viewModel.luckResponse.observe({ lifecycle }, {
+
+            when (it) {
+                is Result.Success -> {
+                    Snackbar.make(wheelButton, it.data.message!! + "", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+
+                is Result.Loading -> {
+                }
+
+                is Result.Error -> {
+                }
+            }
+        })
+    }
+
 
 }

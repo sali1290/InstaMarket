@@ -1,15 +1,13 @@
 package com.e.domain.models
 
-import java.util.*
-
 
 data class LuckUserModel(
 
-    var id: Int?,
+    var date: String?,
 
     var coin: String?,
 
-    var date: Date?,
+    var id: Int?,
 
     var user_id: Int?
 )

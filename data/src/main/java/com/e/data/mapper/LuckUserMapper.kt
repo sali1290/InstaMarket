@@ -10,10 +10,10 @@ import javax.inject.Inject
 class LuckUserMapper @Inject constructor(){
     fun toMapper(agents: LuckUser): LuckUserModel {
         return LuckUserModel(
-            agents.id ?: 0,
+            agents.date ?: "",
             agents.coin ?: "",
-            agents.date ?: Date(),
-            agents.user_id ?: 0,
+            agents.id ?: 0,
+            agents.uid ?: 0,
         )
     }
 }
