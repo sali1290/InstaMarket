@@ -7,25 +7,26 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.e.domain.Result
 import com.e.instamarket.R
 import com.e.instamarket.adapter.ImageSliderAdapter
 import com.e.instamarket.databinding.FragmentHomeBinding
+import com.e.instamarket.viewmodel.enterApp.EnterAppViewModel
 import com.e.instamarket.viewmodel.user.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.fragment.app.FragmentActivity
 
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: UserViewModel
+    private lateinit var viewModel: EnterAppViewModel
+    private lateinit var userViewModel: UserViewModel
 //    private lateinit var bannerViewModel: AppInfoViewModel
 
 
@@ -35,7 +36,8 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(EnterAppViewModel::class.java)
+        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 //        bannerViewModel = ViewModelProvider(requireActivity()).get(AppInfoViewModel::class.java)
         return binding.root
     }
@@ -142,22 +144,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeUser() {
-        viewModel.user.observe(viewLifecycleOwner, {
+        viewModel.user.observe(viewLifecycleOwner, { it ->
 
             when (it) {
 
                 is Result.Success -> {
-
                     binding.progressBar.visibility = View.INVISIBLE
                     val role = it.data.role
-
                     if (role == "admin") {
                         binding.textView5.text = "مدیر"
                     } else {
                         binding.textView5.text = "کاربر"
                     }
-
-
                     binding.textView10.text = it.data.firstName + " " + it.data.lastName
                     binding.textView31.text = it.data.balance
 
@@ -168,14 +166,38 @@ class HomeFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                    userViewModel.getUser()
+                    userViewModel.user.observe(viewLifecycleOwner, {
+                        when (it) {
+                            is Result.Success -> {
+                                binding.progressBar.visibility = View.INVISIBLE
+                                val role = it.data.role
+                                if (role == "admin") {
+                                    binding.textView5.text = "مدیر"
+                                } else {
+                                    binding.textView5.text = "کاربر"
+                                }
+                                binding.textView10.text = it.data.firstName + " " + it.data.lastName
+                                binding.textView31.text = it.data.balance
+                            }
+                            is Result.Loading -> {
+                            }
+                            is Result.Error -> {
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "لطفا اتصال اینترنت خود را بررسی کنید",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    })
+
                 }
             }
-
         })
-
-
     }
+
 
 //    private fun observeBanner() {
 //        bannerViewModel.banner.observe(viewLifecycleOwner, {

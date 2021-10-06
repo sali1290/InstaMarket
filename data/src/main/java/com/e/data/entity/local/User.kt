@@ -31,7 +31,7 @@ data class User(
     @Json(name = "email")
     var email : String?,
 
-    @Json(name = "user_name")
+    @Json(name = "username")
     var userName : String?,
 
     @Json(name = "phone")

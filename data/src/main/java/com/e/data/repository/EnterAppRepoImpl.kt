@@ -5,12 +5,14 @@ import com.e.data.api.LoginTypeConverter
 import com.e.data.api.RegisterRequest
 import com.e.data.api.RegisterTypeConverter
 import com.e.data.mapper.TokenMapper
+import com.e.data.mapper.UserMapper
 import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
 import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSource
 import com.e.data.repository.userDataSource.local.UserLocalDataSource
 import com.e.data.utile.NetWorkHelper
 import com.e.data.utile.SessionManager
 import com.e.domain.models.TokenModel
+import com.e.domain.models.UserModel
 import com.e.domain.repository.EnterAppRepo
 import java.io.IOException
 import javax.inject.Inject
@@ -21,6 +23,7 @@ class EnterAppRepoImpl @Inject constructor(
     private val userLocalDataSource: UserLocalDataSource,
     private val netWorkHelper: NetWorkHelper,
     private val tokenMapper: dagger.Lazy<TokenMapper>,
+    private val userMapper: dagger.Lazy<UserMapper>,
     private val sessionManager: SessionManager
 
 ) : EnterAppRepo {
@@ -38,7 +41,6 @@ class EnterAppRepoImpl @Inject constructor(
                 token = request.body().let {
                     tokenMapper.get().toMapper(it!!)
                 }
-                userLocalDataSource.saveUserFromDB(request.body()?.user!!)
                 return token
             } else {
                 throw IOException("Server is Not Responding")
@@ -93,15 +95,29 @@ class EnterAppRepoImpl @Inject constructor(
 
     //not complete
     @Throws(IOException::class)
-    override suspend fun getUserFromLogin(
-        email: String,
-        phone: String,
-        type: String,
-        description: String,
-        username: String,
-        password: String
-    ): String {
-        return ""
+    override suspend fun getUserFromLogin(): UserModel {
+        lateinit var user: UserModel
+        val request = enterAppRemoteDataSource.getUserFromRemote()
+        if (netWorkHelper.isNetworkConnected()) {
+            if (request.isSuccessful && request.body() != null) {
+                val response = request.body()
+                user = response.let {
+                    userMapper.get().toMapper(it!!)
+                }
+                userLocalDataSource.saveUserFromDB(response!!)
+                return user
+            } else {
+                user = userLocalDataSource.getUserFromDB().let {
+                    userMapper.get().toMapper(it)
+                }
+                return user
+            }
+        } else {
+            user = userLocalDataSource.getUserFromDB().let {
+                userMapper.get().toMapper(it)
+            }
+            return user
+        }
     }
 
     @Throws(IOException::class)

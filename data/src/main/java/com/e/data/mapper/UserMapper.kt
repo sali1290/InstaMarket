@@ -1,8 +1,6 @@
 package com.e.data.mapper
 
 import com.e.data.entity.local.User
-import com.e.data.entity.remote.Service
-import com.e.domain.models.ServiceModel
 import com.e.domain.models.UserModel
 import javax.inject.Inject
 

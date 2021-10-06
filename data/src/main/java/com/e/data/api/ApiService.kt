@@ -2,6 +2,7 @@ package com.e.data.api
 
 import com.e.data.entity.*
 import com.e.data.entity.local.Ticket
+import com.e.data.entity.local.User
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -19,15 +20,7 @@ interface ApiService {
     ): Response<Token>
 
     @POST("auth/user")
-    @FormUrlEncoded
-    suspend fun getUser(
-        @Field("email") email: String,
-        @Field("phone") phone: String,
-        @Field("first_name") firstName: String,
-        @Field("last_name") lastName: String,
-        @Field("user_name") userName: String,
-        @Field("password") password: String
-    ): Response<String>
+    suspend fun getUser(): Response<User>
 
     @POST("auth/logout")
     @FormUrlEncoded
