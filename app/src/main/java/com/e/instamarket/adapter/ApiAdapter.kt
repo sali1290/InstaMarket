@@ -1,22 +1,19 @@
 package com.e.instamarket.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.SpinnerAdapter
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.e.domain.models.ApiModel
 import com.e.instamarket.R
 
-class ApiAdapter(private val apiList: MutableList<ApiModel>, private val context: Context) :
+class ApiAdapter(private val apiList: MutableList<ApiModel>) :
     RecyclerView.Adapter<ApiAdapter.ApiViewHolder>() {
 
     inner class ApiViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val button: Button = itemView.findViewById(R.id.api_title)
+        val title: TextView = itemView.findViewById(R.id.api_title)
+        val code: TextView = itemView.findViewById(R.id.api_code)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApiViewHolder {
@@ -25,18 +22,10 @@ class ApiAdapter(private val apiList: MutableList<ApiModel>, private val context
     }
 
     override fun onBindViewHolder(holder: ApiViewHolder, position: Int) {
-        val name = apiList[position].name
-        val key = apiList[position].key
-        holder.button.text = apiList[position].name
-        holder.button.setOnClickListener {
-            if (holder.button.text == name) {
-                holder.button.text = key
-            } else {
-                holder.button.text = name
-            }
-        }
-    }
+        holder.code.text = apiList[position].key
+        holder.title.text = apiList[position].name
 
+        }
 
     override fun getItemCount(): Int = apiList.size
 

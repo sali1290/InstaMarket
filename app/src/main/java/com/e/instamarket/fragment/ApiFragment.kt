@@ -11,7 +11,6 @@ import com.e.domain.Result
 import com.e.instamarket.adapter.ApiAdapter
 import com.e.instamarket.databinding.FragmentApiBinding
 import com.e.instamarket.viewmodel.appInfo.AppInfoViewModel
-import okhttp3.internal.notify
 
 
 class ApiFragment : Fragment() {
@@ -46,7 +45,7 @@ class ApiFragment : Fragment() {
 
             when (it) {
                 is Result.Success -> {
-                    binding.apiRecycler.adapter = ApiAdapter(it.data, requireContext())
+                    binding.apiRecycler.adapter = ApiAdapter(it.data)
                 }
 
                 is Result.Loading -> {
