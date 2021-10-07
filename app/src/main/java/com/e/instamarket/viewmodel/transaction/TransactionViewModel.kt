@@ -33,10 +33,20 @@ class TransactionViewModel @Inject constructor(
     }
 
 
-    fun createTransaction(amount: String, type: String) = liveData {
-        val transaction = createTransactionsUseCase.execute(amount, type)
-        emit(transaction)
+    private val _createRequest = MutableLiveData<Result<String>>()
+    val createRequest: LiveData<Result<String>>
+        get() = _createRequest
+    private val createTransactionHandler = CoroutineExceptionHandler { _, exception ->
+        _createRequest.postValue(exception.message?.let { Result.Error(it) })
     }
+
+    fun createTransaction(amount: String, type: String) =
+        viewModelScope.launch(Dispatchers.IO + createTransactionHandler) {
+            _createRequest.postValue(Result.Loading)
+            createTransactionsUseCase.execute(amount, type).let {
+                _createRequest.postValue(Result.Success(it!!))
+            }
+        }
 
 
 }

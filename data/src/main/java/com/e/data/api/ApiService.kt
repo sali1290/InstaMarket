@@ -115,11 +115,9 @@ interface ApiService {
 
     //transaction api
     @POST("transaction/create")
-    @FormUrlEncoded
     suspend fun createTransaction(
-        @Field("amount") amount: String,
-        @Field("type") type: String
-    ): Response<String>
+        @Body createTransactionRequest: CreateTransactionRequest
+    ): Response<TransactionLink>
 
     @POST("transaction/get")
     suspend fun getUserTransaction(

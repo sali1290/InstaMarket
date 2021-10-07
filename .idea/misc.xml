@@ -18,6 +18,7 @@
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/ic_more_background.xml" value="0.2703125" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/ic_profile.xml" value="0.2703125" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/ic_profile_background.xml" value="0.26615384615384613" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/ic_zarinpal.xml" value="0.24259259259259258" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/image_background.xml" value="0.2703125" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/inactive_dot_viewpager.xml" value="0.2703125" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/drawable/ok_button_background.xml" value="0.2703125" />
@@ -48,6 +49,7 @@
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_order.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_orders.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_raise_stock.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_rule.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/InstaMarket/app/src/main/res/layout/fragment_sites.xml" value="0.25416666666666665" />

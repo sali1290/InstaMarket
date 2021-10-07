@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_homeFragment_to_ordersFragment"
             app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_raiseStockFragment"
+            app:destination="@id/raiseStockFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreFeatureFragment"
@@ -153,4 +156,9 @@
         android:name="com.e.instamarket.fragment.RuleFragment"
         android:label="fragment_rule"
         tools:layout="@layout/fragment_rule" />
+    <fragment
+        android:id="@+id/raiseStockFragment"
+        android:name="com.e.instamarket.fragment.RaiseStockFragment"
+        android:label="fragment_raise_stock"
+        tools:layout="@layout/fragment_raise_stock" />
 </navigation>

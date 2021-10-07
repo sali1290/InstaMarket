@@ -1,16 +1,16 @@
 package com.e.data.repository.transactionDataSource.remote
 
+import com.e.data.api.CreateTransactionRequest
 import com.e.data.api.TransactionRequest
+import com.e.data.entity.TransactionLink
 import com.e.data.entity.TransactionList
-import com.e.data.entity.remote.Transaction
 import retrofit2.Response
 
 interface TransactionRemoteDataSource {
 
     suspend fun createTransactionFromRemote(
-        amount: String,
-        type: String
-    ): Response<String>
+        createTransactionRequest: CreateTransactionRequest
+    ): Response<TransactionLink>
 
     suspend fun getUserTransactionFromRemote(
         transactionRequest: TransactionRequest

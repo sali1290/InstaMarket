@@ -8,7 +8,6 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.e.domain.Result
@@ -136,6 +135,18 @@ class HomeFragment : Fragment() {
         binding.btnOrderReport.setOnClickListener {
             bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.ordersFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
+        binding.btnRaiseStock.setOnClickListener {
+            bottomNav.selectedItemId = R.id.profile
+            findNavController().navigate(R.id.raiseStockFragment)
+            bottomNav.visibility = View.INVISIBLE
+        }
+
+        binding.btnPay.setOnClickListener {
+            bottomNav.selectedItemId = R.id.profile
+            findNavController().navigate(R.id.transactionFragment)
             bottomNav.visibility = View.INVISIBLE
         }
 
