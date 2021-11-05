@@ -2,6 +2,7 @@ package com.e.data.repository.enterAppDataSource.remote
 
 import com.e.data.api.LoginRequest
 import com.e.data.api.RegisterRequest
+import com.e.data.entity.RegisterResponse
 import com.e.data.entity.Token
 import com.e.data.entity.local.User
 import retrofit2.Response
@@ -15,7 +16,7 @@ interface EnterAppRemoteDataSource {
 
     suspend fun registerFromRemote(
         registerRequest: RegisterRequest
-    ): Response<Token>
+    ): Response<RegisterResponse>
 
     suspend fun getUserFromRemote(
     ): Response<User>

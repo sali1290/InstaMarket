@@ -17,7 +17,7 @@ interface EnterAppRepo {
         username: String,
         password: String,
         confirmPassword: String
-    ): TokenModel
+    ): RegisterResponseModel
 
     suspend fun getUserFromLogin(): UserModel
 

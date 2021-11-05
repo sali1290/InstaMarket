@@ -4,6 +4,7 @@ import com.e.data.api.LoginRequest
 import com.e.data.api.LoginTypeConverter
 import com.e.data.api.RegisterRequest
 import com.e.data.api.RegisterTypeConverter
+import com.e.data.mapper.RegisterResponseMapper
 import com.e.data.mapper.TokenMapper
 import com.e.data.mapper.UserMapper
 import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
@@ -11,6 +12,7 @@ import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSource
 import com.e.data.repository.userDataSource.local.UserLocalDataSource
 import com.e.data.utile.NetWorkHelper
 import com.e.data.utile.SessionManager
+import com.e.domain.models.RegisterResponseModel
 import com.e.domain.models.TokenModel
 import com.e.domain.models.UserModel
 import com.e.domain.repository.EnterAppRepo
@@ -24,6 +26,7 @@ class EnterAppRepoImpl @Inject constructor(
     private val netWorkHelper: NetWorkHelper,
     private val tokenMapper: dagger.Lazy<TokenMapper>,
     private val userMapper: dagger.Lazy<UserMapper>,
+    private val registerResponseMapper: dagger.Lazy<RegisterResponseMapper>,
     private val sessionManager: SessionManager
 
 ) : EnterAppRepo {
@@ -59,30 +62,25 @@ class EnterAppRepoImpl @Inject constructor(
         username: String,
         password: String,
         confirmPassword: String
-    ): TokenModel {
-        lateinit var token: TokenModel
+    ): RegisterResponseModel {
+        lateinit var token: RegisterResponseModel
         val registerRequest: RegisterRequest = RegisterTypeConverter().converter(
             email,
             phone,
             firstName,
             lastName,
             username,
-            password
+            password,
+            confirmPassword
         )
+        val request = enterAppRemoteDataSource.registerFromRemote(registerRequest)
         if (netWorkHelper.isNetworkConnected()) {
-            if (enterAppRemoteDataSource.registerFromRemote(
-                    registerRequest
-                ).isSuccessful &&
-                enterAppRemoteDataSource.registerFromRemote(
-                    registerRequest
-                )
-                    .body() != null
+            if (request.isSuccessful &&
+                request.body() != null
             ) {
-                val response = enterAppRemoteDataSource.registerFromRemote(
-                    registerRequest
-                )
-                token = response.body().let {
-                    tokenMapper.get().toMapper(it!!)
+
+                token = request.body().let {
+                    registerResponseMapper.get().toMapper(it!!)
                 }
                 return token
             } else {

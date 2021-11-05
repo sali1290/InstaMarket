@@ -9,8 +9,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 @Entity
-data class Token(
-
+data class RegisterResponse(
     @Json(name = "id")
     @PrimaryKey(autoGenerate = true)
     var id: Int?,
@@ -30,6 +29,9 @@ data class Token(
     @Json(name = "result")
     var result: Boolean?,
 
+    @Json(name = "password_confirmation")
+    var passwordConfirmation: String?,
+
     @Json(name = "errors")
-    var errors: Errors?
+    var errors: Errors?,
 )

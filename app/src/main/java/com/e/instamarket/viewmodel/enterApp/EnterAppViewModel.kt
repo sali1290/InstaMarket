@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.e.domain.Result
+import com.e.domain.models.RegisterResponseModel
 import com.e.domain.models.TokenModel
 import com.e.domain.models.UserModel
 import com.e.domain.usecase.enterAppUseCase.GetUserFromLoginUseCase
@@ -53,6 +54,12 @@ class EnterAppViewModel @Inject constructor(
         }
     }
 
+    private val _registerResponse = MutableLiveData<Result<RegisterResponseModel>>()
+    val registerResponse: LiveData<Result<RegisterResponseModel>>
+        get() = _registerResponse
+    private val registerResponseHandler = CoroutineExceptionHandler { _, exception ->
+        _registerResponse.postValue(exception.message?.let { Result.Error(it) })
+    }
 
     fun register(
         email: String,
@@ -62,13 +69,13 @@ class EnterAppViewModel @Inject constructor(
         userName: String,
         password: String,
         confirmPassword: String
-    ) = viewModelScope.launch(Dispatchers.IO + handler) {
-        _token.postValue(Result.Loading)
+    ) = viewModelScope.launch(Dispatchers.IO + registerResponseHandler) {
+        _registerResponse.postValue(Result.Loading)
         registerUseCase.execute(
             email, phone, firstName,
             lastName, userName, password, confirmPassword
         ).let {
-            _token.postValue(Result.Success(it))
+            _registerResponse.postValue(Result.Success(it))
         }
 
 

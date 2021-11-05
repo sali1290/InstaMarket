@@ -11,11 +11,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.e.data.utile.SessionManager
 import com.e.domain.Result
+import com.e.domain.models.RegisterResponseModel
 import com.e.domain.models.TokenModel
 import com.e.instamarket.R
 import com.e.instamarket.databinding.FragmentRegisterBinding
 import com.e.instamarket.viewmodel.enterApp.EnterAppViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -61,33 +66,35 @@ class RegisterFragment : Fragment() {
             pass = binding.etPass.text.toString()
             rePass = binding.etRePass.text.toString()
 
-//            if (binding.etFirstName.text.isEmpty() ||
-//                binding.etLastName.text.isEmpty() ||
-//                binding.etEmail.text.isEmpty() ||
-//                binding.etUsername.text.isEmpty() ||
-//                binding.etPhone.text.isEmpty() ||
-//                binding.etPass.text.isEmpty() ||
-//                binding.etRePass.text.isEmpty()
-//            ) {
-//                Toast.makeText(
-//                    requireActivity(),
-//                    "لطفا تمامی مقادیر را وارد کنید",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            } else {
-                viewModel.register(email, phone, fName, lName, username, pass, rePass)
-                observe()
-         //   }
+            if (binding.etFirstName.text.isEmpty() ||
+                binding.etLastName.text.isEmpty() ||
+                binding.etEmail.text.isEmpty() ||
+                binding.etUsername.text.isEmpty() ||
+                binding.etPhone.text.isEmpty() ||
+                binding.etPass.text.isEmpty() ||
+                binding.etRePass.text.isEmpty()
+            ) {
+                Toast.makeText(
+                    requireActivity(),
+                    "لطفا تمامی مقادیر را وارد کنید",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+            viewModel.register(email, phone, fName, lName, username, pass, rePass)
+            observe()
+               }
+
         }
     }
 
     private fun observe() {
-        viewModel.token.observe(viewLifecycleOwner, {
+        viewModel.registerResponse.observe(viewLifecycleOwner, {
 
             when (it) {
                 is Result.Success -> {
-                    checkData(it.data)
                     sessionManager.saveAuthToken(it.data.accessToken!!)
+                    checkData(it.data)
+                    Toast.makeText(requireActivity(), "خوش آمدید", Toast.LENGTH_SHORT).show()
                 }
 
                 is Result.Loading -> {
@@ -103,22 +110,18 @@ class RegisterFragment : Fragment() {
         })
     }
 
-    private fun checkData(token: TokenModel) {
-        when {
-            !token.errors?.email.isNullOrEmpty() -> {
-                Toast.makeText(requireActivity(), token.errors?.email?.get(0)!!, Toast.LENGTH_SHORT)
-                    .show()
+    private fun checkData(token: RegisterResponseModel) {
+        if (!token.accessToken.isNullOrEmpty()) {
+            findNavController().navigate(R.id.homeFragment)
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
             }
-            !token.errors?.password.isNullOrEmpty() -> {
-                Toast.makeText(requireActivity(), token.errors?.password?.get(0)!!, Toast.LENGTH_SHORT)
-                    .show()
-            }
-            else -> {
-                findNavController().navigate(R.id.homeFragment)
-                requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
-                }
-            }
+        } else {
+            Toast.makeText(
+                requireActivity(),
+                "نام کاربری یا رمز عبور اشتباه است",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
+    }
 
-}

@@ -3,6 +3,7 @@ package com.e.data.repository.enterAppDataSource.remote
 import com.e.data.api.ApiService
 import com.e.data.api.LoginRequest
 import com.e.data.api.RegisterRequest
+import com.e.data.entity.RegisterResponse
 import com.e.data.entity.Token
 import com.e.data.entity.local.User
 import retrofit2.Response
@@ -17,7 +18,7 @@ class EnterAppRemoteDataSourceImpl @Inject constructor(private val apiService: A
 
     override suspend fun registerFromRemote(
         registerRequest: RegisterRequest
-    ): Response<Token> {
+    ): Response<RegisterResponse> {
         return apiService.register(registerRequest)
     }
 
