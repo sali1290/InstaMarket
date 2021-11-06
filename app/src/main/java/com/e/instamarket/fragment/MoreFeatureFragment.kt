@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.e.domain.Result
@@ -37,47 +38,58 @@ class MoreFeatureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val btnHome = requireActivity().findViewById<CardView>(R.id.btn_home)
         bottomNav.visibility = View.VISIBLE
+        btnHome.visibility = View.VISIBLE
+
         observeBanner()
 
         binding.news.setOnClickListener {
             findNavController().navigate(R.id.newsFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnApi.setOnClickListener {
             findNavController().navigate(R.id.apiFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnAgents.setOnClickListener {
             findNavController().navigate(R.id.agentFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.buySite.setOnClickListener {
             findNavController().navigate(R.id.sitesFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnFaq.setOnClickListener {
             findNavController().navigate(R.id.faqFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnRule.setOnClickListener {
             findNavController().navigate(R.id.ruleFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnAboutUs.setOnClickListener {
             findNavController().navigate(R.id.aboutUsFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnContactUs.setOnClickListener {
             findNavController().navigate(R.id.contactUsFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
 

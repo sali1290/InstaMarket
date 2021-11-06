@@ -9,7 +9,6 @@
 
         <item
             android:id="@+id/home"
-            android:icon="@drawable/logo_image"
             android:title="خانه" />
 
         <item

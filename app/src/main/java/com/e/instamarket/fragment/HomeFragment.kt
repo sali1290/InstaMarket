@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,7 +47,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val btnHome = requireActivity().findViewById<CardView>(R.id.btn_home)
         bottomNav.visibility = View.VISIBLE
+        btnHome.visibility = View.VISIBLE
 
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -119,12 +122,14 @@ class HomeFragment : Fragment() {
             bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.categoryFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnTransaction.setOnClickListener {
             bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.transactionFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnLuck.setOnClickListener {
@@ -135,18 +140,21 @@ class HomeFragment : Fragment() {
             bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.ordersFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnRaiseStock.setOnClickListener {
             bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.raiseStockFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         binding.btnPay.setOnClickListener {
             bottomNav.selectedItemId = R.id.profile
             findNavController().navigate(R.id.transactionFragment)
             bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
         }
 
         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
