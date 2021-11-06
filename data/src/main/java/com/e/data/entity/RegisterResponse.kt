@@ -29,9 +29,10 @@ data class RegisterResponse(
     @Json(name = "result")
     var result: Boolean?,
 
-    @Json(name = "password_confirmation")
-    var passwordConfirmation: String?,
+    @Json(name = "message")
+    var message: String?,
 
     @Json(name = "errors")
-    var errors: Errors?,
+    var errors: Errors?
+
 )

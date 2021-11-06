@@ -11,8 +11,8 @@ import com.e.domain.models.BannerModel
 import com.e.instamarket.R
 
 class ImageSliderAdapter(
-//    private val banners: MutableList<BannerModel>,
-//    private val context: Context
+    private val banners: MutableList<BannerModel>,
+    private val context: Context
 ) :
     RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
 
@@ -27,7 +27,7 @@ class ImageSliderAdapter(
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-//        Glide.with(context).load(banners[position].src).into(holder.imageView)
+        Glide.with(context).load(banners[position].src).into(holder.imageView)
     }
 
     override fun getItemCount(): Int = 4

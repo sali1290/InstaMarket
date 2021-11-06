@@ -9,8 +9,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
-        android:layout_margin="@dimen/_3sdp">
+        android:layout_margin="@dimen/_3sdp"
+        app:cardCornerRadius="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -98,6 +98,7 @@
                         android:textSize="@dimen/_10sdp" />
 
                     <TextView
+                        android:id="@+id/tv_register_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -124,6 +125,7 @@
                         android:textSize="@dimen/_10sdp" />
 
                     <TextView
+                        android:id="@+id/tv_register_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -150,6 +152,7 @@
                         android:textSize="@dimen/_10sdp" />
 
                     <TextView
+                        android:id="@+id/tv_register_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -169,6 +172,8 @@
                         android:layout_marginEnd="@dimen/_32sdp"
                         android:background="@drawable/gray_background"
                         android:hint="شماره همراه"
+                        android:inputType="number"
+                        android:maxLength="12"
                         android:padding="@dimen/_4sdp"
                         android:paddingStart="@dimen/_8sdp"
                         android:paddingEnd="@dimen/_8sdp"
@@ -239,8 +244,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:gravity="center"
                             android:background="@drawable/button_background"
+                            android:gravity="center"
                             android:text="ثبت نام"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_12sdp"

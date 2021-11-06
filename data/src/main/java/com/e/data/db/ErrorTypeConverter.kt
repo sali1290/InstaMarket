@@ -11,6 +11,8 @@ class ErrorTypeConverter {
         return JSONObject().apply {
             put("email", error?.email)
             put("password", error?.password)
+            put("username", error?.username)
+            put("phone", error?.phoen)
         }.toString()
     }
 
@@ -18,7 +20,8 @@ class ErrorTypeConverter {
     fun toSource(user: String): Errors {
         val json = JSONObject(user)
         return Errors(
-            json.get("email") as List<String>?, json.get("password") as List<String>?
+            json.get("email") as List<String>?, json.get("password") as List<String>?,
+            json.get("username") as List<String>?, json.get("phone") as List<String>?
         )
     }
 }

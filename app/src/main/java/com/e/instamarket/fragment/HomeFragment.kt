@@ -14,6 +14,7 @@ import com.e.domain.Result
 import com.e.instamarket.R
 import com.e.instamarket.adapter.ImageSliderAdapter
 import com.e.instamarket.databinding.FragmentHomeBinding
+import com.e.instamarket.viewmodel.appInfo.AppInfoViewModel
 import com.e.instamarket.viewmodel.enterApp.EnterAppViewModel
 import com.e.instamarket.viewmodel.user.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: EnterAppViewModel
     private lateinit var userViewModel: UserViewModel
-//    private lateinit var bannerViewModel: AppInfoViewModel
+    private lateinit var bannerViewModel: AppInfoViewModel
 
 
     override fun onCreateView(
@@ -37,7 +38,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(EnterAppViewModel::class.java)
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-//        bannerViewModel = ViewModelProvider(requireActivity()).get(AppInfoViewModel::class.java)
+        bannerViewModel = ViewModelProvider(requireActivity()).get(AppInfoViewModel::class.java)
         return binding.root
     }
 
@@ -108,12 +109,10 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.imageSlider2.adapter = ImageSliderAdapter()
-
 
         viewModel.getUser()
-//        bannerViewModel.getBanners()
-//        observeBanner()
+        bannerViewModel.getBanners()
+        observeBanner()
         observeUser()
 
         binding.btnCategory.setOnClickListener {
@@ -210,19 +209,21 @@ class HomeFragment : Fragment() {
     }
 
 
-//    private fun observeBanner() {
-//        bannerViewModel.banner.observe(viewLifecycleOwner, {
-//
-//            when (it) {
-//
-//                is Result.Success -> {}
-//                is Result.Loading -> {}
-//                is Result.Error -> {
-//                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-//                }
-//            }
-//        })
-//    }
+    private fun observeBanner() {
+        bannerViewModel.banner.observe(viewLifecycleOwner, {
+
+            when (it) {
+
+                is Result.Success -> {
+                    binding.imageSlider2.adapter = ImageSliderAdapter(it.data,requireContext())
+                }
+                is Result.Loading -> {}
+                is Result.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+    }
 
 
 }

@@ -84,7 +84,7 @@ class EnterAppRepoImpl @Inject constructor(
                 }
                 return token
             } else {
-                throw IOException("Server is Not Responding")
+                throw IOException("لطفا دوباره امتحان کنید")
             }
         } else {
             throw IOException("No Internet Connection")

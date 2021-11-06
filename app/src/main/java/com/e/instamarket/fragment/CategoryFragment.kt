@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.domain.Result
+import com.e.domain.models.CategoryModel
 import com.e.instamarket.databinding.FragmentCategoryBinding
 import com.e.instamarket.viewmodel.appInfo.AppInfoViewModel
 import com.e.instamarket.viewmodel.order.OrderViewModel
@@ -74,12 +75,25 @@ class CategoryFragment : Fragment() {
         viewModel.category.observe(viewLifecycleOwner, {
             when (it) {
                 is Result.Success -> {
-                    val list: MutableList<String> = arrayListOf()
+                    val list: MutableList<CategoryModel> = mutableListOf()
+                    val nameList: MutableList<String> = mutableListOf()
+
                     for (i in 0 until it.data.size) {
-                        list.add(it.data[i].name!!)
+                        list.add(it.data[i])
                     }
+                    list.sortBy {
+                        it.sort?.toInt()
+                    }
+
+                    for (i in 0 until list.size) {
+                        nameList.add(list[i].name!!)
+                    }
+
+
+
+
                     binding.spinner.adapter =
-                        ArrayAdapter(requireActivity(), R.layout.simple_dropdown_item_1line, list)
+                        ArrayAdapter(requireActivity(), R.layout.simple_dropdown_item_1line, nameList)
 
                     binding.spinner.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
@@ -89,7 +103,7 @@ class CategoryFragment : Fragment() {
                                 position: Int,
                                 id: Long
                             ) {
-                                val name = list[position]
+                                val name = list[position].name
                                 for (i in 0 until list.size) {
                                     if (name == it.data[i].name) {
                                         observeService(it.data[i].id!!)

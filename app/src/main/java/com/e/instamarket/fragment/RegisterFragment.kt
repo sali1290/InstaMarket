@@ -80,9 +80,17 @@ class RegisterFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-            viewModel.register(email, phone, fName, lName, username, pass, rePass)
-            observe()
-               }
+                if (binding.etPass.text.toString() == binding.etRePass.text.toString()) {
+                    viewModel.register(email, phone, fName, lName, username, pass, rePass)
+                    observe()
+                } else {
+                    Toast.makeText(
+                        requireActivity(),
+                        "رمز عبور با تایید مطابقت ندارد",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
 
         }
     }
@@ -94,7 +102,7 @@ class RegisterFragment : Fragment() {
                 is Result.Success -> {
                     sessionManager.saveAuthToken(it.data.accessToken!!)
                     checkData(it.data)
-                    Toast.makeText(requireActivity(), "خوش آمدید", Toast.LENGTH_SHORT).show()
+
                 }
 
                 is Result.Loading -> {
@@ -103,6 +111,14 @@ class RegisterFragment : Fragment() {
 
                 is Result.Error -> {
                     Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                    binding.tvRegisterEmail.text = "پست الکترونیک قبلا استفاده شده است"
+                    binding.tvRegisterEmail.setTextColor(requireActivity().getColor(R.color.red))
+
+                    binding.tvRegisterUsername.text = "نام کاربری قبلا استفاده شده است"
+                    binding.tvRegisterUsername.setTextColor(requireActivity().getColor(R.color.red))
+
+                    binding.tvRegisterPhone.text = "شماره تلفن قبلا استفاده شده است"
+                    binding.tvRegisterPhone.setTextColor(requireActivity().getColor(R.color.red))
                 }
             }
 
@@ -112,16 +128,17 @@ class RegisterFragment : Fragment() {
 
     private fun checkData(token: RegisterResponseModel) {
         if (!token.accessToken.isNullOrEmpty()) {
+            Toast.makeText(requireActivity(), "خوش آمدید", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.homeFragment)
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
             }
         } else {
             Toast.makeText(
                 requireActivity(),
-                "نام کاربری یا رمز عبور اشتباه است",
+                token.errors?.email?.get(0),
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
-    }
+}
 

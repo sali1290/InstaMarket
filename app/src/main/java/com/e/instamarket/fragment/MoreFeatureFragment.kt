@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.e.domain.Result
 import com.e.instamarket.R
 import com.e.instamarket.adapter.ImageSliderAdapter
 import com.e.instamarket.databinding.FragmentMoreFeatureBinding
+import com.e.instamarket.viewmodel.appInfo.AppInfoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MoreFeatureFragment : Fragment() {
 
     private lateinit var binding: FragmentMoreFeatureBinding
+    private lateinit var bannerViewModel: AppInfoViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +29,7 @@ class MoreFeatureFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentMoreFeatureBinding.inflate(inflater, container, false)
+        bannerViewModel = ViewModelProvider(requireActivity()).get(AppInfoViewModel::class.java)
         return binding.root
     }
 
@@ -31,8 +38,7 @@ class MoreFeatureFragment : Fragment() {
 
         val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.visibility = View.VISIBLE
-
-        binding.imageSlider3.adapter = ImageSliderAdapter()
+        observeBanner()
 
         binding.news.setOnClickListener {
             findNavController().navigate(R.id.newsFragment)
@@ -76,4 +82,23 @@ class MoreFeatureFragment : Fragment() {
 
 
     }
+
+    private fun observeBanner() {
+        bannerViewModel.banner.observe(viewLifecycleOwner, {
+
+            when (it) {
+
+                is Result.Success -> {
+                    binding.imageSlider3.adapter = ImageSliderAdapter(it.data, requireContext())
+                }
+                is Result.Loading -> {
+                }
+                is Result.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+    }
+
+
 }
