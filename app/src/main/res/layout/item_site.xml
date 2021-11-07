@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:elevation="20dp"
         app:cardCornerRadius="15dp">
 
         <LinearLayout
-            android:layout_width="@dimen/_140sdp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="@dimen/_4sdp">
 
             <TextView
                 android:id="@+id/site_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
@@ -46,7 +45,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_15sdp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/site_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/textView37"
@@ -57,13 +64,6 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
 
-                <TextView
-                    android:id="@+id/site_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
             <Button
@@ -77,24 +77,21 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
 
+            <Button
+                android:id="@+id/btn_buy_site"
+                style="@style/Widget.MaterialComponents.TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:backgroundTint="@color/purple_200"
+                android:gravity="center"
+                android:text="پرداخت"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_buy_site"
-            style="@style/Widget.MaterialComponents.TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/purple_200"
-            android:gravity="center"
-            android:text="پرداخت"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

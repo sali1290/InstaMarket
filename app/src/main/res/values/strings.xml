@@ -74,4 +74,5 @@
     <string name="discount_code">اگر کد تخفیف دارید وارد کنید</string>
     <string name="example_amount">5000 تومان</string>
     <string name="raise_stock_check_box">بله من قطعا می دانم که بعد از اینکه مبلغ پرداخت و اضافه شد من نمی توانم درخواست بازگشت پول را داشته باشم</string>
+    <string name="blog">وبلاگ</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.e.data.repository.userDataSource.remote
 
+import com.e.data.entity.BlogList
 import com.e.data.entity.Token
 import retrofit2.Response
 import retrofit2.http.Field
@@ -16,4 +17,6 @@ interface UserRemoteDataSource {
     suspend fun verifyUserFromRemote(code: String): Response<Token>
 
     suspend fun sendVerifyFromRemote(): Response<Token>
+
+    suspend fun getBlogs(): Response<BlogList>
 }

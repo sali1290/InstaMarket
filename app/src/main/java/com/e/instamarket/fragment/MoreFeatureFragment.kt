@@ -92,6 +92,12 @@ class MoreFeatureFragment : Fragment() {
             btnHome.visibility = View.INVISIBLE
         }
 
+        binding.btnBlog.setOnClickListener {
+            findNavController().navigate(R.id.blogFragment)
+            bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
+        }
+
 
     }
 

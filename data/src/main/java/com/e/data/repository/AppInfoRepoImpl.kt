@@ -26,7 +26,6 @@ class AppInfoRepoImpl @Inject constructor(
 
     @Throws(IOException::class)
     override suspend fun getAgent(): MutableList<AgentsModel> {
-
         if (netWorkHelper.isNetworkConnected()) {
             lateinit var agentList: MutableList<AgentsModel>
             val request = appInfoRemoteDataSource.getAgentsFromRemote()

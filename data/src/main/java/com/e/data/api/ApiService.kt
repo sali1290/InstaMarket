@@ -139,5 +139,8 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun getTicket(@Field("id") id: String): Response<MutableList<Ticket>>
 
+    //blog
+    @POST("blog/list")
+    suspend fun getBlogs(): Response<BlogList>
 
 }

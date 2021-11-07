@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_moreFeatureFragment_to_ruleFragment"
             app:destination="@id/ruleFragment" />
+        <action
+            android:id="@+id/action_moreFeatureFragment_to_blogFragment"
+            app:destination="@id/blogFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -161,4 +164,9 @@
         android:name="com.e.instamarket.fragment.RaiseStockFragment"
         android:label="fragment_raise_stock"
         tools:layout="@layout/fragment_raise_stock" />
+    <fragment
+        android:id="@+id/blogFragment"
+        android:name="com.e.instamarket.fragment.BlogFragment"
+        android:label="fragment_blog"
+        tools:layout="@layout/fragment_blog" />
 </navigation>
