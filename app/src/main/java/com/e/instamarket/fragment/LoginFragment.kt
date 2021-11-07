@@ -79,15 +79,10 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireActivity(), "خوش آمدید", Toast.LENGTH_SHORT).show()
                 }
 
-                is Result.Loading -> {
-                    Toast.makeText(requireActivity(), "Loading", Toast.LENGTH_SHORT).show()
-                }
+                is Result.Loading -> {}
 
                 is Result.Error -> {
                     Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
-                }
-                else -> {
-
                 }
             }
         })

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ import com.e.domain.models.CategoryModel
 import com.e.instamarket.databinding.FragmentCategoryBinding
 import com.e.instamarket.viewmodel.appInfo.AppInfoViewModel
 import com.e.instamarket.viewmodel.order.OrderViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class CategoryFragment : Fragment() {
 
@@ -58,10 +60,16 @@ class CategoryFragment : Fragment() {
             if (categoryId != "" && serviceId != "" && link != "" && quantity != "" && binding.checkBox.isChecked) {
                 orderViewModel.createOrder(categoryId, serviceId, quantity, link)
                 observeOrder()
+            } else if (quantity.toInt() > 100) {
+                Toast.makeText(
+                    requireContext(),
+                    "تعداد انتخاب شده بیشتر از میزان مجاز است",
+                    Toast.LENGTH_LONG
+                ).show()
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "please fill all: \n$categoryId \n$serviceId \n$quantity \n$link ",
+                    "لطفا تمامی مقادیر را تکمیل کنید",
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -72,6 +80,8 @@ class CategoryFragment : Fragment() {
     }
 
     private fun observeCategory() {
+        val progressBar =
+            requireActivity().findViewById<ProgressBar>(com.e.instamarket.R.id.progressBar)
         viewModel.category.observe(viewLifecycleOwner, {
             when (it) {
                 is Result.Success -> {
@@ -89,11 +99,12 @@ class CategoryFragment : Fragment() {
                         nameList.add(list[i].name!!)
                     }
 
-
-
-
                     binding.spinner.adapter =
-                        ArrayAdapter(requireActivity(), R.layout.simple_dropdown_item_1line, nameList)
+                        ArrayAdapter(
+                            requireActivity(),
+                            R.layout.simple_dropdown_item_1line,
+                            nameList
+                        )
 
                     binding.spinner.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
@@ -117,11 +128,10 @@ class CategoryFragment : Fragment() {
                             }
                         }
 
-
                 }
                 is Result.Loading -> {
 //                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
-                    binding.categoryProgress.visibility = View.VISIBLE
+                    progressBar.visibility = View.VISIBLE
                     requireActivity().window.setFlags(
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
@@ -135,6 +145,8 @@ class CategoryFragment : Fragment() {
     }
 
     private fun observeService(id: Int) {
+        val progressBar =
+            requireActivity().findViewById<ProgressBar>(com.e.instamarket.R.id.progressBar)
         viewModel.service.observe(viewLifecycleOwner, {
             when (it) {
                 is Result.Success -> {
@@ -144,6 +156,7 @@ class CategoryFragment : Fragment() {
                             list.add(it.data[i].name!!)
                         }
                     }
+
                     binding.serviceSpinner.adapter =
                         ArrayAdapter(requireActivity(), R.layout.simple_dropdown_item_1line, list)
 
@@ -164,6 +177,7 @@ class CategoryFragment : Fragment() {
                                 for (i in 0 until it.data.size) {
                                     if (name == it.data[i].name) {
                                         serviceId = it.data[i].id.toString()
+                                        binding.tvServicePrice.text = it.data[i].price + " تومان"
                                         binding.button3.isClickable = true
                                     }
                                 }
@@ -173,14 +187,15 @@ class CategoryFragment : Fragment() {
                             }
                         }
 
-                    binding.categoryProgress.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                     requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                 }
                 is Result.Loading -> {
 //                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
-                    binding.categoryProgress.visibility = View.VISIBLE
+                    progressBar.visibility = View.VISIBLE
                 }
                 is Result.Error -> {
+                    progressBar.visibility = View.INVISIBLE
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
             }
@@ -188,26 +203,27 @@ class CategoryFragment : Fragment() {
     }
 
     private fun observeOrder() {
+        val progressBar =
+            requireActivity().findViewById<ProgressBar>(com.e.instamarket.R.id.progressBar)
         orderViewModel.order.observe(viewLifecycleOwner, {
 
             when (it) {
 
                 is Result.Success -> {
 
-                    binding.categoryProgress.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                     requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
                     Toast.makeText(
                         requireContext(),
-                        "Succeed " + it.data.message,
+                        it.data.message,
                         Toast.LENGTH_LONG
                     ).show()
-                    Log.i("my tag", it.data.message!!)
                 }
 
                 is Result.Loading -> {
 //                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
-                    binding.categoryProgress.visibility = View.VISIBLE
+                    progressBar.visibility = View.VISIBLE
                     requireActivity().window.setFlags(
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
@@ -216,6 +232,13 @@ class CategoryFragment : Fragment() {
 
                 is Result.Error -> {
                     Log.i("my tag", it.message)
+                    progressBar.visibility = View.INVISIBLE
+                    requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                    Snackbar.make(
+                        progressBar,
+                        "موجودی شما کافی نیست، لطفا از قسمت افزایش موجودی، موجودی خود را افزایش دهید",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
 
             }

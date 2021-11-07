@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
@@ -162,12 +163,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeUser() {
+        val progressBar = requireActivity().findViewById<ProgressBar>(R.id.progressBar)
         viewModel.user.observe(viewLifecycleOwner, { it ->
 
             when (it) {
 
                 is Result.Success -> {
-                    binding.progressBar.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                     val role = it.data.role
                     if (role == "admin") {
                         binding.textView5.text = "مدیر"
@@ -180,7 +182,7 @@ class HomeFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    progressBar.visibility = View.VISIBLE
                 }
 
                 is Result.Error -> {
@@ -189,7 +191,7 @@ class HomeFragment : Fragment() {
                     userViewModel.user.observe(viewLifecycleOwner, {
                         when (it) {
                             is Result.Success -> {
-                                binding.progressBar.visibility = View.INVISIBLE
+                                progressBar.visibility = View.INVISIBLE
                                 val role = it.data.role
                                 if (role == "admin") {
                                     binding.textView5.text = "مدیر"
@@ -223,9 +225,10 @@ class HomeFragment : Fragment() {
             when (it) {
 
                 is Result.Success -> {
-                    binding.imageSlider2.adapter = ImageSliderAdapter(it.data,requireContext())
+                    binding.imageSlider2.adapter = ImageSliderAdapter(it.data, requireContext())
                 }
-                is Result.Loading -> {}
+                is Result.Loading -> {
+                }
                 is Result.Error -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
