@@ -83,6 +83,12 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.editBankInfoFragment)
         }
 
+        binding.etEditUser.setOnClickListener {
+            bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
+            findNavController().navigate(R.id.editUserInfoFragment)
+        }
+
     }
 
     private fun observe() {

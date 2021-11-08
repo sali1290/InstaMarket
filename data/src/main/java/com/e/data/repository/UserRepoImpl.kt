@@ -1,6 +1,7 @@
 package com.e.data.repository
 
 import com.e.data.api.UserBankInfoTypeConverter
+import com.e.data.api.UserInfoTypeConverter
 import com.e.data.mapper.BlogMapper
 import com.e.data.mapper.UserMapper
 import com.e.data.repository.userDataSource.local.UserLocalDataSource
@@ -13,9 +14,9 @@ import java.io.IOException
 import javax.inject.Inject
 
 class UserRepoImpl @Inject constructor(
-    private val userRemoteDataSource: UserRemoteDataSource,
     private val userLocalDataSource: UserLocalDataSource,
     private val userMapper: dagger.Lazy<UserMapper>,
+    private val userRemoteDataSource: UserRemoteDataSource,
     private val netWorkHelper: NetWorkHelper,
     private val blogMapper: dagger.Lazy<BlogMapper>
 ) :
@@ -41,6 +42,7 @@ class UserRepoImpl @Inject constructor(
         return user!!
     }
 
+    @Throws(IOException::class)
     override suspend fun getBlogs(): MutableList<BlogModel> {
         lateinit var blogList: MutableList<BlogModel>
         val request = userRemoteDataSource.getBlogs()
@@ -62,6 +64,7 @@ class UserRepoImpl @Inject constructor(
         }
     }
 
+    @Throws(IOException::class)
     override suspend fun updateUserBankInfo(
         shcart: String?,
         shshaba: String?,
@@ -69,7 +72,47 @@ class UserRepoImpl @Inject constructor(
     ): Boolean {
         val userBankInfoConverter =
             UserBankInfoTypeConverter().converter(shcart, shshaba, bankName)
-        val request = userRemoteDataSource.updateUserFromRemote(userBankInfoConverter)
+        val request = userRemoteDataSource.updateUserBankInfoFromRemote(userBankInfoConverter)
+
+        if (netWorkHelper.isNetworkConnected()) {
+            if (request.isSuccessful &&
+                request.body() != null
+            ) {
+                val answer = request.body()
+                return answer!!
+            } else {
+                throw IOException("Server is Not Responding")
+            }
+        } else {
+            throw IOException("No Internet Connection")
+        }
+    }
+
+    @Throws(IOException::class)
+    override suspend fun updateUserInfo(
+        firstName: String?,
+        lastName: String?,
+        email: String?,
+        username: String?,
+        phone: String?,
+//        birthday: String?,
+//        education: String?,
+//        marry: String?,
+//        sex: String?
+    ): Boolean {
+        val userInfoConverter =
+            UserInfoTypeConverter().converter(
+                firstName,
+                lastName,
+                email,
+                username,
+                phone,
+//                birthday,
+//                education,
+//                marry,
+//                sex
+            )
+        val request = userRemoteDataSource.updateUserInfoFromRemote(userInfoConverter)
 
         if (netWorkHelper.isNetworkConnected()) {
             if (request.isSuccessful &&

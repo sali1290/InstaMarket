@@ -174,7 +174,7 @@
                         android:background="@drawable/gray_background"
                         android:hint="شماره همراه"
                         android:inputType="number"
-                        android:maxLength="10"
+                        android:maxLength="11"
                         android:padding="@dimen/_4sdp"
                         android:paddingStart="@dimen/_8sdp"
                         android:paddingEnd="@dimen/_8sdp"

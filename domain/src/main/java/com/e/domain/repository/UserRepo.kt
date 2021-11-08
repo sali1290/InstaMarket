@@ -17,4 +17,16 @@ interface UserRepo {
         bankName: String?
     ): Boolean
 
+    suspend fun updateUserInfo(
+        firstName: String?,
+        lastName: String?,
+        email: String?,
+        username: String?,
+        phone: String?
+//        birthday: String?,
+//        education: String?,
+//        marry: String?,
+//        sex: String?,
+    ): Boolean
+
 }

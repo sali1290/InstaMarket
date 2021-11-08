@@ -10,6 +10,7 @@ import com.e.domain.models.UserModel
 import com.e.domain.usecase.userUseCase.GetBlogsUseCase
 import com.e.domain.usecase.userUseCase.GetUserUseCase
 import com.e.domain.usecase.userUseCase.UpdateUserBankInfoUseCase
+import com.e.domain.usecase.userUseCase.UpdateUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -18,10 +19,46 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor(
-    private val userUseCase: GetUserUseCase,
+    private val userUseCase: UpdateUserUseCase,
+    private val getUserUseCase: GetUserUseCase,
     private val blogsUseCase: GetBlogsUseCase,
     private val updateUserBankInfoUseCase: UpdateUserBankInfoUseCase
 ) : ViewModel() {
+
+    private val _userInfo = MutableLiveData<Result<Boolean>>()
+    val userInfo: LiveData<Result<Boolean>>
+        get() = _userInfo
+
+    private val updateHandler = CoroutineExceptionHandler { _, exception ->
+        _userInfo.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun updateUserInfo(
+        firstName: String?,
+        lastName: String?,
+        email: String?,
+        username: String?,
+        phone: String?,
+//        birthday: String?,
+//        education: String?,
+//        marry: String?,
+//        sex: String?
+    ) = viewModelScope.launch(Dispatchers.IO + updateHandler) {
+        _userInfo.postValue(Result.Loading)
+        userUseCase.execute(
+            firstName,
+            lastName,
+            email,
+            username,
+            phone,
+//            birthday,
+//            education,
+//            marry,
+//            sex
+        ).let {
+            _userInfo.postValue(Result.Success(it))
+        }
+    }
 
     private val _user = MutableLiveData<Result<UserModel>>()
     val user: LiveData<Result<UserModel>>
@@ -33,7 +70,7 @@ class UserViewModel @Inject constructor(
 
     fun getUser() = viewModelScope.launch(Dispatchers.IO + handler) {
         _user.postValue(Result.Loading)
-        userUseCase.execute().let {
+        getUserUseCase.execute().let {
             _user.postValue(Result.Success(it!!))
         }
     }

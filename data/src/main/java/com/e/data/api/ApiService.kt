@@ -85,7 +85,7 @@ interface ApiService {
     //user api
     @POST("user/update")
     suspend fun updateUserPersonalInfo(
-
+        @Body userInfoRequest: UserInfoRequest
     ): Response<Boolean>
 
     @POST("user/update")

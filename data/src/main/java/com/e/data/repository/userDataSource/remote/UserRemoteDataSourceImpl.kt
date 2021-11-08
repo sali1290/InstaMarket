@@ -2,6 +2,7 @@ package com.e.data.repository.userDataSource.remote
 
 import com.e.data.api.ApiService
 import com.e.data.api.UserBankInfoRequest
+import com.e.data.api.UserInfoRequest
 import com.e.data.entity.BlogList
 import com.e.data.entity.Token
 import retrofit2.Response
@@ -9,11 +10,18 @@ import javax.inject.Inject
 
 class UserRemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) :
     UserRemoteDataSource {
-    override suspend fun updateUserFromRemote(
+    override suspend fun updateUserBankInfoFromRemote(
         userBankInfoRequest: UserBankInfoRequest
     ): Response<Boolean> {
         return apiService.updateUserBankInfo(userBankInfoRequest)
     }
+
+    override suspend fun updateUserInfoFromRemote(
+        userInfoRequest: UserInfoRequest
+    ): Response<Boolean> {
+        return apiService.updateUserPersonalInfo(userInfoRequest)
+    }
+
 
     override suspend fun checkUserIsVerifyFromRemote(): Response<Boolean> {
         return apiService.checkUserIsVerify()
