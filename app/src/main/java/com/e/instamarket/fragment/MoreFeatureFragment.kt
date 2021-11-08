@@ -98,6 +98,12 @@ class MoreFeatureFragment : Fragment() {
             btnHome.visibility = View.INVISIBLE
         }
 
+        binding.btnMakeMoney.setOnClickListener {
+            findNavController().navigate(R.id.makeMoneyFragment)
+            bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
+        }
+
 
     }
 
