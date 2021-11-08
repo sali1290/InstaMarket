@@ -9,6 +9,7 @@ import com.e.domain.models.BlogModel
 import com.e.domain.models.UserModel
 import com.e.domain.usecase.userUseCase.GetBlogsUseCase
 import com.e.domain.usecase.userUseCase.GetUserUseCase
+import com.e.domain.usecase.userUseCase.UpdateUserBankInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val userUseCase: GetUserUseCase,
-    private val blogsUseCase: GetBlogsUseCase
+    private val blogsUseCase: GetBlogsUseCase,
+    private val updateUserBankInfoUseCase: UpdateUserBankInfoUseCase
 ) : ViewModel() {
 
     private val _user = MutableLiveData<Result<UserModel>>()
@@ -50,6 +52,23 @@ class UserViewModel @Inject constructor(
             _blogList.postValue(Result.Success(it))
         }
     }
+
+
+    private val _updateUserBankInfo = MutableLiveData<Result<Boolean>>()
+    val updateUserBankInfo: LiveData<Result<Boolean>>
+        get() = _updateUserBankInfo
+
+    private val updateUserBankInfoHandler = CoroutineExceptionHandler { _, exception ->
+        _updateUserBankInfo.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun updateUserBankInfo(shcard: String, shshaba: String, bankName: String) =
+        viewModelScope.launch(Dispatchers.IO + updateUserBankInfoHandler) {
+            _updateUserBankInfo.postValue(Result.Loading)
+            updateUserBankInfoUseCase.execute(shcard, shshaba, bankName).let {
+                _updateUserBankInfo.postValue(Result.Success(it))
+            }
+        }
 
 }
 

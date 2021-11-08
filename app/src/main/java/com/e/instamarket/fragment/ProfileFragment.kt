@@ -8,14 +8,17 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.e.data.utile.SessionManager
 import com.e.domain.Result
 import com.e.instamarket.R
 import com.e.instamarket.adapter.ProfileBankAdapter
 import com.e.instamarket.adapter.ProfileInfoAdapter
 import com.e.instamarket.databinding.FragmentProfileBinding
+import com.e.instamarket.viewmodel.enterApp.EnterAppViewModel
 import com.e.instamarket.viewmodel.user.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var viewModel: UserViewModel
+    private lateinit var viewModel: EnterAppViewModel
 
 
     override fun onCreateView(
@@ -35,7 +38,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(EnterAppViewModel::class.java)
 
         observe()
         return binding.root
@@ -44,8 +47,11 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility =
-            View.VISIBLE
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val btnHome = requireActivity().findViewById<CardView>(R.id.btn_home)
+        bottomNav.visibility = View.VISIBLE
+        btnHome.visibility = View.VISIBLE
+
         viewModel.getUser()
 
         val sessionManager = SessionManager(requireContext())
@@ -71,6 +77,11 @@ class ProfileFragment : Fragment() {
             dialog.show()
         }
 
+        binding.etEditUserBank.setOnClickListener {
+            bottomNav.visibility = View.INVISIBLE
+            btnHome.visibility = View.INVISIBLE
+            findNavController().navigate(R.id.editBankInfoFragment)
+        }
 
     }
 
@@ -81,8 +92,8 @@ class ProfileFragment : Fragment() {
             when (it) {
 
                 is Result.Success -> {
-                    binding.profileRecycler.adapter = ProfileInfoAdapter(it.data)
                     binding.userBankRecycler.adapter = ProfileBankAdapter(it.data)
+                    binding.profileRecycler.adapter = ProfileInfoAdapter(it.data)
                     progressBar.visibility = View.INVISIBLE
                     requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 

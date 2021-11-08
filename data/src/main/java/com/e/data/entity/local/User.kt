@@ -94,16 +94,16 @@ data class User(
     @Json(name = "minharvest")
     var minharvest : String?,
 
-    @Json(name = "card_number")
+    @Json(name = "shcart")
     var cardNumber : String?,
 
-    @Json(name = "sh_number")
+    @Json(name = "shshaba")
     var shNumber : String?,
 
     @Json(name = "account_name")
     var accountName : String?,
 
-    @Json(name = "bank_name")
+    @Json(name = "Name_bank")
     var bankName : String?,
 
     @Json(name = "verify_bank")

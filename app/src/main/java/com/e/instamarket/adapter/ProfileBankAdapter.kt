@@ -41,6 +41,6 @@ class ProfileBankAdapter(private val userModel: UserModel) :
         }
     }
 
-    override fun getItemCount() = 4
+    override fun getItemCount() = 3
 
 }

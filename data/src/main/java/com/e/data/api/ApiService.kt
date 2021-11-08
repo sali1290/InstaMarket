@@ -84,10 +84,13 @@ interface ApiService {
 
     //user api
     @POST("user/update")
-    @FormUrlEncoded
-    suspend fun updateUser(
-        @Field("first_name") firstName: String,
-        @Field("last_name") lastName: String
+    suspend fun updateUserPersonalInfo(
+
+    ): Response<Boolean>
+
+    @POST("user/update")
+    suspend fun updateUserBankInfo(
+        @Body userBankInfoRequest: UserBankInfoRequest
     ): Response<Boolean>
 
     @POST("user/checkVerify")

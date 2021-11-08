@@ -69,7 +69,14 @@
         android:id="@+id/profileFragment"
         android:name="com.e.instamarket.fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editBankInfoFragment"
+            app:destination="@id/editBankInfoFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editUserInfoFragment"
+            app:destination="@id/editUserInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.e.instamarket.fragment.LoginFragment"
@@ -169,4 +176,14 @@
         android:name="com.e.instamarket.fragment.BlogFragment"
         android:label="fragment_blog"
         tools:layout="@layout/fragment_blog" />
+    <fragment
+        android:id="@+id/editBankInfoFragment"
+        android:name="com.e.instamarket.fragment.EditBankInfoFragment"
+        android:label="fragment_edit_bank_info"
+        tools:layout="@layout/fragment_edit_bank_info" />
+    <fragment
+        android:id="@+id/editUserInfoFragment"
+        android:name="com.e.instamarket.fragment.EditUserInfoFragment"
+        android:label="fragment_edit_user_info"
+        tools:layout="@layout/fragment_edit_user_info" />
 </navigation>
