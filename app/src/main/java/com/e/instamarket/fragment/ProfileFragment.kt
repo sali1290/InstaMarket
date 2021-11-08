@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.e.data.utile.SessionManager
 import com.e.domain.Result
 import com.e.instamarket.R
+import com.e.instamarket.adapter.ProfileBankAdapter
+import com.e.instamarket.adapter.ProfileInfoAdapter
 import com.e.instamarket.databinding.FragmentProfileBinding
 import com.e.instamarket.viewmodel.user.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -73,40 +75,18 @@ class ProfileFragment : Fragment() {
     }
 
     private fun observe() {
-        val progressBar = requireActivity().findViewById<ProgressBar>(com.e.instamarket.R.id.progressBar)
+        val progressBar =
+            requireActivity().findViewById<ProgressBar>(com.e.instamarket.R.id.progressBar)
         viewModel.user.observe(viewLifecycleOwner, {
             when (it) {
 
                 is Result.Success -> {
-                    binding.apply {
-                        tvName1.text = "نام"
-                        tvName2.text = "نام خانوادگی"
-                        tvName3.text = "ایمیل"
-                        tvName4.text = "نام کاربری"
-                        tvName5.text = "شماره تلفن"
-                        tvName6.text = "شماره کارت"
-                        tvName7.text = "شماره شبا"
-                        tvName8.text = "بانک"
-                        tvName9.text = "تاریخ تولد"
-                        tvName10.text = "تحصیلات"
-                        tvName11.text = "وضعیت تاهل"
-                        tvName12.text = "جنسیت"
-
-                        etName1.text = it.data.firstName
-                        etName2.text = it.data.lastName
-                        etName3.text = it.data.email
-                        etName4.text = it.data.userName
-                        etName5.text = it.data.phone
-                        etName6.text = it.data.cardNumber
-                        etName7.text = it.data.shNumber
-                        etName8.text = it.data.bankName
-                        etName9.text = it.data.birthday
-                        etName10.text = it.data.education
-                        etName11.text = it.data.marry
-                        etName12.text = it.data.sex
-                    }
+                    binding.profileRecycler.adapter = ProfileInfoAdapter(it.data)
+                    binding.userBankRecycler.adapter = ProfileBankAdapter(it.data)
                     progressBar.visibility = View.INVISIBLE
                     requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
+
                 }
 
                 is Result.Loading -> {
