@@ -27,7 +27,9 @@ class ImageSliderAdapter(
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        Glide.with(context).load(banners[position].src).into(holder.imageView)
+        Glide.with(context).load(
+            R.drawable.instamarket_test
+        ).into(holder.imageView)
     }
 
     override fun getItemCount(): Int = 4

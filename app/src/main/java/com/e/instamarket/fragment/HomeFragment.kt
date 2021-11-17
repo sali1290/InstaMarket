@@ -52,6 +52,20 @@ class HomeFragment : Fragment() {
         bottomNav.visibility = View.VISIBLE
         btnHome.visibility = View.VISIBLE
 
+        requireActivity().onBackPressedDispatcher.addCallback(
+            requireActivity(),
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (bottomNav.selectedItemId == R.id.home) {
+                        requireActivity().finish()
+                    } else {
+                        isEnabled = false
+                        requireActivity().onBackPressed()
+                    }
+                }
+            })
+
+
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.profile -> {
