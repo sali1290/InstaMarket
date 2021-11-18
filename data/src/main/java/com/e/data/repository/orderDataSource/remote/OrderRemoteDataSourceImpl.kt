@@ -4,7 +4,6 @@ import com.e.data.api.ApiService
 import com.e.data.api.OrderRequestConverter
 import com.e.data.entity.OrderList
 import com.e.data.entity.OrderRequest
-import com.e.data.entity.local.Order
 import retrofit2.Response
 import javax.inject.Inject
 

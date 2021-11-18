@@ -2,7 +2,7 @@ package com.e.data.repository.ticketDataSource.remote
 
 import com.e.data.api.ApiService
 import com.e.data.entity.TicketRequest
-import com.e.data.entity.local.Ticket
+import com.e.data.entity.Ticket
 import retrofit2.Response
 import javax.inject.Inject
 

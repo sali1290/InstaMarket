@@ -1,4 +1,4 @@
-package com.e.data.entity.remote
+package com.e.data.entity
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

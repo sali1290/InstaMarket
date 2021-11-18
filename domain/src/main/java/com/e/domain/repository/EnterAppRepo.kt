@@ -30,5 +30,4 @@ interface EnterAppRepo {
         password: String
     ): String
 
-    suspend fun getUserToken(): TokenModel
 }

@@ -1,6 +1,6 @@
 package com.e.data.mapper
 
-import com.e.data.entity.remote.Api
+import com.e.data.entity.Api
 import com.e.domain.models.ApiModel
 import javax.inject.Inject
 

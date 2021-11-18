@@ -7,9 +7,7 @@ import com.e.data.api.RegisterTypeConverter
 import com.e.data.mapper.RegisterResponseMapper
 import com.e.data.mapper.TokenMapper
 import com.e.data.mapper.UserMapper
-import com.e.data.repository.enterAppDataSource.local.EnterAppLocalDataSource
 import com.e.data.repository.enterAppDataSource.remote.EnterAppRemoteDataSource
-import com.e.data.repository.userDataSource.local.UserLocalDataSource
 import com.e.data.utile.NetWorkHelper
 import com.e.data.utile.SessionManager
 import com.e.domain.models.RegisterResponseModel
@@ -21,8 +19,6 @@ import javax.inject.Inject
 
 class EnterAppRepoImpl @Inject constructor(
     private val enterAppRemoteDataSource: EnterAppRemoteDataSource,
-    private val enterAppLocalDataSource: EnterAppLocalDataSource,
-    private val userLocalDataSource: UserLocalDataSource,
     private val netWorkHelper: NetWorkHelper,
     private val tokenMapper: dagger.Lazy<TokenMapper>,
     private val userMapper: dagger.Lazy<UserMapper>,
@@ -102,19 +98,12 @@ class EnterAppRepoImpl @Inject constructor(
                 user = response.let {
                     userMapper.get().toMapper(it!!)
                 }
-                userLocalDataSource.saveUserFromDB(response!!)
                 return user
             } else {
-                user = userLocalDataSource.getUserFromDB().let {
-                    userMapper.get().toMapper(it)
-                }
-                return user
+                throw IOException("Server is Not Responding")
             }
         } else {
-            user = userLocalDataSource.getUserFromDB().let {
-                userMapper.get().toMapper(it)
-            }
-            return user
+            throw IOException("No Internet Connection")
         }
     }
 
@@ -143,7 +132,6 @@ class EnterAppRepoImpl @Inject constructor(
                 ).body()!!
 //                enterAppLocalDataSource.deleteTokenFromDB()
                 sessionManager.saveAuthToken("")
-                userLocalDataSource.deleteUserFromDB()
                 return message
             } else {
                 throw IOException("Server is Not Responding")
@@ -151,18 +139,6 @@ class EnterAppRepoImpl @Inject constructor(
         } else {
             throw IOException("No Internet Connection")
         }
-    }
-
-    override suspend fun getUserToken(): TokenModel {
-        lateinit var token: TokenModel
-        if (enterAppLocalDataSource.getTokenFromDB().result == true) {
-            token = enterAppLocalDataSource.getTokenFromDB().let {
-                tokenMapper.get().toMapper(it)
-            }
-        } else {
-            token.result = false
-        }
-        return token
     }
 
 

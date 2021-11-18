@@ -1,8 +1,6 @@
 package com.e.data.mapper
 
-import com.e.data.entity.remote.Category
-import com.e.data.entity.remote.Faq
-import com.e.domain.models.CategoryModel
+import com.e.data.entity.Faq
 import com.e.domain.models.FaqModel
 import javax.inject.Inject
 

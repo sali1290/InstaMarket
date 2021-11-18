@@ -1,6 +1,6 @@
 package com.e.data.mapper
 
-import com.e.data.entity.remote.Agents
+import com.e.data.entity.Agents
 import com.e.domain.models.AgentsModel
 import javax.inject.Inject
 

@@ -1,9 +1,7 @@
 package com.e.data.mapper
 
-import com.e.data.entity.remote.Banner
-import com.e.data.entity.remote.Service
+import com.e.data.entity.Banner
 import com.e.domain.models.BannerModel
-import com.e.domain.models.ServiceModel
 import javax.inject.Inject
 
 class BannerMapper @Inject constructor(){

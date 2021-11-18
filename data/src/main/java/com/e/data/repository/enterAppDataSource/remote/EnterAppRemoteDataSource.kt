@@ -4,7 +4,7 @@ import com.e.data.api.LoginRequest
 import com.e.data.api.RegisterRequest
 import com.e.data.entity.RegisterResponse
 import com.e.data.entity.Token
-import com.e.data.entity.local.User
+import com.e.data.entity.User
 import retrofit2.Response
 
 

@@ -1,6 +1,5 @@
 package com.e.data.api
 
-import com.e.data.entity.local.Errors
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

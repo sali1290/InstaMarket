@@ -1,7 +1,6 @@
 package com.e.data.mapper
 
-import com.e.data.entity.local.Errors
-import com.e.data.entity.local.Ticket
+import com.e.data.entity.Ticket
 import com.e.domain.models.TicketModel
 import javax.inject.Inject
 

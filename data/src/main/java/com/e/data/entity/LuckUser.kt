@@ -1,4 +1,4 @@
-package com.e.data.entity.local
+package com.e.data.entity
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

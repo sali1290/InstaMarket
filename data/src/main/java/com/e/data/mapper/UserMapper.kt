@@ -1,6 +1,6 @@
 package com.e.data.mapper
 
-import com.e.data.entity.local.User
+import com.e.data.entity.User
 import com.e.domain.models.UserModel
 import javax.inject.Inject
 

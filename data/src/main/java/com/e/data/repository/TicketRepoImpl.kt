@@ -1,21 +1,16 @@
 package com.e.data.repository
 
-import com.e.data.entity.TicketRequest
-import com.e.data.entity.local.Ticket
 import com.e.data.mapper.TicketMapper
 import com.e.data.mapper.TicketRequestMapper
-import com.e.data.repository.ticketDataSource.local.TicketLocalDataSource
 import com.e.data.repository.ticketDataSource.remote.TicketRemoteDataSource
 import com.e.data.utile.NetWorkHelper
 import com.e.domain.models.TicketModel
 import com.e.domain.models.TicketRequestModel
 import com.e.domain.repository.TicketRepo
 import java.io.IOException
-import java.lang.Exception
 import javax.inject.Inject
 
 class TicketRepoImpl @Inject constructor(
-    private val ticketLocalDataSource: TicketLocalDataSource,
     private val ticketRemoteDataSource: TicketRemoteDataSource,
     private val netWorkHelper: NetWorkHelper,
     private val ticketMapper: dagger.Lazy<TicketMapper>,
@@ -46,7 +41,6 @@ class TicketRepoImpl @Inject constructor(
                 ticketRequest = response.let {
                     ticketRequestMapper.get().toMapper(it!!)
                 }
-                ticketLocalDataSource.saveTicketFromDB(response?.ticket!!)
                 return ticketRequest
             } else {
                 throw IOException("Server is Not Responding")
@@ -64,35 +58,18 @@ class TicketRepoImpl @Inject constructor(
             if (ticketRemoteDataSource.getTicketsFromRemote(id).isSuccessful &&
                 ticketRemoteDataSource.getTicketsFromRemote(id).body() != null
             ) {
-                ticketLocalDataSource.deleteTicketFromDB()
                 val response = ticketRemoteDataSource.getTicketsFromRemote(id).body()
                 for (i in 0..response?.size!!) {
                     ticketList[i] = response[i].let {
                         ticketMapper.get().toMapper(it)
                     }
-                    ticketLocalDataSource.saveTicketFromDB(response[i])
                 }
                 return ticketList
             } else {
-                if (ticketLocalDataSource.getTicketListFromDB().size > 0) {
-                    for (i in 0..ticketLocalDataSource.getTicketListFromDB().size) {
-                        ticketList[i] = ticketLocalDataSource.getTicketListFromDB()[i].let {
-                            ticketMapper.get().toMapper(it)
-                        }
-                    }
-                    return ticketList
-                }
+                throw IOException("Server is Not Responding")
             }
         } else {
-            if (ticketLocalDataSource.getTicketListFromDB().size > 0) {
-                for (i in 0..ticketLocalDataSource.getTicketListFromDB().size) {
-                    ticketList[i] = ticketLocalDataSource.getTicketListFromDB()[i].let {
-                        ticketMapper.get().toMapper(it)
-                    }
-                }
-                return ticketList
-            }
+            throw IOException("No Internet Connection")
         }
-        return ticketList
     }
 }

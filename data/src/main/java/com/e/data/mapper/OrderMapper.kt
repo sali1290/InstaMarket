@@ -1,6 +1,6 @@
 package com.e.data.mapper
 
-import com.e.data.entity.local.Order
+import com.e.data.entity.Order
 import com.e.domain.models.OrderModel
 import javax.inject.Inject
 

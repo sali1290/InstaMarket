@@ -1,16 +1,16 @@
-package com.e.data.entity.local
+package com.e.data.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@Entity
 @JsonClass(generateAdapter = true)
-data class Ticket(
-    @PrimaryKey(autoGenerate = true)
+data class Faq(
+
     @Json(name = "id")
     val id: Int?,
+
+    @Json(name = "answer")
+    val answer: String?,
 
     @Json(name = "changed")
     val changed: String?,
@@ -18,20 +18,17 @@ data class Ticket(
     @Json(name = "created")
     val created: String?,
 
-    @Json(name = "description")
-    val description: String?,
-
     @Json(name = "ids")
     val ids: String?,
 
-    @Json(name = "messages")
-    val messages: Errors?,
+    @Json(name = "question")
+    val question: String?,
+
+    @Json(name = "sort")
+    val sort: String?,
 
     @Json(name = "status")
     val status: String?,
-
-    @Json(name = "subject")
-    val subject: String?,
 
     @Json(name = "uid")
     val uid: String?
