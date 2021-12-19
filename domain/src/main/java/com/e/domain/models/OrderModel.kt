@@ -92,4 +92,6 @@ data class OrderModel(
 
     var apiResponse: String?,
 
+    var shamsiDate: String?
+
     )

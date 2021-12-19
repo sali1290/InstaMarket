@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.domain.Result
 import com.e.domain.models.CategoryModel
+import com.e.domain.models.ServiceModel
 import com.e.instamarket.databinding.FragmentCategoryBinding
 import com.e.instamarket.viewmodel.appInfo.AppInfoViewModel
 import com.e.instamarket.viewmodel.order.OrderViewModel
@@ -150,15 +151,30 @@ class CategoryFragment : Fragment() {
         viewModel.service.observe(viewLifecycleOwner, {
             when (it) {
                 is Result.Success -> {
-                    val list: MutableList<String> = arrayListOf()
+                    val list: MutableList<ServiceModel> = arrayListOf()
+                    val nameList: MutableList<String> = mutableListOf()
+
+
                     for (i in 0 until it.data.size) {
                         if (it.data[i].cateId.equals(id.toString())) {
-                            list.add(it.data[i].name!!)
+                            list.add(it.data[i])
                         }
                     }
 
+                    list.sortBy {
+                        it.price!!.toFloat()
+                    }
+
+                    for (i in 0 until list.size) {
+                        nameList.add(list[i].name!!)
+                    }
+
                     binding.serviceSpinner.adapter =
-                        ArrayAdapter(requireActivity(), R.layout.simple_dropdown_item_1line, list)
+                        ArrayAdapter(
+                            requireActivity(),
+                            R.layout.simple_dropdown_item_1line,
+                            nameList
+                        )
 
                     binding.serviceSpinner.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
@@ -168,7 +184,7 @@ class CategoryFragment : Fragment() {
                                 position: Int,
                                 id: Long
                             ) {
-                                val name = list[position]
+                                val name = nameList[position]
                                 for (i in 0 until list.size) {
                                     if (name == it.data[i].name) {
                                         binding.tvDescription.text = it.data[i].desc.toString()

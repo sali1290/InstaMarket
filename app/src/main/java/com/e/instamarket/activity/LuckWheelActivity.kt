@@ -25,6 +25,7 @@ class LuckWheelActivity : AppCompatActivity() {
     private lateinit var wheelButton: Button
     private lateinit var adapter: LuckWheelAdapter
 
+
     var number = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,16 +43,8 @@ class LuckWheelActivity : AppCompatActivity() {
 
         //check user luck
         viewModel.haveLuck()
-        wheelButton.isClickable = observeUserLuck()
+        observeUserLuck()
 
-        if (!observeUserLuck()) {
-            Snackbar.make(
-                wheelButton,
-                "امروز شانسی ندارید!! بعدا امتحان کنید",
-                Snackbar.LENGTH_LONG
-            )
-                .show()
-        }
     }
 
 
@@ -116,13 +109,29 @@ class LuckWheelActivity : AppCompatActivity() {
         })
     }
 
-    private fun observeUserLuck(): Boolean {
-        var answer = false
-        viewModel.luck.observe({ lifecycle }, {
+    private fun observeUserLuck() {
 
+        viewModel.luck.observe({ lifecycle }, {
             when (it) {
                 is Result.Success -> {
-                    answer = it.data
+                    if (it.data) {
+                        wheelButton.isClickable = it.data
+                        Snackbar.make(
+                            wheelButton,
+                            "you have luck",
+                            Snackbar.LENGTH_LONG
+                        )
+                            .show()
+                    } else {
+                        wheelButton.isClickable = false
+                        Snackbar.make(
+                            wheelButton,
+                            "امروز شانسی ندارید!! بعدا امتحان کنید",
+                            Snackbar.LENGTH_LONG
+                        )
+                            .show()
+                    }
+
                 }
 
                 is Result.Loading -> {
@@ -130,11 +139,10 @@ class LuckWheelActivity : AppCompatActivity() {
 
                 is Result.Error -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                    answer = false
                 }
             }
         })
-        return answer
+
     }
 
     private fun observeLuckResponse() {

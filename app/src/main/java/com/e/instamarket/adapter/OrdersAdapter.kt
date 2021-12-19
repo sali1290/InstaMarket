@@ -40,7 +40,7 @@ class OrdersAdapter(private val ordersList: MutableList<OrderModel>) :
             if (ordersList[position].created.toString().isEmpty()) {
                 buyDate.text = "تاریخ خرید: نامشخص"
             } else {
-                buyDate.text = "تاریخ خرید: " + ordersList[position].created.toString()
+                buyDate.text = "تاریخ خرید: " + ordersList[position].shamsiDate.toString()
             }
 
             shomarande.text = "شروع شمارنده: " + ordersList[position].start

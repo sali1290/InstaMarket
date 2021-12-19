@@ -141,4 +141,7 @@ data class Order(
     @Json(name = "api_response")
     var apiResponse: String?,
 
+    @Json(name = "shamsi_created_at")
+    var shamsiDate: String?,
+
     )

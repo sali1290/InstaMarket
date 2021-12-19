@@ -28,4 +28,6 @@ data class TransactionModel(
 
     var note: String?,
 
+    var shamsiDate: String?
+
     )

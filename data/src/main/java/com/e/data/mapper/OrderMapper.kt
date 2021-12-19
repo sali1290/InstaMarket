@@ -52,6 +52,7 @@ class OrderMapper @Inject constructor(){
             agents.returnAmount ?: "",
             agents.returnId ?: "",
             agents.apiResponse ?: "",
+            agents.shamsiDate ?: ""
         )
     }
 }

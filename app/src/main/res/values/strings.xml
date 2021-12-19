@@ -17,7 +17,7 @@
     <string name="order">ثبت سفارش</string>
     <string name="transaction">لیست تراکنش ها</string>
     <string name="payment_report">گزارش پرداخت ها</string>
-    <string name="order_report">گزارشات سفارشات</string>
+    <string name="order_report">گزارش سفارشات</string>
 
     <string name="login">اگر قبلا در سایت ما ثبت نام کرده اید با همان مشخصات و پسورد میتوانید وارد برنامه شوید</string>
     <string name="email">نام کاربری یا پست الکترونیک (ایمیل)</string>

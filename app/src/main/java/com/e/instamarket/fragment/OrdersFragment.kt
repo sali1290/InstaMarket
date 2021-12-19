@@ -40,7 +40,8 @@ class OrdersFragment : Fragment() {
     }
 
     private fun observe() {
-        val progressBar = requireActivity().findViewById<ProgressBar>(com.e.instamarket.R.id.progressBar)
+        val progressBar =
+            requireActivity().findViewById<ProgressBar>(com.e.instamarket.R.id.progressBar)
         viewModel.orderList.observe(viewLifecycleOwner, {
             when (it) {
 
@@ -48,6 +49,8 @@ class OrdersFragment : Fragment() {
                     progressBar.visibility = View.INVISIBLE
                     requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                     binding.orderListRecycler.adapter = OrdersAdapter(it.data)
+                    Toast.makeText(requireContext(), it.data.size.toString(), Toast.LENGTH_LONG)
+                        .show()
                 }
 
                 is Result.Loading -> {

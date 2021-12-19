@@ -44,5 +44,8 @@ data class Transaction(
     @Json(name = "note")
     var note: String?,
 
+    @Json(name = "shamsi_created_at")
+    var shamsiDate: String?,
+
 
     )

@@ -1,6 +1,8 @@
 package com.e.instamarket.fragment
 
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,8 @@ import com.e.instamarket.viewmodel.enterApp.EnterAppViewModel
 import com.e.instamarket.viewmodel.user.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import android.os.Looper
+import androidx.core.view.size
 
 
 @AndroidEntryPoint
@@ -129,9 +133,24 @@ class HomeFragment : Fragment() {
 
 
         viewModel.getUser()
-        bannerViewModel.getBanners()
-        observeBanner()
+//        bannerViewModel.getBanners()
+//        observeBanner()
+        binding.imageSlider2.adapter = ImageSliderAdapter(requireContext())
         observeUser()
+
+        val countDownTimer = object : CountDownTimer(60000, 4000) {
+            override fun onTick(millisUntilFinished: Long) {
+                if (binding.imageSlider2.currentItem == 5) {
+                    binding.imageSlider2.currentItem = 0
+                } else {
+                    binding.imageSlider2.currentItem++
+                }
+            }
+
+            override fun onFinish() {
+                start()
+            }
+        }.start()
 
         binding.btnCategory.setOnClickListener {
             bottomNav.selectedItemId = R.id.profile
@@ -233,22 +252,22 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun observeBanner() {
-        bannerViewModel.banner.observe(viewLifecycleOwner, {
-
-            when (it) {
-
-                is Result.Success -> {
-                    binding.imageSlider2.adapter = ImageSliderAdapter(it.data, requireContext())
-                }
-                is Result.Loading -> {
-                }
-                is Result.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-    }
+//    private fun observeBanner() {
+//        bannerViewModel.banner.observe(viewLifecycleOwner, {
+//
+//            when (it) {
+//
+//                is Result.Success -> {
+//                    binding.imageSlider2.adapter = ImageSliderAdapter(it.data, requireContext())
+//                }
+//                is Result.Loading -> {
+//                }
+//                is Result.Error -> {
+//                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+//                }
+//            }
+//        })
+//    }
 
 
 }

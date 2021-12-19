@@ -1,6 +1,9 @@
 package com.e.instamarket.fragment
 
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +45,22 @@ class MoreFeatureFragment : Fragment() {
         bottomNav.visibility = View.VISIBLE
         btnHome.visibility = View.VISIBLE
 
-        observeBanner()
+//        observeBanner()
+        binding.imageSlider3.adapter = ImageSliderAdapter(requireContext())
+
+        val countDownTimer = object : CountDownTimer(60000, 4000) {
+            override fun onTick(millisUntilFinished: Long) {
+                if (binding.imageSlider3.currentItem == 5) {
+                    binding.imageSlider3.currentItem = 0
+                } else {
+                    binding.imageSlider3.currentItem++
+                }
+            }
+
+            override fun onFinish() {
+                start()
+            }
+        }.start()
 
         binding.news.setOnClickListener {
             findNavController().navigate(R.id.newsFragment)
@@ -107,22 +125,22 @@ class MoreFeatureFragment : Fragment() {
 
     }
 
-    private fun observeBanner() {
-        bannerViewModel.banner.observe(viewLifecycleOwner, {
-
-            when (it) {
-
-                is Result.Success -> {
-                    binding.imageSlider3.adapter = ImageSliderAdapter(it.data, requireContext())
-                }
-                is Result.Loading -> {
-                }
-                is Result.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-    }
+//    private fun observeBanner() {
+//        bannerViewModel.banner.observe(viewLifecycleOwner, {
+//
+//            when (it) {
+//
+//                is Result.Success -> {
+//                    binding.imageSlider3.adapter = ImageSliderAdapter(it.data, requireContext())
+//                }
+//                is Result.Loading -> {
+//                }
+//                is Result.Error -> {
+//                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+//                }
+//            }
+//        })
+//    }
 
 
 }

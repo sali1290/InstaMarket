@@ -22,8 +22,9 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/imageSlider3"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_margin="@dimen/_5sdp" />
+                android:layout_height="@dimen/_85sdp"
+                android:layout_margin="@dimen/_5sdp"
+                />
 
             <TableLayout
                 android:layout_width="match_parent"

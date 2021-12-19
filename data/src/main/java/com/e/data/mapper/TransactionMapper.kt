@@ -4,7 +4,7 @@ import com.e.data.entity.Transaction
 import com.e.domain.models.TransactionModel
 import javax.inject.Inject
 
-class TransactionMapper @Inject constructor(){
+class TransactionMapper @Inject constructor() {
     fun toMapper(agents: Transaction): TransactionModel {
         return TransactionModel(
             agents.id ?: 0,
@@ -19,7 +19,8 @@ class TransactionMapper @Inject constructor(){
             agents.systemi ?: "",
             agents.payerEmail ?: "",
             agents.txnFee ?: "",
-            agents.note ?: ""
+            agents.note ?: "",
+            agents.shamsiDate ?: ""
         )
     }
 }

@@ -38,7 +38,7 @@ class TransactionAdapter(
             holder.statusTextView.text = "ناموفق"
             holder.statusTextView.setTextColor(context.getColor(R.color.red))
         }
-        holder.dateTextView.text = transactionList[position].created.toString()
+        holder.dateTextView.text = transactionList[position].shamsiDate.toString()
     }
 
     override fun getItemCount(): Int = transactionList.size

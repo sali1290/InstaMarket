@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.e.domain.models.BannerModel
 import com.e.instamarket.R
 
 class ImageSliderAdapter(
-    private val banners: MutableList<BannerModel>,
     private val context: Context
 ) :
     RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
@@ -27,10 +25,53 @@ class ImageSliderAdapter(
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        Glide.with(context).load(
-            R.drawable.instamarket_test
-        ).into(holder.imageView)
+        when (position) {
+
+            0 -> {
+                holder.imageView.scaleType = ImageView.ScaleType.FIT_XY
+                Glide.with(context).load(
+                    R.drawable.baner1
+                ).into(holder.imageView)
+            }
+
+            1 -> {
+                holder.imageView.scaleType = ImageView.ScaleType.FIT_XY
+                Glide.with(context).load(
+                    R.drawable.baner2
+                ).into(holder.imageView)
+            }
+
+            2 -> {
+                holder.imageView.scaleType = ImageView.ScaleType.FIT_XY
+                Glide.with(context).load(
+                    R.drawable.baner3
+                ).into(holder.imageView)
+            }
+
+            3 -> {
+                holder.imageView.scaleType = ImageView.ScaleType.FIT_XY
+                Glide.with(context).load(
+                    R.drawable.baner4
+                ).into(holder.imageView)
+            }
+
+            4 -> {
+                holder.imageView.scaleType = ImageView.ScaleType.FIT_XY
+                Glide.with(context).load(
+                    R.drawable.baner5
+                ).into(holder.imageView)
+            }
+
+            5 -> {
+                holder.imageView.scaleType = ImageView.ScaleType.FIT_XY
+                Glide.with(context).load(
+                    R.drawable.baner6
+                ).into(holder.imageView)
+            }
+
+
+        }
     }
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = 6
 }
